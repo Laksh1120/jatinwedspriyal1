@@ -73,11 +73,15 @@ function Index() {
         <div className="gi-door gi-door-left" aria-hidden="true" />
         <div className="gi-door gi-door-right" aria-hidden="true" />
         <div className="paper-texture absolute inset-0" aria-hidden="true" />
+        <div className="gi-floor" aria-hidden="true" />
+        <div className="gi-screens" aria-hidden="true"><span /><span /></div>
+        <div className="sconce gi-sconce left-4 md:left-16" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
+        <div className="sconce gi-sconce right-4 md:right-16" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <Button variant="ghost" onClick={(e) => { e.stopPropagation(); finishIntro(); }} className="absolute right-5 top-5 z-20 uppercase tracking-[0.2em] text-cream hover:bg-cream/10 hover:text-cream">Skip</Button>
         <div className="gi-stage">
           <div className="gi-halo" aria-hidden="true" />
           <img src={ganeshaImage} alt="Lord Ganesha" width={1024} height={1024} className="gi-ganesha" />
-          <p className="gi-mantra font-display text-gold">॥ श्री गणेशाय नमः ॥</p>
+          <p className="gi-mantra font-display font-semibold text-emerald-deep">॥ श्री गणेशाय नमः ॥</p>
           <div className="gi-card">
             <p className="text-[10px] uppercase tracking-[0.35em] text-gold">You're invited</p>
             <p className="mt-4 font-display text-4xl text-cream md:text-5xl">Priyal <span className="text-gold">&</span> Jatin</p>
