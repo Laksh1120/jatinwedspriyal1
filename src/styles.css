@@ -99,7 +99,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sconce .stem { display:block; width:1px; height:66px; margin:auto; background:var(--gold); position:relative; }
 .sconce .stem::after { content:"❦"; position:absolute; top:24px; left:50%; transform:translateX(-50%); font-size:2rem; }
 
-.ganpati-intro { position:fixed; inset:0; z-index:100; display:grid; place-items:center; overflow:hidden; cursor:pointer; background:radial-gradient(circle at 50% 42%, color-mix(in oklab,var(--gold) 22%,var(--emerald-deep)), var(--emerald-deep) 65%); transition:opacity 1s ease .4s; }
+.ganpati-intro { position:fixed; inset:0; z-index:100; display:grid; place-items:center; overflow:hidden; cursor:pointer; background:radial-gradient(ellipse at 50% 35%, color-mix(in oklab,var(--gold) 14%,var(--emerald)), var(--emerald) 45%, var(--emerald-deep) 90%); transition:opacity 1s ease .4s; }
+.gi-floor { position:absolute; left:-20%; right:-20%; bottom:0; height:30%; z-index:1; transform:perspective(500px) rotateX(48deg); transform-origin:bottom; background-color:oklch(0.18 0.01 150); background-image:linear-gradient(45deg,var(--cream) 25%,transparent 25%),linear-gradient(-45deg,var(--cream) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--cream) 75%),linear-gradient(-45deg,transparent 75%,var(--cream) 75%); background-size:120px 120px; background-position:0 0,0 60px,60px -60px,-60px 0; box-shadow:inset 0 40px 60px -20px color-mix(in oklab,var(--emerald-deep) 80%,transparent); }
+.gi-screens { position:absolute; z-index:2; left:50%; bottom:24%; translate:-50% 0; display:flex; gap:10px; }
+.gi-screens span { display:block; width:min(30vw,13rem); height:min(58vh,30rem); border:3px solid var(--gold); border-radius:50% 50% 0 0 / 14% 14% 0 0; background:radial-gradient(circle at 50% 45%, color-mix(in oklab,var(--cream) 30%,var(--blush)), var(--blush) 70%); box-shadow:0 20px 50px color-mix(in oklab,var(--emerald-deep) 60%,transparent); opacity:.92; }
+.gi-sconce { top:12%; z-index:2; transform:scale(1.3); }
+.gi-sconce .lamp { animation:gi-flicker 3s ease-in-out infinite; }
+@keyframes gi-flicker { 50% { box-shadow:0 0 40px color-mix(in oklab,var(--gold) 80%,transparent); } }
 .ganpati-intro::before { content:""; position:absolute; inset:18px; z-index:3; border:1px solid color-mix(in oklab,var(--gold) 65%,transparent); pointer-events:none; }
 .gi-door { position:absolute; top:0; bottom:0; width:50%; z-index:5; background:var(--emerald-deep); transition:transform 1.3s cubic-bezier(.7,0,.2,1); animation:gi-doors 1.4s cubic-bezier(.7,0,.2,1) .2s forwards; }
 .gi-door-left { left:0; border-right:2px solid var(--gold); }
