@@ -8,6 +8,7 @@ import lakeAsset from "@/assets/lake.jpg.asset.json";
 import proposalImage from "@/assets/story-proposal.jpg";
 import venueImage from "@/assets/story-venue.jpg";
 import engagementImage from "@/assets/story-engagement.jpg";
+import ganeshaImage from "@/assets/ganesha.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,26 +52,39 @@ function Index() {
 
   useEffect(() => {
     const force = new URLSearchParams(window.location.search).has("intro");
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && (force || !window.localStorage.getItem("priyal-jatin-intro-v4"))) setIntro(true);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && (force || !window.localStorage.getItem("priyal-jatin-intro-v5"))) setIntro(true);
   }, []);
 
-  const openInvitation = () => {
+  const finishIntro = () => {
     setOpening(true);
-    window.localStorage.setItem("priyal-jatin-intro-v4", "1");
-    window.setTimeout(() => setIntro(false), 1200);
+    window.localStorage.setItem("priyal-jatin-intro-v5", "1");
+    window.setTimeout(() => setIntro(false), 1400);
   };
+
+  useEffect(() => {
+    if (!intro) return;
+    const t = window.setTimeout(finishIntro, 7200);
+    return () => window.clearTimeout(t);
+  }, [intro]);
 
   return (
     <main className="overflow-hidden bg-background text-foreground">
-      {intro && <div className={`invitation-intro ${opening ? "is-opening" : ""}`}>
-        <Button variant="ghost" onClick={() => setIntro(false)} className="absolute right-5 top-5 uppercase tracking-[0.2em] text-cream hover:bg-cream/10 hover:text-cream">Skip</Button>
-        <button type="button" className="invitation-card" onClick={openInvitation} aria-label="Open the invitation">
-          <p className="text-xs uppercase tracking-[0.35em] text-gold">You're invited</p>
-          <div className="my-8 text-gold"><Heart className="mx-auto size-7" /></div>
-          <p className="font-display text-5xl text-cream">Priyal <span className="text-gold">&</span> Jatin</p>
-          <p className="mt-5 text-xs uppercase tracking-[0.22em] text-blush">November 12, 2026</p>
-          <span className="mt-12 block text-[10px] uppercase tracking-[0.3em] text-cream/70">Tap to open</span>
-        </button>
+      {intro && <div className={`ganpati-intro ${opening ? "is-opening" : ""}`} onClick={finishIntro}>
+        <div className="gi-door gi-door-left" aria-hidden="true" />
+        <div className="gi-door gi-door-right" aria-hidden="true" />
+        <div className="paper-texture absolute inset-0" aria-hidden="true" />
+        <Button variant="ghost" onClick={(e) => { e.stopPropagation(); finishIntro(); }} className="absolute right-5 top-5 z-20 uppercase tracking-[0.2em] text-cream hover:bg-cream/10 hover:text-cream">Skip</Button>
+        <div className="gi-stage">
+          <div className="gi-halo" aria-hidden="true" />
+          <img src={ganeshaImage} alt="Lord Ganesha" width={1024} height={1024} className="gi-ganesha" />
+          <p className="gi-mantra font-display text-gold">॥ श्री गणेशाय नमः ॥</p>
+          <div className="gi-card">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-gold">You're invited</p>
+            <p className="mt-4 font-display text-4xl text-cream md:text-5xl">Priyal <span className="text-gold">&</span> Jatin</p>
+            <Flourish />
+            <p className="text-xs uppercase tracking-[0.22em] text-blush">November 12, 2026</p>
+          </div>
+        </div>
       </div>}
 
       <nav className="fixed inset-x-0 top-0 z-40 border-b border-gold/25 bg-emerald/90 px-5 text-cream backdrop-blur-md md:px-10">
