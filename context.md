@@ -47,11 +47,11 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 ## Sections in src/routes/index.tsx
 
-1. **Ganpati intro** — full-screen emerald room: doors part, gold Ganesha and the mantra appear, then the invitation card unfolds and the site is revealed (auto after ~7s; tap or Skip to go straight in; `localStorage`-gated, respects reduced-motion, `?intro` forces it)
-2. **Nav** — fixed gold-on-emerald bar, "Lake & Love" wordmark, mobile hamburger
+1. **Ganpati intro** — full-screen deep-lavender room: doors part, gold Ganesha and the mantra appear, then the invitation card unfolds and the site is revealed (auto after ~7s; tap or Skip to go straight in; `localStorage`-gated, respects reduced-motion, `?intro` forces it)
+2. **Nav** — fixed deep-lavender bar with gold-soft accents and cream text, "Lake & Love" wordmark, mobile hamburger
 3. **Hero (`#home`)** — names, date, faded lake photo, paper texture, two wall sconces, arched couple portrait, scroll cue
 4. **Couple (`#couple`)** — arched portrait + two ornate panels (bride and groom with parent names)
-5. **Countdown (`#event`)** — live Days / Hours / Minutes / Seconds until December 10, 2026 in four deep blue-grey cards on the checkerboard band, then the date/dress-code meta
+5. **Countdown (`#event`)** — live Days / Hours / Minutes / Seconds until December 10, 2026 in four deep-lavender cards on the sage checkerboard band, then the date/dress-code meta
 6. **Venue (`#venue`)** — name, address, description, getting-there list, embedded Google Maps iframe, directions button
 7. **Stories (`#blog`)** — 3 "our journey" cards with photo, date, title, copy, "Read more"
 8. **Footer** — names, date, tagline "Where the lake meets forever"
@@ -76,11 +76,11 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 - `.paper-texture` — film-grain/mist overlay
 - `.flourish` — gold rule + heart divider under headings
 - `.arch-frame` / `.arch-inner` — arched photo frame with double gold outline
-- `.ornate-panel` — emerald card, gold hairline, ✦ corners, blush offset shadow
-- `.count-card` — countdown unit card: deep blue-grey, gold hairline + ✦ corners, Bodoni numerals, blush label
+- `.ornate-panel` — deep-lavender card, gold hairline, ✦ corners, pale-lavender offset shadow
+- `.count-card` — countdown unit card: deep lavender, gold hairline + ✦ corners, Bodoni numerals, pale-lavender label
 - `.checker-section` / `.checker-footer` — checkerboard staging bands
 - `.sconce` — wall-lamp ornament in the hero and in the intro
-- `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: emerald doors, blush arched screens, perspective checkered floor, gold halo, invitation card
+- `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: deep-lavender doors and room, sage arched screens, perspective checkered floor, gold halo, invitation card
 - `.invitation-card` — leftover from the previous entry card, no longer rendered
 
 Fonts load from `<link>` tags in `src/routes/__root.tsx` (Tailwind v4's build
@@ -235,8 +235,30 @@ cannot `@import` a remote URL).
   message, since that decides whether to look at the cache or at the code.
 
 ### 2026-09-28 — Theme changed to sage & lavender (content unchanged)
-- Replaced the beige `#BCA68E` and blue-grey `#88969F` backgrounds with the requested
-  sage `#B8C9A9` and lavender `#C0AED4` across the page, hero, checker band and intro.
-- Rebuilt the supporting dark, pale, ink and border shades around those colours so the
-  navigation, cards, venue, footer, labels and Ganpati room remain readable and cohesive.
-- Kept the warm cream and antique-gold accents, all content, layout and interactions unchanged.
+- **The two requested colours are now the theme.** The beige `#BCA68E` and blue-grey
+  `#88969F` scheme is gone; the page background and the countdown checker band are sage
+  `#B8C9A9`, and the hero, the story frames and the Ganpati screens are lavender `#C0AED4`.
+- **Every token in `src/styles.css` is now a literal hex** (the previous round wrote them in
+  `oklch`): `--background`/`--accent`/`--beige` `#B8C9A9`, `--emerald`/`--secondary`/`--ring`
+  `#C0AED4`, `--emerald-deep`/`--primary` `#4C4258`, `--blush` `#E7E0ED`, `--foreground`
+  `#253023`, `--muted-foreground` `#44523F`, `--muted` `#E5EADF`, `--border` `#9EAC92`,
+  `--input` `#DBE4D3`, `--gold` `#81662D`, `--gold-soft` `#C7A85A`, `--cream`/`--card` `#FAF7F1`.
+- **The old names stay, the colours changed.** `--emerald` is lavender, `--beige` is sage and
+  `--blush` is pale lavender — kept as class names so no layout or markup had to be touched.
+- **Supporting shades rebuilt around the pair:** deep lavender `#4C4258` for the nav, the couple
+  panels, the countdown cards, the venue, the footer and the intro room; pale lavender `#E7E0ED`
+  for the hero arch, the story frames, the panel offset shadows and labels on dark; deep green
+  ink `#253023` for all copy on sage and lavender; a sage-grey `#9EAC92` border.
+- **Contrast re-checked, not assumed** (computed with a script against WCAG): ink on sage 7.84:1,
+  ink on lavender 6.72:1, cream on deep lavender 8.82:1, pale lavender on deep lavender 7.31:1,
+  gold-soft on deep lavender 4.12:1 (large/decorative text only), gold on cream 5.07:1.
+- **Intro room re-tinted to match:** deep lavender walls, floor and doors, sage arched screens,
+  brass lamps and card edging; the mantra stays dark so it reads on the screens.
+- **Content, layout and behaviour untouched** — same copy, same sections, same countdown, same
+  skippable opening with the `priyal-jatin-intro-v5` key and `?intro` replay.
+- **This file's own descriptions were corrected** (Overview, Sections, decorative classes) so they
+  say lavender/sage instead of the old emerald and blue-grey wording; changelog entries above are
+  left as they were written.
+- **Verified:** build OK; Playwright at 1280×1800 confirms sage on the body and the checker band,
+  lavender in the hero, deep lavender in the nav and the countdown cards, with no console or page
+  errors.
