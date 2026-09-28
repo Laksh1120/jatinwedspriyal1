@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowDown, Clock3, Flower2, Gem, GlassWater, Heart, MapPin, Menu, Music2, Sparkles, X } from "lucide-react";
+import { ArrowDown, Heart, MapPin, Menu, Music2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import coupleAsset from "@/assets/couple.jpg.asset.json";
@@ -24,18 +24,59 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const events = [
-  { icon: Flower2, time: "4:00 PM", name: "Guest Arrival", copy: "Welcome drinks on the lakeside terrace. Light acoustic music and meadow views." },
-  { icon: Gem, time: "5:30 PM", name: "Ceremony", copy: "An outdoor ceremony on the wooden dock, overlooking Mirror Lake at golden hour." },
-  { icon: GlassWater, time: "6:30 PM", name: "Reception & Dinner", copy: "Farm-to-table dinner under the stars, followed by dancing by the water's edge." },
-  { icon: Sparkles, time: "10:00 PM", name: "Farewell", copy: "Lantern send-off over the lake. Shuttle service departs at 11:00 PM." },
-];
-
 const stories = [
   { image: proposalImage, alt: "Proposal by the lake", date: "March 12, 2025", title: "The Proposal at Mirror Lake", copy: "Jatin got down on one knee as the sun painted the water gold. Priyal said yes before he could finish the question." },
   { image: venueImage, alt: "Venue scouting", date: "January 8, 2025", title: "Finding Our Perfect Shore", copy: "We visited a dozen venues before stepping onto the shores of Praveg Lake Resort — we knew instantly this was the one." },
   { image: engagementImage, alt: "Engagement party", date: "November 2, 2024", title: "Engagement Celebration", copy: "Family and friends gathered for an intimate garden party. So much love, laughter, and homemade pie." },
 ];
+
+const COUNTDOWN_TARGET = new Date("2026-12-10T00:00:00+05:30").getTime();
+
+function getRemaining() {
+  const diff = COUNTDOWN_TARGET - Date.now();
+  const clamped = Math.max(diff, 0);
+  return {
+    arrived: diff <= 0,
+    days: Math.floor(clamped / 86400000),
+    hours: Math.floor(clamped / 3600000) % 24,
+    minutes: Math.floor(clamped / 60000) % 60,
+    seconds: Math.floor(clamped / 1000) % 60,
+  };
+}
+
+function Countdown() {
+  const [remaining, setRemaining] = useState<ReturnType<typeof getRemaining> | null>(null);
+
+  useEffect(() => {
+    setRemaining(getRemaining());
+    const id = window.setInterval(() => setRemaining(getRemaining()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const units = [
+    { label: "Days", value: remaining ? String(remaining.days) : "--" },
+    { label: "Hours", value: remaining ? pad(remaining.hours) : "--" },
+    { label: "Minutes", value: remaining ? pad(remaining.minutes) : "--" },
+    { label: "Seconds", value: remaining ? pad(remaining.seconds) : "--" },
+  ];
+
+  return (
+    <div className="animate-fade-in">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {units.map((unit) => (
+          <div key={unit.label} className="count-card">
+            <span className="num" aria-hidden="true">{unit.value}</span>
+            <span className="rule" aria-hidden="true" />
+            <span className="lbl">{unit.label}</span>
+            <span className="sr-only">{unit.value} {unit.label.toLowerCase()}</span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-9 text-center font-display text-xl italic text-foreground/80 md:text-2xl">{remaining?.arrived ? "Today is the day — the lake is waiting." : "Until we say “I do” by the water"}</p>
+    </div>
+  );
+}
 
 function Flourish({ dark = false }: { dark?: boolean }) {
   return <div className={`flourish ${dark ? "flourish--dark" : ""}`} aria-hidden="true"><span /><Heart className="size-3" /><span /></div>;
@@ -97,10 +138,10 @@ function Index() {
           <a href="#home" className="font-display text-2xl">Lake <span className="text-gold-soft">&</span> Love</a>
           <Button variant="ghost" size="icon" className="text-cream hover:bg-cream/10 hover:text-gold-soft md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</Button>
           <div className="hidden gap-8 text-[11px] uppercase tracking-[0.25em] md:flex">
-            <a href="#couple" className="transition-colors hover:text-gold-soft">Us</a><a href="#event" className="transition-colors hover:text-gold-soft">Event</a><a href="#venue" className="transition-colors hover:text-gold-soft">Venue</a><a href="#blog" className="transition-colors hover:text-gold-soft">Stories</a>
+            <a href="#couple" className="transition-colors hover:text-gold-soft">Us</a><a href="#event" className="transition-colors hover:text-gold-soft">Countdown</a><a href="#venue" className="transition-colors hover:text-gold-soft">Venue</a><a href="#blog" className="transition-colors hover:text-gold-soft">Stories</a>
           </div>
         </div>
-        {menuOpen && <div className="flex flex-col gap-5 border-t border-gold/20 py-6 text-center text-xs uppercase tracking-[0.25em] md:hidden">{[["#couple","Us"],["#event","Event"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
+        {menuOpen && <div className="flex flex-col gap-5 border-t border-gold/20 py-6 text-center text-xs uppercase tracking-[0.25em] md:hidden">{[["#couple","Us"],["#event","Countdown"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
       </nav>
 
       <header id="home" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-emerald px-5 pb-20 pt-28 text-center text-foreground">
@@ -131,9 +172,9 @@ function Index() {
         </div>
       </section>
 
-      <section id="event" className="checker-section px-5 py-24 md:px-10 md:py-32"><div className="relative mx-auto max-w-6xl"><SectionHeading eyebrow="Mark your calendar" title="Event Details" />
-        <div className="grid gap-px border border-gold/40 bg-gold/40 md:grid-cols-4">{events.map(({icon: Icon,time,name,copy}, index) => <article key={name} className={`p-7 text-center md:p-9 ${index === 1 ? "bg-emerald" : "bg-cream"}`}><Icon className="mx-auto size-7 text-emerald-deep" /><time className="mt-6 block text-xs uppercase tracking-[0.22em] text-emerald-deep">{time}</time><h3 className="mt-3 font-display text-3xl">{name}</h3><p className={`mt-4 text-sm leading-7 ${index === 1 ? "text-foreground" : "text-muted-foreground"}`}>{copy}</p></article>)}</div>
-        <div className="mt-10 grid border border-gold/40 bg-cream md:grid-cols-2"><div className="p-7 text-center md:border-r md:border-gold/40"><p className="text-xs uppercase tracking-[0.25em] text-gold">Date</p><p className="mt-2 font-display text-2xl">Thursday, November 12, 2026</p></div><div className="border-t border-gold/40 p-7 text-center md:border-t-0"><p className="text-xs uppercase tracking-[0.25em] text-gold">Dress Code</p><p className="mt-2 font-display text-2xl">Garden Formal · Earth tones encouraged</p></div></div>
+      <section id="event" className="checker-section px-5 py-24 md:px-10 md:py-32"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
+        <Countdown />
+        <div className="mt-10 grid border border-gold/40 bg-cream md:grid-cols-2"><div className="p-7 text-center md:border-r md:border-gold/40"><p className="text-xs uppercase tracking-[0.25em] text-gold">The Day</p><p className="mt-2 font-display text-2xl">Thursday, December 10, 2026</p></div><div className="border-t border-gold/40 p-7 text-center md:border-t-0"><p className="text-xs uppercase tracking-[0.25em] text-gold">Dress Code</p><p className="mt-2 font-display text-2xl">Garden Formal · Earth tones encouraged</p></div></div>
       </div></section>
 
       <section id="venue" className="relative bg-emerald-deep px-5 py-24 text-cream md:px-10 md:py-32"><div className="paper-texture absolute inset-0" /><div className="relative mx-auto max-w-6xl"><SectionHeading eyebrow="Where we'll gather" title="The Venue" tone="dark" />
