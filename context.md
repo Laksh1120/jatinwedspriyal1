@@ -28,6 +28,7 @@ bottom every time something is added, changed, or fixed.
 │   ├── assets/
 │   │   ├── couple.jpg.asset.json    # Real couple photo (Lovable asset pointer)
 │   │   ├── lake.jpg.asset.json      # Lake backdrop (Lovable asset pointer)
+│   │   ├── ganesha.png              # Generated gold Ganesha artwork (intro)
 │   │   ├── story-proposal.jpg       # Generated story photo
 │   │   ├── story-venue.jpg          # Generated story photo
 │   │   └── story-engagement.jpg     # Generated story photo
@@ -44,7 +45,7 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 ## Sections in src/routes/index.tsx
 
-1. **Invitation intro** — full-screen emerald card with gold border; opens the site on click/tap (skippable, `localStorage`-gated, respects reduced-motion, `?intro` forces it)
+1. **Ganpati intro** — full-screen emerald room: doors part, gold Ganesha and the mantra appear, then the invitation card unfolds and the site is revealed (auto after ~7s; tap or Skip to go straight in; `localStorage`-gated, respects reduced-motion, `?intro` forces it)
 2. **Nav** — fixed gold-on-emerald bar, "Lake & Love" wordmark, mobile hamburger
 3. **Hero (`#home`)** — names, date, faded lake photo, paper texture, two wall sconces, arched couple portrait, scroll cue
 4. **Couple (`#couple`)** — arched portrait + two ornate panels (bride and groom with parent names)
@@ -73,8 +74,9 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 - `.arch-frame` / `.arch-inner` — arched photo frame with double gold outline
 - `.ornate-panel` — emerald card, gold hairline, ✦ corners, blush offset shadow
 - `.checker-section` / `.checker-footer` — checkerboard staging bands
-- `.sconce` — wall-lamp ornament in the hero
-- `.invitation-intro` / `.invitation-card` — tap-to-open entry sequence
+- `.sconce` — wall-lamp ornament in the hero and in the intro
+- `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: emerald doors, blush arched screens, perspective checkered floor, gold halo, invitation card
+- `.invitation-card` — leftover from the previous entry card, no longer rendered
 
 Fonts load from `<link>` tags in `src/routes/__root.tsx` (Tailwind v4's build
 cannot `@import` a remote URL).
@@ -82,6 +84,9 @@ cannot `@import` a remote URL).
 ## Known Gaps / Things to Revisit
 
 - The three story photos are AI-generated stand-ins, not real photographs
+- The Ganesha drawing in the intro is generated artwork, not a traditional illustration
+- The intro was matched from the reel's cover frames and embed media; the reel itself
+  cannot be opened by automation, so the exact animation is still worth a side-by-side check
 - No RSVP form
 - "Read more" links in the Stories cards are still dead `#` placeholders
 - Google Maps iframe uses a text query, not verified exact coordinates
@@ -135,3 +140,30 @@ cannot `@import` a remote URL).
   cache. Cleared the cache and restarted the dev server; no app code changed.
 - **Verified:** build OK, page serves 200, and Playwright runs at 1280×1800 and
   390×844 show the intro card and every section with no console or page errors.
+
+### 2026-09-28 — Ganpati opening sequence (content unchanged)
+- **The envelope entry is gone.** The invitation-card intro is replaced by a
+  Ganpati opening built on the third slide of the reference reel: emerald double
+  doors slide apart, a gold Ganesha appears in a glowing halo above the mantra
+  "॥ श्री गणेशाय नमः ॥", then the invitation card with the names and date
+  unfolds beneath it. Once the card is revealed the sequence holds a moment and
+  the overlay fades away to the website — no other section was touched.
+- **The intro now sits in the reel's room** instead of a flat emerald
+  backdrop: a textured emerald wall with a warm gold glow and an inset gold
+  border, two flickering wall sconces, a pair of blush arched screens with gold
+  edges behind the stage, and a black-and-cream checkered floor laid out in
+  perspective.
+- **New artwork:** `src/assets/ganesha.png`, a generated gold line drawing in
+  the same palette as the rest of the site.
+- **Timing from first paint:** doors 0.2s → Ganesha 1.1s → mantra 2.4s → card
+  4.3s → auto-reveal 7.2s, then a 1.4s fade-out. The mantra is deep emerald so it
+  reads clearly against the blush screens.
+- **Behaviour unchanged:** tapping anywhere or pressing Skip goes straight to the
+  site, `prefers-reduced-motion` visitors bypass the whole thing instantly, and
+  `?intro` forces a replay. The `localStorage` key is bumped to
+  `priyal-jatin-intro-v5`, so every browser sees the new opening once.
+- **Dead style:** `.invitation-card` is still in `src/styles.css` but nothing
+  renders it any more.
+- **Verified:** build OK and Playwright runs at 1280×1800 and 390×844 step through
+  the doors, Ganesha, mantra, card and the reveal into the site with no console or
+  page errors.
