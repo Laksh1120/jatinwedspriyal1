@@ -63,7 +63,7 @@ function Countdown() {
 
   return (
     <div className="animate-fade-in">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {units.map((unit) => (
           <div key={unit.label} className="count-card">
             <span className="num" aria-hidden="true">{unit.value}</span>

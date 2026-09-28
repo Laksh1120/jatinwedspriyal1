@@ -100,7 +100,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .count-card::before,.count-card::after { content:"✦"; position:absolute; color:var(--gold-soft); opacity:.6; font-size:.75rem; }
 .count-card::before { left:11px; top:8px; }
 .count-card::after { right:11px; bottom:8px; }
-.count-card .num { display:block; font-family:var(--font-display); font-weight:500; font-size:clamp(3.2rem,7vw,5.25rem); line-height:.92; color:var(--cream); font-variant-numeric:tabular-nums; }
+.count-card .num { display:block; font-family:var(--font-display); font-weight:500; font-size:clamp(2.6rem,10vw,5.25rem); line-height:.92; color:var(--cream); font-variant-numeric:tabular-nums; }
 .count-card .rule { display:block; width:2.25rem; height:1px; margin:1.1rem auto 0; background:var(--gold-soft); opacity:.55; }
 .count-card .lbl { display:block; margin-top:.85rem; font-size:.62rem; text-transform:uppercase; letter-spacing:.3em; color:var(--blush); }
 
