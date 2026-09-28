@@ -10,10 +10,12 @@ bottom every time something is added, changed, or fixed.
 - **Couple:** Priyal Bang & Jatin Mulchandani
 - **Date:** November 12, 2026
 - **Venue:** Praveg Lake Resort, Daman - 3 Kachigam, Kachigam Damanganga Garden, Daman 396215
+- **Countdown target:** December 10, 2026 (set 2026-09-28). Every other date on the page
+  still reads November 12, 2026 — which is the real day is unconfirmed
 - **Theme:** "Lakeside at dusk" tableau — beige and blue-grey (the requested `#BCA68E` / `#88969F`) with antique gold on warm cream; arched photo frames, ornate panels, checkerboard staging, wall sconces, paper texture
 - **Type:** Single-page TanStack Start app (React 19 + Vite + Tailwind CSS v4, one route at `/`)
 - **Content status:** unchanged from the original upload — names, parents, date, venue,
-  dress code, timeline, story dates and copy are all verbatim
+  dress code and story copy are verbatim; the 4-stage timeline was replaced by a countdown
 
 ## File Structure
 
@@ -49,7 +51,7 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 2. **Nav** — fixed gold-on-emerald bar, "Lake & Love" wordmark, mobile hamburger
 3. **Hero (`#home`)** — names, date, faded lake photo, paper texture, two wall sconces, arched couple portrait, scroll cue
 4. **Couple (`#couple`)** — arched portrait + two ornate panels (bride and groom with parent names)
-5. **Event (`#event`)** — 4-stage timeline (Arrival, Ceremony, Reception, Farewell) on a checkerboard band + date/dress-code meta
+5. **Countdown (`#event`)** — live Days / Hours / Minutes / Seconds until December 10, 2026 in four deep blue-grey cards on the checkerboard band, then the date/dress-code meta
 6. **Venue (`#venue`)** — name, address, description, getting-there list, embedded Google Maps iframe, directions button
 7. **Stories (`#blog`)** — 3 "our journey" cards with photo, date, title, copy, "Read more"
 8. **Footer** — names, date, tagline "Where the lake meets forever"
@@ -58,9 +60,9 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 | Token | Value | Use |
 |---|---|---|
-| `--background` / `--beige` | `oklch(0.738 0.042 69.5)` = `#BCA68E` | Page background, event checker band |
-| `--emerald` | `oklch(0.665 0.021 235.9)` = `#88969F` | Hero, highlighted timeline card |
-| `--emerald-deep` | `oklch(0.405 0.03 233)` | Nav, couple panels, venue, footer, intro room |
+| `--background` / `--beige` | `oklch(0.738 0.042 69.5)` = `#BCA68E` | Page background, countdown checker band |
+| `--emerald` | `oklch(0.665 0.021 235.9)` = `#88969F` | Hero |
+| `--emerald-deep` | `oklch(0.405 0.03 233)` | Nav, couple panels, countdown cards, venue, footer, intro room |
 | `--blush` | `oklch(0.855 0.024 231)` | Pale blue-grey: hero arch, story frames, panel shadows, labels on dark |
 | `--gold` | `oklch(0.52 0.088 78)` | Hairlines, labels on cream, flourish dividers |
 | `--gold-soft` | `oklch(0.72 0.095 78)` | Gold accents on dark surfaces, wall sconces |
@@ -75,6 +77,7 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 - `.flourish` — gold rule + heart divider under headings
 - `.arch-frame` / `.arch-inner` — arched photo frame with double gold outline
 - `.ornate-panel` — emerald card, gold hairline, ✦ corners, blush offset shadow
+- `.count-card` — countdown unit card: deep blue-grey, gold hairline + ✦ corners, Bodoni numerals, blush label
 - `.checker-section` / `.checker-footer` — checkerboard staging bands
 - `.sconce` — wall-lamp ornament in the hero and in the intro
 - `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: emerald doors, blush arched screens, perspective checkered floor, gold halo, invitation card
