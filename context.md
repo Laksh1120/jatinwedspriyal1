@@ -92,6 +92,12 @@ cannot `@import` a remote URL).
 - The Ganesha drawing in the intro is generated artwork, not a traditional illustration
 - The intro was matched from the reel's cover frames and embed media; the reel itself
   cannot be opened by automation, so the exact animation is still worth a side-by-side check
+- Two dates now live on the page: the countdown runs to **December 10, 2026** while the hero,
+  footer, intro card and page description still say **November 12, 2026** — confirm the real
+  day and the site should be made consistent
+- The removed timeline (4:00 PM Guest Arrival, 5:30 PM Ceremony, 6:30 PM Reception & Dinner,
+  10:00 PM Farewell) is no longer shown anywhere; it can be reinstated under the countdown
+  or beside the venue if the schedule is still wanted
 - No RSVP form
 - "Read more" links in the Stories cards are still dead `#` placeholders
 - Google Maps iframe uses a text query, not verified exact coordinates
@@ -195,3 +201,25 @@ cannot `@import` a remote URL).
 - **Verified:** build OK; Playwright at 1280×1800 and 390×844 walks every section with
   no console or page errors; computed background colours read back as `#BCA68E` and
   `#88969F` on the surfaces listed above.
+
+### 2026-09-28 — Event details replaced by a countdown
+- **The Event Details section is now a countdown.** The 4-stage timeline (Arrival,
+  Ceremony, Reception, Farewell) and its checkerboard grid were removed and replaced in
+  the same place — section id `#event`, same checker band, same heading style — by a live
+  counter reading **Days / Hours / Minutes / Seconds** until **10 December 2026**
+  (midnight in Daman, `2026-12-10T00:00:00+05:30`, so every visitor counts to the same instant).
+- **Styled as the rest of the invitation:** four deep blue-grey `.count-card` panels with a
+  gold hairline and ✦ corners, Bodoni numerals in cream over a gold rule, pale blue-grey
+  labels; the line "Until we say “I do” by the water" sits under them, then the cream
+  date/dress-code strip, now reading "Thursday, December 10, 2026" and
+  "Garden Formal · Earth tones encouraged".
+- **Nav relabelled** from "Event" to "Countdown" on both desktop and the mobile menu.
+- **Technical notes:** the counter is a `Countdown` component in `src/routes/index.tsx` —
+  the first paint is `--` and the real numbers arrive in `useEffect`, so server and browser
+  markup never disagree; it re-reads the clock every second and cleans its timer up on
+  unmount. Once the target passes it shows "Today is the day — the lake is waiting."
+  Each card also carries a screen-reader-only reading of its value.
+- **Also:** sections now get `scroll-margin-top` so anchor jumps land clear of the fixed bar.
+- **Verified:** build OK; Playwright at 1280×1800 (one row of four) and 390×844 (2×2 grid)
+  shows the digits ticking down second by second, the nav link scrolling to the heading
+  clear of the bar, and no console or page errors.
