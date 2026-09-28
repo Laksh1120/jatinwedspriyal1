@@ -43,7 +43,7 @@ function Flourish({ dark = false }: { dark?: boolean }) {
 
 function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; title: string; tone?: "light" | "dark" }) {
   const dark = tone === "dark";
-  return <div className="mb-12 text-center md:mb-16"><p className={`font-body text-xs uppercase tracking-[0.28em] ${dark ? "text-blush" : "text-foreground/80"}`}>{eyebrow}</p><h2 className={`mt-3 font-display text-5xl font-medium md:text-7xl ${dark ? "text-cream" : "text-foreground"}`}>{title}</h2><Flourish dark={dark} /></div>;
+  return <div className="mb-12 text-center md:mb-16"><p className={`font-body text-xs uppercase tracking-[0.28em] ${dark ? "text-blush" : "text-foreground"}`}>{eyebrow}</p><h2 className={`mt-3 font-display text-5xl font-medium md:text-7xl ${dark ? "text-cream" : "text-foreground"}`}>{title}</h2><Flourish dark={dark} /></div>;
 }
 
 function Index() {
@@ -110,10 +110,10 @@ function Index() {
         <div className="sconce left-3 md:left-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <div className="sconce right-3 md:right-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <div className="relative z-10 mx-auto w-full max-w-4xl">
-          <p className="font-body text-xs uppercase tracking-[0.35em] text-foreground/80 md:text-sm">You're invited to celebrate</p>
+          <p className="font-body text-xs uppercase tracking-[0.35em] text-foreground md:text-sm">You're invited to celebrate</p>
           <h1 className="mt-7 font-display text-7xl font-medium leading-[0.78] md:text-[9rem]">Priyal <span className="block py-4 text-4xl italic text-foreground md:text-6xl">&</span> Jatin</h1>
           <Flourish />
-          <p className="mt-7 text-xs uppercase tracking-[0.22em] text-foreground/80 md:text-sm">November 12, 2026 · Lakeside at Dusk</p>
+          <p className="mt-7 text-xs uppercase tracking-[0.22em] text-foreground md:text-sm">November 12, 2026 · Lakeside at Dusk</p>
           <div className="mx-auto mt-12 w-full max-w-xl arch-frame"><div className="arch-inner"><img src={coupleAsset.url} alt="Priyal and Jatin by the lake" className="h-[43vh] min-h-80 w-full object-cover object-[center_38%] md:h-[48vh]" /></div></div>
         </div>
         <a href="#couple" aria-label="Scroll to explore" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-foreground/70"><ArrowDown className="animate-bounce" /></a>
