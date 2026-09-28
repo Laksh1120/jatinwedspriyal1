@@ -104,8 +104,8 @@ function Index() {
       </nav>
 
       <header id="home" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-emerald px-5 pb-20 pt-28 text-center text-foreground">
-        <img src={lakeAsset.url} alt="A tranquil lake at dusk" className="absolute inset-0 size-full object-cover opacity-25 mix-blend-luminosity" />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-deep/25 via-transparent to-beige/45" aria-hidden="true" />
+        <img src={lakeAsset.url} alt="A tranquil lake at dusk" className="absolute inset-0 size-full object-cover opacity-15 mix-blend-luminosity" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blush/50 via-emerald/15 to-beige/55" aria-hidden="true" />
         <div className="paper-texture absolute inset-0" />
         <div className="sconce left-3 md:left-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <div className="sconce right-3 md:right-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
