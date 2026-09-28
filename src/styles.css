@@ -41,8 +41,8 @@
 
 :root {
   --radius: 0;
-  --background: oklch(0.935 0.021 78);
-  --foreground: oklch(0.305 0.033 236);
+  --background: oklch(0.738 0.042 69.5);
+  --foreground: oklch(0.28 0.033 236);
   --card: oklch(0.955 0.016 78);
   --card-foreground: oklch(0.305 0.033 236);
   --popover: oklch(0.955 0.016 78);
@@ -89,7 +89,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .arch-frame { position:relative; padding:10px; border:1px solid color-mix(in oklab, var(--gold-soft) 72%, transparent); border-radius:48% 48% 0 0 / 22% 22% 0 0; background:color-mix(in oklab, var(--blush) 88%, transparent); box-shadow:0 22px 60px color-mix(in oklab, var(--emerald-deep) 35%, transparent); }
 .arch-frame::before { content:""; position:absolute; inset:-7px; border:1px solid color-mix(in oklab, var(--gold-soft) 46%, transparent); border-radius:48% 48% 0 0 / 22% 22% 0 0; pointer-events:none; }
 .arch-inner { overflow:hidden; border-radius:47% 47% 0 0 / 21% 21% 0 0; border:1px solid color-mix(in oklab, var(--cream) 55%, transparent); }
-.arch-frame--light { background:var(--beige); box-shadow:18px 22px 0 color-mix(in oklab, var(--emerald) 22%, transparent); }
+.arch-frame--light { background:var(--cream); box-shadow:18px 22px 0 color-mix(in oklab, var(--emerald-deep) 30%, transparent); }
 
 .ornate-panel { position:relative; overflow:hidden; border:1px solid color-mix(in oklab, var(--gold-soft) 55%, transparent); background:var(--emerald-deep); padding:2.25rem; text-align:center; box-shadow:8px 8px 0 var(--blush); }
 .ornate-panel::before,.ornate-panel::after { content:"✦"; position:absolute; color:var(--gold-soft); opacity:.7; font-size:1rem; }
@@ -97,7 +97,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .ornate-panel::after { right:12px; bottom:9px; }
 
 .checker-section { position:relative; background-color:var(--beige); background-image:linear-gradient(45deg,color-mix(in oklab,var(--cream) 90%,transparent) 25%,transparent 25%),linear-gradient(-45deg,color-mix(in oklab,var(--cream) 90%,transparent) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,color-mix(in oklab,var(--cream) 90%,transparent) 75%),linear-gradient(-45deg,transparent 75%,color-mix(in oklab,var(--cream) 90%,transparent) 75%); background-size:56px 56px; background-position:0 0,0 28px,28px -28px,-28px 0; }
-.checker-section::before { content:""; position:absolute; inset:0; background:color-mix(in oklab,var(--cream) 82%,transparent); }
+.checker-section::before { content:""; position:absolute; inset:0; background:color-mix(in oklab,var(--cream) 45%,transparent); }
 .checker-footer { background-color:var(--emerald-deep); background-image:linear-gradient(45deg,color-mix(in oklab,var(--beige) 18%,transparent) 25%,transparent 25%),linear-gradient(-45deg,color-mix(in oklab,var(--beige) 18%,transparent) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,color-mix(in oklab,var(--beige) 18%,transparent) 75%),linear-gradient(-45deg,transparent 75%,color-mix(in oklab,var(--beige) 18%,transparent) 75%); background-size:38px 38px; background-position:0 0,0 19px,19px -19px,-19px 0; }
 
 .sconce { position:absolute; top:7rem; z-index:2; width:70px; color:var(--gold-soft); }

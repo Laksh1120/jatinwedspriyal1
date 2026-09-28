@@ -43,7 +43,7 @@ function Flourish({ dark = false }: { dark?: boolean }) {
 
 function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; title: string; tone?: "light" | "dark" }) {
   const dark = tone === "dark";
-  return <div className="mb-12 text-center md:mb-16"><p className={`font-body text-xs uppercase tracking-[0.28em] ${dark ? "text-blush" : "text-gold"}`}>{eyebrow}</p><h2 className={`mt-3 font-display text-5xl font-medium md:text-7xl ${dark ? "text-cream" : "text-foreground"}`}>{title}</h2><Flourish dark={dark} /></div>;
+  return <div className="mb-12 text-center md:mb-16"><p className={`font-body text-xs uppercase tracking-[0.28em] ${dark ? "text-blush" : "text-foreground/80"}`}>{eyebrow}</p><h2 className={`mt-3 font-display text-5xl font-medium md:text-7xl ${dark ? "text-cream" : "text-foreground"}`}>{title}</h2><Flourish dark={dark} /></div>;
 }
 
 function Index() {
@@ -103,20 +103,20 @@ function Index() {
         {menuOpen && <div className="flex flex-col gap-5 border-t border-gold/20 py-6 text-center text-xs uppercase tracking-[0.25em] md:hidden">{[["#couple","Us"],["#event","Event"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
       </nav>
 
-      <header id="home" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-emerald-deep px-5 pb-20 pt-28 text-center text-cream">
+      <header id="home" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-emerald px-5 pb-20 pt-28 text-center text-foreground">
         <img src={lakeAsset.url} alt="A tranquil lake at dusk" className="absolute inset-0 size-full object-cover opacity-25 mix-blend-luminosity" />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald/60 via-emerald-deep/25 to-emerald-deep/80" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-deep/25 via-transparent to-beige/45" aria-hidden="true" />
         <div className="paper-texture absolute inset-0" />
         <div className="sconce left-3 md:left-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <div className="sconce right-3 md:right-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
         <div className="relative z-10 mx-auto w-full max-w-4xl">
-          <p className="font-body text-xs uppercase tracking-[0.35em] text-blush md:text-sm">You're invited to celebrate</p>
-          <h1 className="mt-7 font-display text-7xl font-medium leading-[0.78] md:text-[9rem]">Priyal <span className="block py-4 text-4xl italic text-gold-soft md:text-6xl">&</span> Jatin</h1>
-          <Flourish dark />
-          <p className="mt-7 text-xs uppercase tracking-[0.22em] text-cream/80 md:text-sm">November 12, 2026 · Lakeside at Dusk</p>
+          <p className="font-body text-xs uppercase tracking-[0.35em] text-foreground/80 md:text-sm">You're invited to celebrate</p>
+          <h1 className="mt-7 font-display text-7xl font-medium leading-[0.78] md:text-[9rem]">Priyal <span className="block py-4 text-4xl italic text-foreground md:text-6xl">&</span> Jatin</h1>
+          <Flourish />
+          <p className="mt-7 text-xs uppercase tracking-[0.22em] text-foreground/80 md:text-sm">November 12, 2026 · Lakeside at Dusk</p>
           <div className="mx-auto mt-12 w-full max-w-xl arch-frame"><div className="arch-inner"><img src={coupleAsset.url} alt="Priyal and Jatin by the lake" className="h-[43vh] min-h-80 w-full object-cover object-[center_38%] md:h-[48vh]" /></div></div>
         </div>
-        <a href="#couple" aria-label="Scroll to explore" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-gold-soft"><ArrowDown className="animate-bounce" /></a>
+        <a href="#couple" aria-label="Scroll to explore" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-foreground/70"><ArrowDown className="animate-bounce" /></a>
       </header>
 
       <section id="couple" className="relative px-5 py-24 md:px-10 md:py-32">
@@ -132,7 +132,7 @@ function Index() {
       </section>
 
       <section id="event" className="checker-section px-5 py-24 md:px-10 md:py-32"><div className="relative mx-auto max-w-6xl"><SectionHeading eyebrow="Mark your calendar" title="Event Details" />
-        <div className="grid gap-px border border-gold/40 bg-gold/40 md:grid-cols-4">{events.map(({icon: Icon,time,name,copy}, index) => <article key={name} className={`p-7 text-center md:p-9 ${index === 1 ? "bg-blush" : "bg-cream"}`}><Icon className="mx-auto size-7 text-emerald-deep" /><time className="mt-6 block text-xs uppercase tracking-[0.22em] text-emerald-deep">{time}</time><h3 className="mt-3 font-display text-3xl">{name}</h3><p className="mt-4 text-sm leading-7 text-muted-foreground">{copy}</p></article>)}</div>
+        <div className="grid gap-px border border-gold/40 bg-gold/40 md:grid-cols-4">{events.map(({icon: Icon,time,name,copy}, index) => <article key={name} className={`p-7 text-center md:p-9 ${index === 1 ? "bg-emerald" : "bg-cream"}`}><Icon className="mx-auto size-7 text-emerald-deep" /><time className="mt-6 block text-xs uppercase tracking-[0.22em] text-emerald-deep">{time}</time><h3 className="mt-3 font-display text-3xl">{name}</h3><p className={`mt-4 text-sm leading-7 ${index === 1 ? "text-foreground" : "text-muted-foreground"}`}>{copy}</p></article>)}</div>
         <div className="mt-10 grid border border-gold/40 bg-cream md:grid-cols-2"><div className="p-7 text-center md:border-r md:border-gold/40"><p className="text-xs uppercase tracking-[0.25em] text-gold">Date</p><p className="mt-2 font-display text-2xl">Thursday, November 12, 2026</p></div><div className="border-t border-gold/40 p-7 text-center md:border-t-0"><p className="text-xs uppercase tracking-[0.25em] text-gold">Dress Code</p><p className="mt-2 font-display text-2xl">Garden Formal · Earth tones encouraged</p></div></div>
       </div></section>
 
@@ -142,9 +142,9 @@ function Index() {
         </div>
       </div></section>
 
-      <section id="blog" className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group"><div className="overflow-hidden border border-gold/40 bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-[11px] uppercase tracking-[0.22em] text-gold">{story.date}</time><h3 className="mt-2 font-display text-3xl">{story.title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-gold pb-1 text-xs uppercase tracking-[0.2em] text-emerald-deep">Read more</a></article>)}</div></div></section>
+      <section id="blog" className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group"><div className="overflow-hidden border border-cream/70 bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-[11px] uppercase tracking-[0.22em] text-foreground/80">{story.date}</time><h3 className="mt-2 font-display text-3xl">{story.title}</h3><p className="mt-3 text-sm leading-7 text-foreground/80">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-foreground/40 pb-1 text-xs uppercase tracking-[0.2em] text-foreground">Read more</a></article>)}</div></div></section>
 
-      <footer className="checker-footer border-t border-gold/40 px-5 py-16 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-cream">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-xs uppercase tracking-[0.25em] text-blush">November 12, 2026</p><p className="mt-8 font-display text-xl italic text-cream/70">Where the lake meets forever</p></footer>
+      <footer className="checker-footer border-t border-gold-soft/40 px-5 py-16 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-cream">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-xs uppercase tracking-[0.25em] text-blush">November 12, 2026</p><p className="mt-8 font-display text-xl italic text-cream/70">Where the lake meets forever</p></footer>
     </main>
   );
 }
