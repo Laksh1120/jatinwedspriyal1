@@ -12,7 +12,7 @@ bottom every time something is added, changed, or fixed.
 - **Venue:** Praveg Lake Resort, Daman - 3 Kachigam, Kachigam Damanganga Garden, Daman 396215
 - **Countdown target:** December 10, 2026 (set 2026-09-28). Every other date on the page
   still reads November 12, 2026 — which is the real day is unconfirmed
-- **Theme:** "Lakeside at dusk" tableau — beige and blue-grey (the requested `#BCA68E` / `#88969F`) with antique gold on warm cream; arched photo frames, ornate panels, checkerboard staging, wall sconces, paper texture
+- **Theme:** "Lakeside at dusk" tableau — sage and lavender (the requested `#B8C9A9` / `#C0AED4`) with antique gold on warm cream; arched photo frames, ornate panels, checkerboard staging, wall sconces, paper texture
 - **Type:** Single-page TanStack Start app (React 19 + Vite + Tailwind CSS v4, one route at `/`)
 - **Content status:** unchanged from the original upload — names, parents, date, venue,
   dress code and story copy are verbatim; the 4-stage timeline was replaced by a countdown
@@ -60,14 +60,14 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 | Token | Value | Use |
 |---|---|---|
-| `--background` / `--beige` | `oklch(0.738 0.042 69.5)` = `#BCA68E` | Page background, countdown checker band |
-| `--emerald` | `oklch(0.665 0.021 235.9)` = `#88969F` | Hero |
-| `--emerald-deep` | `oklch(0.405 0.03 233)` | Nav, couple panels, countdown cards, venue, footer, intro room |
-| `--blush` | `oklch(0.855 0.024 231)` | Pale blue-grey: hero arch, story frames, panel shadows, labels on dark |
-| `--gold` | `oklch(0.52 0.088 78)` | Hairlines, labels on cream, flourish dividers |
-| `--gold-soft` | `oklch(0.72 0.095 78)` | Gold accents on dark surfaces, wall sconces |
-| `--cream` | `oklch(0.955 0.016 78)` | Cards, light text on dark |
-| `--foreground` | `oklch(0.28 0.033 236)` | Ink text on beige and blue-grey surfaces |
+| `--background` / `--beige` | `#B8C9A9` | Sage page background, countdown checker band |
+| `--emerald` | `#C0AED4` | Lavender hero |
+| `--emerald-deep` | `#4C4258` | Deep lavender: nav, couple panels, countdown cards, venue, footer, intro room |
+| `--blush` | `#E7E0ED` | Pale lavender: hero arch, story frames, panel shadows, labels on dark |
+| `--gold` | `#81662D` | Hairlines, labels on cream, flourish dividers |
+| `--gold-soft` | `#C7A85A` | Gold accents on dark surfaces, wall sconces |
+| `--cream` | `#FAF7F1` | Cards, light text on dark |
+| `--foreground` | `#253023` | Deep green ink on sage and lavender surfaces |
 | `--font-display` | Bodoni Moda | Headings, names |
 | `--font-body` | Montserrat | Body/UI text |
 
@@ -233,3 +233,10 @@ cannot `@import` a remote URL).
 - **Action:** no app code, style or content was touched. A refresh (or hard refresh) clears
   it; if it ever happens again, note whether the page is plain white or shows an error
   message, since that decides whether to look at the cache or at the code.
+
+### 2026-09-28 — Theme changed to sage & lavender (content unchanged)
+- Replaced the beige `#BCA68E` and blue-grey `#88969F` backgrounds with the requested
+  sage `#B8C9A9` and lavender `#C0AED4` across the page, hero, checker band and intro.
+- Rebuilt the supporting dark, pale, ink and border shades around those colours so the
+  navigation, cards, venue, footer, labels and Ganpati room remain readable and cohesive.
+- Kept the warm cream and antique-gold accents, all content, layout and interactions unchanged.
