@@ -235,8 +235,30 @@ cannot `@import` a remote URL).
   message, since that decides whether to look at the cache or at the code.
 
 ### 2026-09-28 — Theme changed to sage & lavender (content unchanged)
-- Replaced the beige `#BCA68E` and blue-grey `#88969F` backgrounds with the requested
-  sage `#B8C9A9` and lavender `#C0AED4` across the page, hero, checker band and intro.
-- Rebuilt the supporting dark, pale, ink and border shades around those colours so the
-  navigation, cards, venue, footer, labels and Ganpati room remain readable and cohesive.
-- Kept the warm cream and antique-gold accents, all content, layout and interactions unchanged.
+- **The two requested colours are now the theme.** The beige `#BCA68E` and blue-grey
+  `#88969F` scheme is gone; the page background and the countdown checker band are sage
+  `#B8C9A9`, and the hero, the story frames and the Ganpati screens are lavender `#C0AED4`.
+- **Every token in `src/styles.css` is now a literal hex** (the previous round wrote them in
+  `oklch`): `--background`/`--accent`/`--beige` `#B8C9A9`, `--emerald`/`--secondary`/`--ring`
+  `#C0AED4`, `--emerald-deep`/`--primary` `#4C4258`, `--blush` `#E7E0ED`, `--foreground`
+  `#253023`, `--muted-foreground` `#44523F`, `--muted` `#E5EADF`, `--border` `#9EAC92`,
+  `--input` `#DBE4D3`, `--gold` `#81662D`, `--gold-soft` `#C7A85A`, `--cream`/`--card` `#FAF7F1`.
+- **The old names stay, the colours changed.** `--emerald` is lavender, `--beige` is sage and
+  `--blush` is pale lavender — kept as class names so no layout or markup had to be touched.
+- **Supporting shades rebuilt around the pair:** deep lavender `#4C4258` for the nav, the couple
+  panels, the countdown cards, the venue, the footer and the intro room; pale lavender `#E7E0ED`
+  for the hero arch, the story frames, the panel offset shadows and labels on dark; deep green
+  ink `#253023` for all copy on sage and lavender; a sage-grey `#9EAC92` border.
+- **Contrast re-checked, not assumed** (computed with a script against WCAG): ink on sage 7.84:1,
+  ink on lavender 6.72:1, cream on deep lavender 8.82:1, pale lavender on deep lavender 7.31:1,
+  gold-soft on deep lavender 4.12:1 (large/decorative text only), gold on cream 5.07:1.
+- **Intro room re-tinted to match:** deep lavender walls, floor and doors, sage arched screens,
+  brass lamps and card edging; the mantra stays dark so it reads on the screens.
+- **Content, layout and behaviour untouched** — same copy, same sections, same countdown, same
+  skippable opening with the `priyal-jatin-intro-v5` key and `?intro` replay.
+- **This file's own descriptions were corrected** (Overview, Sections, decorative classes) so they
+  say lavender/sage instead of the old emerald and blue-grey wording; changelog entries above are
+  left as they were written.
+- **Verified:** build OK; Playwright at 1280×1800 confirms sage on the body and the checker band,
+  lavender in the hero, deep lavender in the nav and the countdown cards, with no console or page
+  errors.
