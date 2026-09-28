@@ -93,8 +93,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const force = new URLSearchParams(window.location.search).has("intro");
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && (force || !window.localStorage.getItem("priyal-jatin-intro-v5"))) setIntro(true);
+    setIntro(true);
   }, []);
 
   const finishIntro = () => {
