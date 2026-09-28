@@ -223,3 +223,13 @@ cannot `@import` a remote URL).
 - **Verified:** build OK; Playwright at 1280×1800 (one row of four) and 390×844 (2×2 grid)
   shows the digits ticking down second by second, the nav link scrolling to the heading
   clear of the bar, and no console or page errors.
+
+### 2026-09-28 — Preview load report (no code changed)
+- **Report:** the preview appeared not to load right after the countdown swap.
+- **Diagnosis:** nothing in the invitation was broken — the page answers `200` and a test
+  browser opens the site through the Ganpati opening and every section with no console or
+  page errors. The blank preview was the editor's own reload left over from the round of
+  edits, not a fault in the site.
+- **Action:** no app code, style or content was touched. A refresh (or hard refresh) clears
+  it; if it ever happens again, note whether the page is plain white or shows an error
+  message, since that decides whether to look at the cache or at the code.
