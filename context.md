@@ -47,11 +47,11 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 ## Sections in src/routes/index.tsx
 
-1. **Ganpati intro** — full-screen emerald room: doors part, gold Ganesha and the mantra appear, then the invitation card unfolds and the site is revealed (auto after ~7s; tap or Skip to go straight in; `localStorage`-gated, respects reduced-motion, `?intro` forces it)
-2. **Nav** — fixed gold-on-emerald bar, "Lake & Love" wordmark, mobile hamburger
+1. **Ganpati intro** — full-screen deep-lavender room: doors part, gold Ganesha and the mantra appear, then the invitation card unfolds and the site is revealed (auto after ~7s; tap or Skip to go straight in; `localStorage`-gated, respects reduced-motion, `?intro` forces it)
+2. **Nav** — fixed deep-lavender bar with gold-soft accents and cream text, "Lake & Love" wordmark, mobile hamburger
 3. **Hero (`#home`)** — names, date, faded lake photo, paper texture, two wall sconces, arched couple portrait, scroll cue
 4. **Couple (`#couple`)** — arched portrait + two ornate panels (bride and groom with parent names)
-5. **Countdown (`#event`)** — live Days / Hours / Minutes / Seconds until December 10, 2026 in four deep blue-grey cards on the checkerboard band, then the date/dress-code meta
+5. **Countdown (`#event`)** — live Days / Hours / Minutes / Seconds until December 10, 2026 in four deep-lavender cards on the sage checkerboard band, then the date/dress-code meta
 6. **Venue (`#venue`)** — name, address, description, getting-there list, embedded Google Maps iframe, directions button
 7. **Stories (`#blog`)** — 3 "our journey" cards with photo, date, title, copy, "Read more"
 8. **Footer** — names, date, tagline "Where the lake meets forever"
@@ -76,11 +76,11 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 - `.paper-texture` — film-grain/mist overlay
 - `.flourish` — gold rule + heart divider under headings
 - `.arch-frame` / `.arch-inner` — arched photo frame with double gold outline
-- `.ornate-panel` — emerald card, gold hairline, ✦ corners, blush offset shadow
-- `.count-card` — countdown unit card: deep blue-grey, gold hairline + ✦ corners, Bodoni numerals, blush label
+- `.ornate-panel` — deep-lavender card, gold hairline, ✦ corners, pale-lavender offset shadow
+- `.count-card` — countdown unit card: deep lavender, gold hairline + ✦ corners, Bodoni numerals, pale-lavender label
 - `.checker-section` / `.checker-footer` — checkerboard staging bands
 - `.sconce` — wall-lamp ornament in the hero and in the intro
-- `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: emerald doors, blush arched screens, perspective checkered floor, gold halo, invitation card
+- `.ganpati-intro` / `.gi-*` — Ganpati opening sequence: deep-lavender doors and room, sage arched screens, perspective checkered floor, gold halo, invitation card
 - `.invitation-card` — leftover from the previous entry card, no longer rendered
 
 Fonts load from `<link>` tags in `src/routes/__root.tsx` (Tailwind v4's build
