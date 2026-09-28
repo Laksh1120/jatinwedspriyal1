@@ -10,7 +10,7 @@ bottom every time something is added, changed, or fixed.
 - **Couple:** Priyal Bang & Jatin Mulchandani
 - **Date:** November 12, 2026
 - **Venue:** Praveg Lake Resort, Daman - 3 Kachigam, Kachigam Damanganga Garden, Daman 396215
-- **Theme:** "Lakeside at dusk" tableau — deep emerald, blush pink, antique gold on warm cream; arched photo frames, ornate panels, checkerboard staging, wall sconces, paper texture
+- **Theme:** "Lakeside at dusk" tableau — beige and blue-grey (the requested `#BCA68E` / `#88969F`) with antique gold on warm cream; arched photo frames, ornate panels, checkerboard staging, wall sconces, paper texture
 - **Type:** Single-page TanStack Start app (React 19 + Vite + Tailwind CSS v4, one route at `/`)
 - **Content status:** unchanged from the original upload — names, parents, date, venue,
   dress code, timeline, story dates and copy are all verbatim
@@ -58,12 +58,14 @@ longer in the repo; its content now lives in `src/routes/index.tsx` and
 
 | Token | Value | Use |
 |---|---|---|
-| `--emerald` | `oklch(0.34 0.09 158)` | Nav, hero, venue, panels |
-| `--emerald-deep` | `oklch(0.25 0.065 157)` | Intro screen, footer |
-| `--blush` | `oklch(0.76 0.13 350)` | Arches, accents, checker band |
-| `--gold` | `oklch(0.74 0.11 80)` | Borders, labels, dividers |
-| `--cream` | `oklch(0.965 0.025 83)` | Background, light text |
-| `--foreground` | `oklch(0.28 0.045 157)` | Body copy on cream |
+| `--background` / `--beige` | `oklch(0.738 0.042 69.5)` = `#BCA68E` | Page background, event checker band |
+| `--emerald` | `oklch(0.665 0.021 235.9)` = `#88969F` | Hero, highlighted timeline card |
+| `--emerald-deep` | `oklch(0.405 0.03 233)` | Nav, couple panels, venue, footer, intro room |
+| `--blush` | `oklch(0.855 0.024 231)` | Pale blue-grey: hero arch, story frames, panel shadows, labels on dark |
+| `--gold` | `oklch(0.52 0.088 78)` | Hairlines, labels on cream, flourish dividers |
+| `--gold-soft` | `oklch(0.72 0.095 78)` | Gold accents on dark surfaces, wall sconces |
+| `--cream` | `oklch(0.955 0.016 78)` | Cards, light text on dark |
+| `--foreground` | `oklch(0.28 0.033 236)` | Ink text on beige and blue-grey surfaces |
 | `--font-display` | Bodoni Moda | Headings, names |
 | `--font-body` | Montserrat | Body/UI text |
 
@@ -167,3 +169,26 @@ cannot `@import` a remote URL).
 - **Verified:** build OK and Playwright runs at 1280×1800 and 390×844 step through
   the doors, Ganesha, mantra, card and the reveal into the site with no console or
   page errors.
+
+### 2026-09-28 — Background revamp to beige & blue-grey (content unchanged)
+- **The two requested colours are now the actual backgrounds**, verified by reading the
+  rendered page: the whole page sits on `#BCA68E` beige (body, couple and stories
+  sections, event checker band) and the hero plus the highlighted timeline card are
+  `#88969F` blue-grey. The old emerald and blush are gone from the interface.
+- **New shades built from the same two colours** so nothing is unreadable: a deep
+  blue-grey (`oklch(0.405 0.03 233)`) for the nav, the couple panels, the venue, the
+  footer and the intro room; a pale blue-grey (`oklch(0.855 0.024 231)`) for the hero
+  arch, the story frames, the panel offset shadows and labels on dark; cream
+  (`oklch(0.955 0.016 78)`) for cards; ink (`oklch(0.28 0.033 236)`) for text on the
+  beige and blue-grey surfaces.
+- **Gold was re-tuned** to an antique brass (`oklch(0.52 0.088 78)`) with a lighter
+  `--gold-soft` for dark surfaces, since the old gold vanished against beige.
+- **Text moved where contrast demanded it:** the hero now uses dark ink on blue-grey
+  instead of cream, section headings on the beige page use ink, the venue heading has
+  a light variant, the highlighted ceremony card carries ink copy, and the small
+  labels were strengthened from 80% to full ink.
+- **Intro room re-tinted** to match: blue-grey walls and floor, beige arched screens,
+  brass lamps and card border.
+- **Verified:** build OK; Playwright at 1280×1800 and 390×844 walks every section with
+  no console or page errors; computed background colours read back as `#BCA68E` and
+  `#88969F` on the surfaces listed above.
