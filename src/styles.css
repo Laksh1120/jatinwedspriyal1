@@ -142,5 +142,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .ganpati-intro.is-opening { opacity:0; pointer-events:none; }
 .ganpati-intro.is-opening .gi-stage { transform:scale(1.1); transition:transform 1.3s ease; }
 
+/* ============= Events ============= */
+.events-section { position:relative; background-color:var(--emerald-deep); background-image:radial-gradient(circle at 50% 50%, color-mix(in oklab,var(--cream) 5%,transparent) 0 9px, transparent 10px), radial-gradient(circle at 50% 50%, color-mix(in oklab,var(--secondary) 9%,transparent) 0 22px, transparent 23px); background-size:76px 76px, 76px 76px; }
+.event-card { position:relative; border-radius:2.6rem; border:2px solid color-mix(in oklab,var(--secondary) 85%,var(--cream)); background:var(--cream); padding:.55rem; box-shadow:0 30px 70px color-mix(in oklab,var(--foreground) 45%,transparent); }
+.event-card::before { content:""; position:absolute; inset:8px; z-index:1; border:1px solid color-mix(in oklab,var(--gold-soft) 55%,transparent); border-radius:2.2rem; pointer-events:none; }
+.event-card .event-img-wrap { overflow:hidden; border-radius:2.2rem 2.2rem 1.6rem 1.6rem; }
+.event-card .event-img-wrap img { display:block; width:100%; aspect-ratio:4/3.4; object-fit:cover; }
+.font-script { font-family:"Great Vibes", cursive; }
+.event-divider { display:flex; align-items:center; justify-content:center; gap:1.1rem; margin:0 0 3rem; color:var(--gold-soft); }
+.event-divider::before,.event-divider::after { content:""; width:4rem; height:1px; background:linear-gradient(90deg,transparent,var(--gold-soft)); }
+.event-divider::after { background:linear-gradient(90deg,var(--gold-soft),transparent); }
+@media (max-width: 767px) { .event-card { border-radius:1.8rem; padding:.45rem; } .event-card::before { inset:6px; border-radius:1.4rem; } .event-card .event-img-wrap { border-radius:1.4rem 1.4rem 1rem 1rem; } .event-card .event-img-wrap img { aspect-ratio:4/3.6; } }
+
 @media (max-width: 767px) { .sconce { width:44px; opacity:.75; } .sconce .lamp { width:34px; height:25px; } .count-card { padding:1.4rem .5rem 1.2rem; } .count-card .rule { margin-top:.8rem; } .count-card .lbl { margin-top:.6rem; letter-spacing:.22em; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
