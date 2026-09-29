@@ -8,7 +8,6 @@ import lakeAsset from "@/assets/lake.jpg.asset.json";
 import proposalImage from "@/assets/story-proposal.jpg";
 import venueImage from "@/assets/story-venue.jpg";
 import engagementImage from "@/assets/story-engagement.jpg";
-import ganeshaImage from "@/assets/ganesha.png";
 import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
 import ringCeremonyImage from "@/assets/events/ring-ceremony.jpg";
 import haldiImage from "@/assets/events/haldi.jpg";
@@ -115,25 +114,7 @@ function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; t
 }
 
 function Index() {
-  const [intro, setIntro] = useState(false);
-  const [opening, setOpening] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    setIntro(true);
-  }, []);
-
-  const finishIntro = () => {
-    setOpening(true);
-    window.localStorage.setItem("priyal-jatin-intro-v5", "1");
-    window.setTimeout(() => setIntro(false), 1400);
-  };
-
-  useEffect(() => {
-    if (!intro) return;
-    const t = window.setTimeout(finishIntro, 7200);
-    return () => window.clearTimeout(t);
-  }, [intro]);
 
   return (
     <main className="overflow-hidden bg-background text-foreground">
