@@ -9,6 +9,12 @@ import proposalImage from "@/assets/story-proposal.jpg";
 import venueImage from "@/assets/story-venue.jpg";
 import engagementImage from "@/assets/story-engagement.jpg";
 import ganeshaImage from "@/assets/ganesha.png";
+import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
+import ringCeremonyImage from "@/assets/events/ring-ceremony.jpg";
+import haldiImage from "@/assets/events/haldi.jpg";
+import baraatImage from "@/assets/events/baraat.jpg";
+import receptionImage from "@/assets/events/reception.jpg";
+import phereImage from "@/assets/events/phere.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +34,25 @@ const stories = [
   { image: proposalImage, alt: "Proposal by the lake", date: "March 12, 2025", title: "The Proposal at Mirror Lake", copy: "Jatin got down on one knee as the sun painted the water gold. Priyal said yes before he could finish the question." },
   { image: venueImage, alt: "Venue scouting", date: "January 8, 2025", title: "Finding Our Perfect Shore", copy: "We visited a dozen venues before stepping onto the shores of Praveg Lake Resort — we knew instantly this was the one." },
   { image: engagementImage, alt: "Engagement party", date: "November 2, 2024", title: "Engagement Celebration", copy: "Family and friends gathered for an intimate garden party. So much love, laughter, and homemade pie." },
+];
+
+const eventDays = [
+  {
+    label: "Friday · 11 December 2026",
+    items: [
+      { image: welcomeLunchImage, alt: "Welcome lunch on the lawn", title: "Welcome Lunch", tagline: "A First Toast to Forever", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
+      { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony", tagline: "A Promise Sealed by the Water", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Sangeet & Cocktails" },
+    ],
+  },
+  {
+    label: "Saturday · 12 December 2026",
+    items: [
+      { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", tagline: "Bathed in Flowers & Blessings", date: ["12", "12", "26"], time: "10:00 am onwards", day: "Saturday" },
+      { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", tagline: "The Joyful Procession", date: ["12", "12", "26"], time: "6:00 pm onwards", day: "Saturday" },
+      { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", tagline: "An Evening of Glamour & Grace", date: ["12", "12", "26"], time: "8:00 pm onwards", day: "Saturday" },
+      { image: phereImage, alt: "Mandap by the lake at night", title: "Phere", tagline: "Seven Steps Around the Sacred Fire", date: ["12", "12", "26"], time: "11:00 pm onwards", day: "Saturday" },
+    ],
+  },
 ];
 
 const COUNTDOWN_TARGET = new Date("2026-12-10T00:00:00+05:30").getTime();
