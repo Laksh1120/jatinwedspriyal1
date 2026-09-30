@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowDown, Heart, MapPin, Menu, Music2, X } from "lucide-react";
+import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import coupleAsset from "@/assets/couple.jpg.asset.json";
-import lakeAsset from "@/assets/lake.jpg.asset.json";
 import proposalImage from "@/assets/story-proposal.jpg";
 import venueImage from "@/assets/story-venue.jpg";
 import engagementImage from "@/assets/story-engagement.jpg";
@@ -113,6 +111,76 @@ function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; t
   return <div className="mb-12 text-center md:mb-16"><p className={`font-body text-xs uppercase tracking-[0.28em] ${dark ? "text-blush" : "text-foreground"}`}>{eyebrow}</p><h2 className={`mt-3 font-display text-5xl font-medium md:text-7xl ${dark ? "text-cream" : "text-foreground"}`}>{title}</h2><Flourish dark={dark} /></div>;
 }
 
+function InvitationFlorals() {
+  return (
+    <>
+      <svg className="invitation-florals invitation-florals--top" viewBox="0 0 480 250" aria-hidden="true">
+        <g className="floral-sway floral-sway--left">
+          <path className="floral-stem" d="M38 0c2 54 15 88 47 125 15 17 19 41 16 67M74 0c-3 50 5 84 25 112" />
+          <path className="floral-leaf" d="M40 27c-28 3-34 24-34 24 23 3 35-8 34-24Zm12 34c25 3 30 22 30 22-21 3-31-7-30-22ZM74 91c-27 1-33 21-33 21 21 5 33-4 33-21Zm25 33c23 5 25 24 25 24-20 0-28-10-25-24Z" />
+          <path className="floral-bloom" d="M28 3c8 13 20 14 31 2 1 16-8 25-21 25S16 20 28 3Zm52 60c7 11 17 12 26 2 1 13-7 21-18 21S70 77 80 63Zm8 70c7 11 17 12 26 2 1 13-7 21-18 21s-18-9-8-23Z" />
+          <circle className="floral-bud" cx="101" cy="190" r="7" />
+        </g>
+        <g className="floral-sway floral-sway--right">
+          <path className="floral-stem" d="M442 0c-2 54-15 88-47 125-15 17-19 41-16 67M406 0c3 50-5 84-25 112" />
+          <path className="floral-leaf" d="M440 27c28 3 34 24 34 24-23 3-35-8-34-24Zm-12 34c-25 3-30 22-30 22 21 3 31-7 30-22Zm-22 30c27 1 33 21 33 21-21 5-33-4-33-21Zm-25 33c-23 5-25 24-25 24 20 0 28-10 25-24Z" />
+          <path className="floral-bloom" d="M452 3c-8 13-20 14-31 2-1 16 8 25 21 25s22-10 10-27Zm-52 60c-7 11-17 12-26 2-1 13 7 21 18 21s18-9 8-23Zm-8 70c-7 11-17 12-26 2-1 13 7 21 18 21s18-9 8-23Z" />
+          <circle className="floral-bud" cx="379" cy="190" r="7" />
+        </g>
+        <g className="floral-sway floral-sway--center">
+          <path className="floral-stem" d="M240 0v59M214 0c4 24 13 38 26 52M266 0c-4 24-13 38-26 52" />
+          <path className="floral-bloom" d="M240 42c-14-20-31-11-28 4 2 10 13 15 28 21 15-6 26-11 28-21 3-15-14-24-28-4Z" />
+          <circle className="floral-bud" cx="212" cy="26" r="7" /><circle className="floral-bud" cx="268" cy="26" r="7" />
+        </g>
+      </svg>
+      <svg className="invitation-florals invitation-florals--bottom" viewBox="0 0 480 250" aria-hidden="true">
+        <g className="floral-sway floral-sway--bottom">
+          <path className="lotus-stem" d="M46 250c7-68 24-104 47-136M156 250c-3-60 5-103 23-143M253 250c0-73-1-121-8-169M350 250c-3-58 9-98 38-137M448 250c-1-60-8-102-27-137" />
+          <path className="palm-leaf" d="M0 230C31 161 65 151 111 166 75 177 48 196 23 229Zm4 18c19-49 52-63 91-50-36 9-58 27-75 51Z" />
+          <g className="lotus-bloom"><path d="M93 126c-28-5-40 15-35 31 5 18 22 28 35 36 13-8 30-18 35-36 5-16-7-36-35-31Z" /><path d="M93 182c-13-22-13-45 0-72 13 27 13 50 0 72Zm0 3c-25-13-37-30-41-55 25 12 38 30 41 55Zm0 0c25-13 37-30 41-55-25 12-38 30-41 55Z" /></g>
+          <g className="lotus-bloom"><path d="M179 118c-25-4-36 14-31 29 4 16 19 25 31 32 12-7 27-16 31-32 5-15-6-33-31-29Z" /><path d="M179 171c-12-20-12-41 0-66 12 25 12 46 0 66Z" /></g>
+          <g className="lotus-bloom lotus-bloom--large"><path d="M245 93c-32-6-46 18-40 37 5 21 25 32 40 42 15-10 35-21 40-42 6-19-8-43-40-37Z" /><path d="M245 162c-16-27-16-56 0-88 16 32 16 61 0 88Zm0 4c-31-16-46-37-51-68 31 15 47 37 51 68Zm0 0c31-16 46-37 51-68-31 15-47 37-51 68Z" /></g>
+          <g className="lotus-bloom"><path d="M388 124c-27-5-39 15-34 31 5 17 21 27 34 35 13-8 29-18 34-35 5-16-7-36-34-31Z" /><path d="M388 181c-13-22-13-44 0-71 13 27 13 49 0 71Z" /></g>
+          <g className="lotus-bloom"><path d="M421 119c-22-4-32 12-28 25 4 14 17 22 28 29 11-7 24-15 28-29 4-13-6-29-28-25Z" /></g>
+        </g>
+      </svg>
+    </>
+  );
+}
+
+function InvitationHero() {
+  return (
+    <header id="home" className="invitation-hero">
+      <div className="invitation-grain" aria-hidden="true" />
+      <div className="invitation-card">
+        <div className="invitation-damask" aria-hidden="true" />
+        <InvitationFlorals />
+        <div className="invitation-copy">
+          <div className="invitation-reveal invitation-reveal--1">
+            <div className="ganesh-mark" aria-hidden="true">ॐ</div>
+            <p className="invitation-blessing">|| Shri Ganeshay Namah ||</p>
+          </div>
+          <p className="invitation-intro invitation-reveal invitation-reveal--2">You are invited to the wedding of</p>
+          <div className="invitation-reveal invitation-reveal--3">
+            <h1 className="invitation-name">Priyal Bang</h1>
+            <div className="invitation-family">
+              <p>grand d/o Late Shri Shakerlalji &amp; Smt. Sitadevi Bang</p>
+              <p>d/o Mr. Dinesh Bang &amp; Mrs. Meenakshi Bang</p>
+            </div>
+          </div>
+          <div className="invitation-ampersand invitation-reveal invitation-reveal--4">&amp;</div>
+          <div className="invitation-reveal invitation-reveal--5">
+            <h2 className="invitation-name invitation-name--groom">Jatin Mulchandani</h2>
+            <div className="invitation-family">
+              <p>s/o Mr. Hiranand Mulchandani &amp; Mrs. Ganeshi Devi Mulchandani</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -123,39 +191,13 @@ function Index() {
           <a href="#home" className="font-display text-2xl">Lake <span className="text-gold-soft">&</span> Love</a>
           <Button variant="ghost" size="icon" className="text-cream hover:bg-cream/10 hover:text-gold-soft md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</Button>
           <div className="hidden gap-8 text-[11px] uppercase tracking-[0.25em] md:flex">
-            <a href="#couple" className="transition-colors hover:text-gold-soft">Us</a><a href="#event" className="transition-colors hover:text-gold-soft">Countdown</a><a href="#events" className="transition-colors hover:text-gold-soft">Events</a><a href="#venue" className="transition-colors hover:text-gold-soft">Venue</a><a href="#blog" className="transition-colors hover:text-gold-soft">Stories</a>
+            <a href="#home" className="transition-colors hover:text-gold-soft">Us</a><a href="#event" className="transition-colors hover:text-gold-soft">Countdown</a><a href="#events" className="transition-colors hover:text-gold-soft">Events</a><a href="#venue" className="transition-colors hover:text-gold-soft">Venue</a><a href="#blog" className="transition-colors hover:text-gold-soft">Stories</a>
           </div>
         </div>
-        {menuOpen && <div className="flex flex-col gap-5 border-t border-gold/20 py-6 text-center text-xs uppercase tracking-[0.25em] md:hidden">{[["#couple","Us"],["#event","Countdown"],["#events","Events"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
+        {menuOpen && <div className="flex flex-col gap-5 border-t border-gold/20 py-6 text-center text-xs uppercase tracking-[0.25em] md:hidden">{[["#home","Us"],["#event","Countdown"],["#events","Events"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
       </nav>
 
-      <header id="home" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-emerald px-5 pb-20 pt-28 text-center text-foreground">
-        <img src={lakeAsset.url} alt="A tranquil lake at dusk" className="absolute inset-0 size-full object-cover opacity-15 mix-blend-luminosity" />
-        <div className="absolute inset-0 bg-gradient-to-b from-blush/50 via-emerald/15 to-beige/55" aria-hidden="true" />
-        <div className="paper-texture absolute inset-0" />
-        <div className="sconce left-3 md:left-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
-        <div className="sconce right-3 md:right-10" aria-hidden="true"><span className="lamp" /><span className="stem" /></div>
-        <div className="relative z-10 mx-auto w-full max-w-4xl">
-          <p className="font-body text-xs uppercase tracking-[0.35em] text-foreground md:text-sm">You're invited to celebrate</p>
-          <h1 className="mt-7 font-display text-7xl font-medium leading-[0.78] md:text-[9rem]">Priyal <span className="block py-4 text-4xl italic text-foreground md:text-6xl">&</span> Jatin</h1>
-          <Flourish />
-          <p className="mt-7 text-xs uppercase tracking-[0.22em] text-foreground md:text-sm">November 12, 2026 · Lakeside at Dusk</p>
-          <div className="mx-auto mt-12 w-full max-w-xl arch-frame"><div className="arch-inner"><img src={coupleAsset.url} alt="Priyal and Jatin by the lake" className="h-[43vh] min-h-80 w-full object-cover object-[center_38%] md:h-[48vh]" /></div></div>
-        </div>
-        <a href="#couple" aria-label="Scroll to explore" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-foreground/70"><ArrowDown className="animate-bounce" /></a>
-      </header>
-
-      <section id="couple" className="relative px-5 py-24 md:px-10 md:py-32">
-        <div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Two hearts, one lake" title="Meet the Couple" />
-          <div className="grid items-center gap-12 md:grid-cols-[1.15fr_1fr] md:gap-20">
-            <div className="arch-frame arch-frame--light"><div className="arch-inner"><img src={coupleAsset.url} alt="Priyal and Jatin by the lake" loading="lazy" className="aspect-[4/5] w-full object-cover" /></div></div>
-            <div className="grid gap-5">
-              <article className="ornate-panel"><span className="text-xs uppercase tracking-[0.28em] text-blush">The Bride</span><h3 className="mt-3 font-display text-4xl text-cream md:text-5xl">Priyal Bang</h3><div className="my-5 h-px bg-gold-soft/40" /><p className="text-xs uppercase tracking-[0.2em] text-blush">Daughter of</p><p className="mt-2 font-display text-2xl text-cream">Mr. Dinesh Bang<br />& Mrs. Meenakshi Bang</p></article>
-              <article className="ornate-panel"><span className="text-xs uppercase tracking-[0.28em] text-blush">The Groom</span><h3 className="mt-3 font-display text-4xl text-cream md:text-5xl">Jatin Mulchandani</h3><div className="my-5 h-px bg-gold-soft/40" /><p className="text-xs uppercase tracking-[0.2em] text-blush">Son of</p><p className="mt-2 font-display text-2xl text-cream">Mr. Shyam Mulchandani<br />& Mrs. Aarti Mulchandani</p></article>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InvitationHero />
 
       <section id="event" className="checker-section px-5 py-24 md:px-10 md:py-32"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
         <Countdown />
