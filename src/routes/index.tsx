@@ -13,6 +13,7 @@ import baraatImage from "@/assets/events/baraat.jpg";
 import receptionImage from "@/assets/events/reception.jpg";
 import phereImage from "@/assets/events/phere.jpg";
 import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
+import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
 import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -198,7 +199,6 @@ function InvitationExperience({ children }: { children: ReactNode }) {
           <video
             ref={videoRef}
             className="intro-video"
-            src={introVideo.url}
             poster={introLastFrame.url}
             muted
             playsInline
@@ -213,7 +213,10 @@ function InvitationExperience({ children }: { children: ReactNode }) {
                 event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);
               }
             }}
-          />
+          >
+            <source src={introVideoWebm.url} type="video/webm" />
+            <source src={introVideo.url} type="video/mp4" />
+          </video>
           {step === "video" && <Button className="intro-skip" type="button" variant="ghost" onClick={finishVideo}>Skip</Button>}
         </div>
       )}
