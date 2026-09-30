@@ -209,7 +209,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
               }
             }}
           />
-          {step === "video" && <button className="intro-skip" type="button" onClick={finishVideo}>Skip</button>}
+          {step === "video" && <Button className="intro-skip" type="button" variant="ghost" onClick={finishVideo}>Skip</Button>}
         </div>
       )}
 
