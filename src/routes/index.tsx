@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,9 @@ import haldiImage from "@/assets/events/haldi.jpg";
 import baraatImage from "@/assets/events/baraat.jpg";
 import receptionImage from "@/assets/events/reception.jpg";
 import phereImage from "@/assets/events/phere.jpg";
+import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
+import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
+import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,72 +60,182 @@ const eventDays: { label: string; items: EventItem[] }[] = [
 const COUNTDOWN_TARGET = new Date("2026-12-10T00:00:00+05:30").getTime();
 const ENVELOPE_SESSION_KEY = "priyal-jatin-envelope-opened";
 
-function EnvelopeIntro() {
-  const [visible, setVisible] = useState(false);
-  const [opening, setOpening] = useState(false);
+type IntroStep = "boot" | "envelope" | "opening" | "video" | "transition" | "final";
+
+function createTicketPath(width: number, height: number) {
+  const inset = Math.min(40, width * 0.08);
+  const radius = 22;
+  const shoulder = 56;
+  return [
+    `M ${inset + radius} 0`,
+    `H ${width - inset - radius}`,
+    `Q ${width - inset} 0 ${width - inset} ${radius}`,
+    `Q ${width - inset} ${shoulder} ${width} ${shoulder}`,
+    `V ${height - shoulder}`,
+    `Q ${width - inset} ${height - shoulder} ${width - inset} ${height - radius}`,
+    `Q ${width - inset} ${height} ${width - inset - radius} ${height}`,
+    `H ${inset + radius}`,
+    `Q ${inset} ${height} ${inset} ${height - radius}`,
+    `Q ${inset} ${height - shoulder} 0 ${height - shoulder}`,
+    `V ${shoulder}`,
+    `Q ${inset} ${shoulder} ${inset} ${radius}`,
+    `Q ${inset} 0 ${inset + radius} 0 Z`,
+  ].join(" ");
+}
+
+function InvitationExperience({ children }: { children: ReactNode }) {
+  const [step, setStep] = useState<IntroStep>("boot");
+  const [ticketPath, setTicketPath] = useState("");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const fallbackRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let alreadyOpened = false;
     try {
-      if (window.sessionStorage.getItem(ENVELOPE_SESSION_KEY)) return;
+      alreadyOpened = Boolean(window.sessionStorage.getItem(ENVELOPE_SESSION_KEY));
     } catch {
-      // The intro can still run when browser storage is unavailable.
+      // The opening still works when browser storage is unavailable.
     }
-
-    setVisible(true);
+    setStep(reducedMotion || alreadyOpened ? "final" : "envelope");
   }, []);
 
   useEffect(() => {
-    if (!visible) return;
-
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [visible]);
+  }, []);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    const updatePath = () => setTicketPath(createTicketPath(card.clientWidth, card.clientHeight));
+    updatePath();
+    const observer = new ResizeObserver(updatePath);
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (step !== "video") return;
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      void video.play().catch(() => {
+        // The timeout below still advances if playback is blocked.
+      });
+    }
+    fallbackRef.current = window.setTimeout(() => setStep("transition"), 6000);
+    return () => {
+      if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
+    };
+  }, [step]);
+
+  useEffect(() => {
+    if (step !== "transition") return;
+    const timeout = window.setTimeout(() => setStep("final"), 1150);
+    return () => window.clearTimeout(timeout);
+  }, [step]);
 
   const openEnvelope = () => {
-    if (opening) return;
-    setOpening(true);
-
+    if (step !== "envelope") return;
+    setStep("opening");
     try {
       window.sessionStorage.setItem(ENVELOPE_SESSION_KEY, "true");
     } catch {
-      // A blocked storage write should not prevent the invitation from opening.
+      // A blocked storage write should not stop the opening.
     }
-
-    window.setTimeout(() => setVisible(false), 2300);
+    window.setTimeout(() => setStep("video"), 1700);
   };
 
-  if (!visible) return null;
+  const finishVideo = () => {
+    if (step !== "video") return;
+    if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
+    const video = videoRef.current;
+    if (video) video.pause();
+    setStep("transition");
+  };
+
+  const showEnvelope = step === "envelope" || step === "opening";
+  const showVideo = step === "video" || step === "transition" || step === "final";
+  const showCard = step === "transition" || step === "final";
+  const clipPath = ticketPath ? `path('${ticketPath}')` : undefined;
 
   return (
-    <div
-      className={`envelope-intro${opening ? " envelope-intro--opening" : ""}`}
-      role="button"
-      tabIndex={0}
-      aria-label="Open wedding invitation"
-      onClick={openEnvelope}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openEnvelope();
-        }
-      }}
-    >
-      <div className="envelope-stage">
-        <div className="envelope">
-          <div className="envelope-card" aria-hidden="true" />
-          <div className="envelope-back" aria-hidden="true" />
-          <div className="envelope-flap" aria-hidden="true" />
-          <div className="envelope-front" aria-hidden="true" />
-          <div className="envelope-stamp" aria-hidden="true"><span /></div>
-          <div className="envelope-seal" aria-hidden="true" />
+    <div className={`invitation-experience invitation-experience--${step}`}>
+      {showEnvelope && (
+        <div
+          className={`envelope-intro${step === "opening" ? " envelope-intro--opening" : ""}`}
+          role="button"
+          tabIndex={0}
+          aria-label="Open wedding invitation"
+          onClick={openEnvelope}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openEnvelope();
+            }
+          }}
+        >
+          <div className="envelope-stage">
+            <div className="envelope">
+              <div className="envelope-card" aria-hidden="true" />
+              <div className="envelope-back" aria-hidden="true" />
+              <div className="envelope-flap" aria-hidden="true" />
+              <div className="envelope-front" aria-hidden="true" />
+              <div className="envelope-stamp" aria-hidden="true"><span /></div>
+              <div className="envelope-seal" aria-hidden="true" />
+            </div>
+            <p className="envelope-hint">Tap to open</p>
+          </div>
         </div>
-        <p className="envelope-hint">Tap to open</p>
+      )}
+
+      {showVideo && (
+        <div className="intro-video-layer" aria-hidden={step === "final"}>
+          <video
+            ref={videoRef}
+            className="intro-video"
+            poster={introLastFrame.url}
+            muted
+            playsInline
+            autoPlay={step === "video"}
+            preload="auto"
+            onEnded={finishVideo}
+            onCanPlay={(event) => {
+              if (step === "video" && event.currentTarget.paused) void event.currentTarget.play();
+            }}
+            onLoadedMetadata={(event) => {
+              if (step === "final" && Number.isFinite(event.currentTarget.duration)) {
+                event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);
+              }
+            }}
+          >
+            <source src={introVideoWebm.url} type="video/webm" />
+            <source src={introVideo.url} type="video/mp4" />
+          </video>
+          {step === "video" && <Button className="intro-skip" type="button" variant="ghost" onClick={finishVideo}>Skip</Button>}
+        </div>
+      )}
+
+      <div
+        ref={cardRef}
+        className={`framed-invitation${showCard ? " framed-invitation--visible" : ""}`}
+        style={{ clipPath }}
+        aria-hidden={!showCard}
+      >
+        <div className="framed-invitation__scroll">{children}</div>
       </div>
+      {showCard && ticketPath && (
+        <svg className="ticket-border" viewBox={`0 0 ${cardRef.current?.clientWidth ?? 1} ${cardRef.current?.clientHeight ?? 1}`} preserveAspectRatio="none" aria-hidden="true">
+          <path className="ticket-border__pink" d={ticketPath} />
+          <path className="ticket-border__cream" d={ticketPath} />
+          <path className="ticket-border__gold" d={ticketPath} />
+        </svg>
+      )}
     </div>
   );
 }
@@ -255,10 +368,9 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <>
-      <EnvelopeIntro />
+    <InvitationExperience>
       <main className="overflow-hidden bg-background text-foreground">
-      <nav className="fixed inset-x-0 top-0 z-40 border-b border-blush bg-background/92 px-5 text-foreground backdrop-blur-md md:px-10">
+      <nav className="sticky inset-x-0 top-0 z-40 border-b border-blush bg-background/92 px-5 text-foreground backdrop-blur-md md:px-10">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
           <a href="#home" className="font-display text-3xl text-primary">Lake <span className="text-gold-soft">&</span> Love</a>
           <Button variant="ghost" size="icon" className="text-primary hover:bg-blush/50 hover:text-accent md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</Button>
@@ -317,6 +429,6 @@ function Index() {
 
        <footer className="checker-footer border-t border-gold-soft/40 px-5 py-16 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
       </main>
-    </>
+    </InvitationExperience>
   );
 }
