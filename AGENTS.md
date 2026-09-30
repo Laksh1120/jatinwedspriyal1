@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep this as a single-page TanStack Start invitation, with all content sections composed in `src/routes/index.tsx`; this preserves the original one-page scroll experience.
+- Keep the session-only envelope intro self-contained in the index route and storage-guarded; this preserves SSR safety and the one-page architecture.

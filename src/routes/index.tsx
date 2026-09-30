@@ -55,6 +55,77 @@ const eventDays: { label: string; items: EventItem[] }[] = [
 ];
 
 const COUNTDOWN_TARGET = new Date("2026-12-10T00:00:00+05:30").getTime();
+const ENVELOPE_SESSION_KEY = "priyal-jatin-envelope-opened";
+
+function EnvelopeIntro() {
+  const [visible, setVisible] = useState(false);
+  const [opening, setOpening] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    try {
+      if (window.sessionStorage.getItem(ENVELOPE_SESSION_KEY)) return;
+    } catch {
+      // The intro can still run when browser storage is unavailable.
+    }
+
+    setVisible(true);
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [visible]);
+
+  const openEnvelope = () => {
+    if (opening) return;
+    setOpening(true);
+
+    try {
+      window.sessionStorage.setItem(ENVELOPE_SESSION_KEY, "true");
+    } catch {
+      // A blocked storage write should not prevent the invitation from opening.
+    }
+
+    window.setTimeout(() => setVisible(false), 2300);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div
+      className={`envelope-intro${opening ? " envelope-intro--opening" : ""}`}
+      role="button"
+      tabIndex={0}
+      aria-label="Open wedding invitation"
+      onClick={openEnvelope}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openEnvelope();
+        }
+      }}
+    >
+      <div className="envelope-stage">
+        <div className="envelope">
+          <div className="envelope-card" aria-hidden="true" />
+          <div className="envelope-back" aria-hidden="true" />
+          <div className="envelope-flap" aria-hidden="true" />
+          <div className="envelope-front" aria-hidden="true" />
+          <div className="envelope-stamp" aria-hidden="true"><span /></div>
+          <div className="envelope-seal" aria-hidden="true" />
+        </div>
+        <p className="envelope-hint">Tap to open</p>
+      </div>
+    </div>
+  );
+}
 
 function getRemaining() {
   const diff = COUNTDOWN_TARGET - Date.now();
@@ -184,7 +255,9 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="overflow-hidden bg-background text-foreground">
+    <>
+      <EnvelopeIntro />
+      <main className="overflow-hidden bg-background text-foreground">
       <nav className="fixed inset-x-0 top-0 z-40 border-b border-blush bg-background/92 px-5 text-foreground backdrop-blur-md md:px-10">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
           <a href="#home" className="font-display text-3xl text-primary">Lake <span className="text-gold-soft">&</span> Love</a>
@@ -243,6 +316,7 @@ function Index() {
        <section id="blog" className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group rounded-lg border border-blush bg-card/45 p-3"><div className="overflow-hidden rounded-md border border-blush bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full rounded-sm object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-sm uppercase tracking-[0.18em] text-muted-foreground">{story.date}</time><h3 className="mt-2 font-script text-3xl text-primary">{story.title}</h3><p className="mt-3 text-base leading-7 text-muted-foreground">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-primary/50 pb-1 text-sm uppercase tracking-[0.16em] text-primary transition-colors hover:border-accent hover:text-accent">Read more</a></article>)}</div></div></section>
 
        <footer className="checker-footer border-t border-gold-soft/40 px-5 py-16 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
-    </main>
+      </main>
+    </>
   );
 }

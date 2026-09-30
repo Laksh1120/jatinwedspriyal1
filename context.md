@@ -262,3 +262,10 @@ cannot `@import` a remote URL).
 - **Verified:** build OK; Playwright at 1280×1800 confirms sage on the body and the checker band,
   lavender in the hero, deep lavender in the nav and the countdown cards, with no console or page
   errors.
+
+## 2026-09-30 — Full-screen envelope intro
+- Added a full-screen, click-anywhere envelope opening before the invitation.
+- Built the blush envelope, gold edging and seal, scalloped stamp, and blank cream card entirely in CSS using the existing warm-paper theme.
+- Sequenced the flap opening, card rise, and overlay reveal; repeated input is ignored while it runs.
+- The opening appears once per browser session, skips for reduced-motion visitors, and locks page scrolling while visible.
+- Existing invitation content, sections, layout, and functionality remain unchanged.
