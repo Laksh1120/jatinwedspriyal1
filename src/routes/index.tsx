@@ -13,6 +13,7 @@ import baraatImage from "@/assets/events/baraat.jpg";
 import receptionImage from "@/assets/events/reception.jpg";
 import phereImage from "@/assets/events/phere.jpg";
 import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
+import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -198,11 +199,15 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             ref={videoRef}
             className="intro-video"
             src={introVideo.url}
+            poster={introLastFrame.url}
             muted
             playsInline
             autoPlay={step === "video"}
             preload="auto"
             onEnded={finishVideo}
+            onCanPlay={(event) => {
+              if (step === "video" && event.currentTarget.paused) void event.currentTarget.play();
+            }}
             onLoadedMetadata={(event) => {
               if (step === "final" && Number.isFinite(event.currentTarget.duration)) {
                 event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);

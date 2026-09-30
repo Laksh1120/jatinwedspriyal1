@@ -77,6 +77,8 @@
   --invitation-pink-soft: oklch(0.6392 0.1598 355.99);
   --invitation-sage: #72806b;
   --invitation-leaf: #a7a69a;
+  --ticket-pink: #e9a6bf;
+  --ticket-cream: #fff8f0;
 }
 
 * { border-color: var(--border); }
@@ -342,8 +344,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   pointer-events:none;
 }
 .ticket-border path { fill:none; vector-effect:non-scaling-stroke; }
-.ticket-border__pink { stroke:#e9a6bf; stroke-width:10; }
-.ticket-border__cream { stroke:#fff8f0; stroke-width:4; }
+.ticket-border__pink { stroke:var(--ticket-pink); stroke-width:10; }
+.ticket-border__cream { stroke:var(--ticket-cream); stroke-width:4; }
 .ticket-border__gold { stroke:var(--gold); stroke-width:1; }
 @keyframes ticket-slap { to { opacity:1; transform:translateX(-50%) scale(1) rotate(0); } }
 @keyframes ticket-slap-shadow {
