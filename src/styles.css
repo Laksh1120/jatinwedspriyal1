@@ -289,11 +289,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .framed-invitation,
 .ticket-border,
 .ticket-glow {
+  --gap:clamp(24px,7vw,40px);
   position:fixed;
-  top:12px;
+  top:var(--gap);
   left:50%;
-  width:min(calc(100dvw - 24px),45rem);
-  height:calc(100dvh - 24px);
+  width:min(calc(100dvw - (2 * var(--gap))),45rem);
+  height:calc(100dvh - (2 * var(--gap)));
   transform:translateX(-50%) scale(.94);
   opacity:0;
 }
@@ -301,6 +302,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   z-index:4;
   overflow:hidden;
   pointer-events:none;
+  container-type:inline-size;
 }
 .framed-invitation__paper {
   position:absolute;
@@ -385,8 +387,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .ganesh-mark { font-family:var(--font-invitation); font-size:1.7rem; line-height:1; color:var(--gold); }
 .invitation-blessing { margin-top:.25rem; font-family:var(--font-invitation); font-size:.72rem; font-weight:500; color:var(--invitation-muted); }
 .invitation-intro { margin-top:1.45rem; font-family:var(--font-invitation); font-size:clamp(1rem,4.4vw,1.2rem); line-height:1.35; }
-.invitation-name { margin-top:1.65rem; font-family:var(--font-script); font-size:clamp(3.25rem,15vw,4.6rem); font-weight:400; line-height:.94; color:var(--invitation-ink); }
-.invitation-name--groom { max-width:100%; font-size:clamp(2.75rem,11.8vw,4.35rem); white-space:nowrap; }
+.invitation-name { margin-top:1.65rem; font-family:var(--font-script); font-size:clamp(34px,12cqw,64px); font-weight:400; line-height:.94; color:var(--invitation-ink); white-space:nowrap; }
+.invitation-name--groom { max-width:100%; }
 .invitation-family { width:min(100%,24rem); margin-top:.85rem; font-family:var(--font-invitation); font-size:clamp(.9rem,3.6vw,1.02rem); line-height:1.52; color:var(--invitation-muted); text-wrap:balance; }
 .invitation-family p + p { margin-top:.22rem; }
 .invitation-ampersand { margin:.8rem 0 -.3rem; font-family:var(--font-script); font-size:2.8rem; line-height:1; color:var(--gold); }
