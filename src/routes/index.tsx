@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
+import { Heart, MapPin, Menu, Music2, Volume2, VolumeX, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import proposalImage from "@/assets/story-proposal.jpg";
@@ -85,6 +85,7 @@ function createTicketPath(width: number, height: number) {
 
 function InvitationExperience({ children }: { children: ReactNode }) {
   const [step, setStep] = useState<IntroStep>("boot");
+  const [muted, setMuted] = useState(false);
   const [ticketPath, setTicketPath] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -122,13 +123,12 @@ function InvitationExperience({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (step !== "video") return;
     const video = videoRef.current;
-    if (video) {
-      video.currentTime = 0;
+    if (video && video.paused) {
       void video.play().catch(() => {
         // The timeout below still advances if playback is blocked.
       });
     }
-    fallbackRef.current = window.setTimeout(() => setStep("transition"), 6000);
+    fallbackRef.current = window.setTimeout(() => setStep("transition"), 4600);
     return () => {
       if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
     };
@@ -148,7 +148,19 @@ function InvitationExperience({ children }: { children: ReactNode }) {
     } catch {
       // A blocked storage write should not stop the opening.
     }
-    window.setTimeout(() => setStep("video"), 1700);
+    const video = videoRef.current;
+    window.setTimeout(() => {
+      if (!video) return;
+      video.currentTime = 0;
+      video.muted = false;
+      setMuted(false);
+      void video.play().catch(() => {
+        video.muted = true;
+        setMuted(true);
+        void video.play().catch(() => undefined);
+      });
+    }, 600);
+    window.setTimeout(() => setStep("video"), 3000);
   };
 
   const finishVideo = () => {
@@ -160,12 +172,53 @@ function InvitationExperience({ children }: { children: ReactNode }) {
   };
 
   const showEnvelope = step === "envelope" || step === "opening";
-  const showVideo = step === "video" || step === "transition" || step === "final";
+  const showVideo = step !== "boot";
   const showCard = step === "transition" || step === "final";
   const clipPath = ticketPath ? `path('${ticketPath}')` : undefined;
 
   return (
     <div className={`invitation-experience invitation-experience--${step}`}>
+      {showVideo && (
+        <div className="intro-video-layer" aria-hidden={step === "final"}>
+          <video
+            ref={videoRef}
+            className="intro-video"
+            poster={introLastFrame.url}
+            muted={muted}
+            playsInline
+            preload="auto"
+            onEnded={finishVideo}
+            onLoadedMetadata={(event) => {
+              if (step === "final" && Number.isFinite(event.currentTarget.duration)) {
+                event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);
+              }
+            }}
+          >
+            <source src={introVideoWebm.url} type="video/webm" />
+            <source src={introVideo.url} type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {showEnvelope && (
+        <div className={`intro-bow${step === "opening" ? " intro-bow--opening" : ""}`} aria-hidden="true">
+          <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="satin-band" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor="#F3C6CC" /><stop offset=".48" stopColor="#E5A5B0" /><stop offset=".68" stopColor="#F6D2D6" /><stop offset="1" stopColor="#D997A4" />
+              </linearGradient>
+              <linearGradient id="satin-knot" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#F8D8DC" /><stop offset=".5" stopColor="#E5A5B0" /><stop offset="1" stopColor="#CF8795" />
+              </linearGradient>
+            </defs>
+            <g className="intro-bow__left"><path d="M296 174C238 105 129 85 76 132c-22 20-10 58 29 69 61 18 133 2 191-27Z" fill="url(#satin-band)"/><path d="M294 190 184 340l-30-67-72 6 166-119Z" fill="url(#satin-band)"/></g>
+            <g className="intro-bow__right"><path d="M304 174c58-69 167-89 220-42 22 20 10 58-29 69-61 18-133 2-191-27Z" fill="url(#satin-band)"/><path d="m306 190 110 150 30-67 72 6-166-119Z" fill="url(#satin-band)"/></g>
+            <ellipse cx="300" cy="176" rx="55" ry="45" fill="url(#satin-knot)"/>
+            <path d="M273 151c18-13 44-14 62-2" fill="none" stroke="#FBE5E7" strokeWidth="7" strokeLinecap="round" opacity=".7"/>
+          </svg>
+        </div>
+      )}
+
       {showEnvelope && (
         <div
           className={`envelope-intro${step === "opening" ? " envelope-intro--opening" : ""}`}
@@ -180,45 +233,35 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             }
           }}
         >
-          <div className="envelope-stage">
-            <div className="envelope">
-              <div className="envelope-card" aria-hidden="true" />
-              <div className="envelope-back" aria-hidden="true" />
-              <div className="envelope-flap" aria-hidden="true" />
-              <div className="envelope-front" aria-hidden="true" />
-              <div className="envelope-stamp" aria-hidden="true"><span /></div>
-              <div className="envelope-seal" aria-hidden="true" />
-            </div>
-            <p className="envelope-hint">Tap to open</p>
+          <div className="envelope-flap envelope-flap--left" aria-hidden="true" />
+          <div className="envelope-flap envelope-flap--right" aria-hidden="true" />
+          <div className="envelope-flap envelope-flap--bottom" aria-hidden="true" />
+          <div className="envelope-flap envelope-flap--top" aria-hidden="true">
+            <div className="envelope-flap__front" />
+            <div className="envelope-flap__liner" />
           </div>
+          <svg className="envelope-emboss envelope-emboss--left" viewBox="0 0 180 260" aria-hidden="true"><path d="M12 250c17-73 27-131 86-179M46 184c-25-4-38-22-40-49 29 3 45 19 40 49Zm25-49c-4-28 9-46 34-56 8 27-3 47-34 56Zm30-34c13-35 37-51 71-47-11 35-35 50-71 47Z"/><circle cx="103" cy="70" r="13"/><path d="M103 57c-16-17-31-5-26 9 4 11 15 16 26 23 11-7 22-12 26-23 5-14-10-26-26-9Z"/></svg>
+          <svg className="envelope-emboss envelope-emboss--right" viewBox="0 0 180 260" aria-hidden="true"><path d="M12 250c17-73 27-131 86-179M46 184c-25-4-38-22-40-49 29 3 45 19 40 49Zm25-49c-4-28 9-46 34-56 8 27-3 47-34 56Zm30-34c13-35 37-51 71-47-11 35-35 50-71 47Z"/><circle cx="103" cy="70" r="13"/><path d="M103 57c-16-17-31-5-26 9 4 11 15 16 26 23 11-7 22-12 26-23 5-14-10-26-26-9Z"/></svg>
+          <div className="envelope-seal" aria-hidden="true" />
+          <p className="envelope-message"><span>Requests the pleasure</span><span>of your company</span></p>
         </div>
       )}
 
-      {showVideo && (
-        <div className="intro-video-layer" aria-hidden={step === "final"}>
-          <video
-            ref={videoRef}
-            className="intro-video"
-            poster={introLastFrame.url}
-            muted
-            playsInline
-            autoPlay={step === "video"}
-            preload="auto"
-            onEnded={finishVideo}
-            onCanPlay={(event) => {
-              if (step === "video" && event.currentTarget.paused) void event.currentTarget.play();
-            }}
-            onLoadedMetadata={(event) => {
-              if (step === "final" && Number.isFinite(event.currentTarget.duration)) {
-                event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);
-              }
-            }}
-          >
-            <source src={introVideoWebm.url} type="video/webm" />
-            <source src={introVideo.url} type="video/mp4" />
-          </video>
-          {step === "video" && <Button className="intro-skip" type="button" variant="ghost" onClick={finishVideo}>Skip</Button>}
-        </div>
+      {(step === "opening" || step === "video") && (
+        <Button
+          className="intro-sound"
+          type="button"
+          size="icon"
+          variant="ghost"
+          onClick={() => {
+            const nextMuted = !muted;
+            setMuted(nextMuted);
+            if (videoRef.current) videoRef.current.muted = nextMuted;
+          }}
+          aria-label={muted ? "Unmute video" : "Mute video"}
+        >
+          {muted ? <VolumeX /> : <Volume2 />}
+        </Button>
       )}
 
       <div

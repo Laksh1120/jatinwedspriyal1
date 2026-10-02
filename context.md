@@ -269,3 +269,9 @@ cannot `@import` a remote URL).
 - Sequenced the flap opening, card rise, and overlay reveal; repeated input is ignored while it runs.
 - The opening appears once per browser session, skips for reduced-motion visitors, and locks page scrolling while visible.
 - Existing invitation content, sections, layout, and functionality remain unchanged.
+
+## 2026-10-02 — Full-screen four-flap envelope redesign
+- Replaced the small centered envelope, blank sliding card, and floating video window with a viewport-filling blush-paper envelope built from four responsive flaps.
+- Added embossed floral details, a plain champagne wax seal, the two-line invitation message, and a layered pink satin ribbon bow.
+- The existing video now sits behind the envelope from the first frame, starts with sound during the opening, and remains the same fixed background behind the final ticket frame.
+- Added a small mute/unmute control after the reveal while preserving the session-only behavior, reduced-motion shortcut, scroll lock, fallback timing, and existing slap-on invitation transition.
