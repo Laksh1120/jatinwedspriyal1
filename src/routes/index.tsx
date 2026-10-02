@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Heart, MapPin, Menu, Music2, Volume2, VolumeX, X } from "lucide-react";
+import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import proposalImage from "@/assets/story-proposal.jpg";
@@ -63,29 +63,27 @@ const ENVELOPE_SESSION_KEY = "priyal-jatin-envelope-opened";
 type IntroStep = "boot" | "envelope" | "opening" | "video" | "transition" | "final";
 
 function createTicketPath(width: number, height: number) {
-  const inset = Math.min(40, width * 0.08);
+  const inset = Math.min(width * 0.08, 40);
   const radius = 22;
-  const shoulder = 56;
   return [
     `M ${inset + radius} 0`,
     `H ${width - inset - radius}`,
-    `Q ${width - inset} 0 ${width - inset} ${radius}`,
-    `Q ${width - inset} ${shoulder} ${width} ${shoulder}`,
-    `V ${height - shoulder}`,
-    `Q ${width - inset} ${height - shoulder} ${width - inset} ${height - radius}`,
-    `Q ${width - inset} ${height} ${width - inset - radius} ${height}`,
+    `A ${radius} ${radius} 0 0 1 ${width - inset} ${radius}`,
+    `A ${inset} ${inset} 0 0 0 ${width} ${radius + inset}`,
+    `V ${height - radius - inset}`,
+    `A ${inset} ${inset} 0 0 0 ${width - inset} ${height - radius}`,
+    `A ${radius} ${radius} 0 0 1 ${width - inset - radius} ${height}`,
     `H ${inset + radius}`,
-    `Q ${inset} ${height} ${inset} ${height - radius}`,
-    `Q ${inset} ${height - shoulder} 0 ${height - shoulder}`,
-    `V ${shoulder}`,
-    `Q ${inset} ${shoulder} ${inset} ${radius}`,
-    `Q ${inset} 0 ${inset + radius} 0 Z`,
+    `A ${radius} ${radius} 0 0 1 ${inset} ${height - radius}`,
+    `A ${inset} ${inset} 0 0 0 0 ${height - radius - inset}`,
+    `V ${radius + inset}`,
+    `A ${inset} ${inset} 0 0 0 ${inset} ${radius}`,
+    `A ${radius} ${radius} 0 0 1 ${inset + radius} 0 Z`,
   ].join(" ");
 }
 
 function InvitationExperience({ children }: { children: ReactNode }) {
   const [step, setStep] = useState<IntroStep>("boot");
-  const [muted, setMuted] = useState(false);
   const [ticketPath, setTicketPath] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -121,22 +119,8 @@ function InvitationExperience({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (step !== "video") return;
-    const video = videoRef.current;
-    if (video && video.paused) {
-      void video.play().catch(() => {
-        // The timeout below still advances if playback is blocked.
-      });
-    }
-    fallbackRef.current = window.setTimeout(() => setStep("transition"), 7000);
-    return () => {
-      if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
-    };
-  }, [step]);
-
-  useEffect(() => {
     if (step !== "transition") return;
-    const timeout = window.setTimeout(() => setStep("final"), 1150);
+    const timeout = window.setTimeout(() => setStep("final"), 2200);
     return () => window.clearTimeout(timeout);
   }, [step]);
 
@@ -151,19 +135,15 @@ function InvitationExperience({ children }: { children: ReactNode }) {
     if (video) {
       video.currentTime = 0;
       video.muted = false;
-      setMuted(false);
-      void video.play().catch(() => {
-        video.muted = true;
-        setMuted(true);
-        void video.play().catch(() => undefined);
-      });
+      void video.play().catch(() => undefined);
     }
     window.requestAnimationFrame(() => setStep("opening"));
     window.setTimeout(() => setStep("video"), 3100);
+    fallbackRef.current = window.setTimeout(() => setStep("transition"), 4200);
   };
 
   const finishVideo = () => {
-    if (step !== "video") return;
+    if (step !== "opening" && step !== "video") return;
     if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
     const video = videoRef.current;
     if (video) video.pause();
@@ -183,7 +163,6 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             ref={videoRef}
             className="intro-video"
             poster={introLastFrame.url}
-            muted={muted}
             playsInline
             preload="auto"
             onEnded={finishVideo}
@@ -266,37 +245,23 @@ function InvitationExperience({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {step === "video" && (
-        <Button
-          className="intro-sound"
-          type="button"
-          size="icon"
-          variant="ghost"
-          onClick={() => {
-            const nextMuted = !muted;
-            setMuted(nextMuted);
-            if (videoRef.current) videoRef.current.muted = nextMuted;
-          }}
-          aria-label={muted ? "Unmute video" : "Mute video"}
-        >
-          {muted ? <VolumeX /> : <Volume2 />}
-        </Button>
-      )}
-
       <div
         ref={cardRef}
         className={`framed-invitation${showCard ? " framed-invitation--visible" : ""}`}
         style={{ clipPath }}
         aria-hidden={!showCard}
       >
-        <div className="framed-invitation__scroll">{children}</div>
+        <div className="framed-invitation__paper" />
+        <div className="framed-invitation__scroll"><div className="framed-invitation__content">{children}</div></div>
       </div>
       {showCard && ticketPath && (
-        <svg className="ticket-border" viewBox={`0 0 ${cardRef.current?.clientWidth ?? 1} ${cardRef.current?.clientHeight ?? 1}`} preserveAspectRatio="none" aria-hidden="true">
-          <path className="ticket-border__pink" d={ticketPath} />
-          <path className="ticket-border__cream" d={ticketPath} />
-          <path className="ticket-border__gold" d={ticketPath} />
-        </svg>
+        <>
+          <svg className="ticket-glow" viewBox={`0 0 ${cardRef.current?.clientWidth ?? 1} ${cardRef.current?.clientHeight ?? 1}`} preserveAspectRatio="none" aria-hidden="true"><path d={ticketPath} /></svg>
+          <svg className="ticket-border" viewBox={`0 0 ${cardRef.current?.clientWidth ?? 1} ${cardRef.current?.clientHeight ?? 1}`} preserveAspectRatio="none" aria-hidden="true">
+            <path className="ticket-border__pink" d={ticketPath} />
+            <path className="ticket-border__cream" d={ticketPath} />
+          </svg>
+        </>
       )}
     </div>
   );
