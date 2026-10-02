@@ -3,9 +3,6 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import proposalImage from "@/assets/story-proposal.jpg";
-import venueImage from "@/assets/story-venue.jpg";
-import engagementImage from "@/assets/story-engagement.jpg";
 import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
 import ringCeremonyImage from "@/assets/events/ring-ceremony.jpg";
 import haldiImageAsset from "@/assets/events/haldi.jpeg.asset.json";
@@ -29,12 +26,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const stories = [
-  { image: proposalImage, alt: "Proposal by the lake", date: "March 12, 2025", title: "The Proposal at Mirror Lake", copy: "Jatin got down on one knee as the sun painted the water gold. Priyal said yes before he could finish the question." },
-  { image: venueImage, alt: "Venue scouting", date: "January 8, 2025", title: "Finding Our Perfect Shore", copy: "We visited a dozen venues before stepping onto the shores of Praveg Lake Resort — we knew instantly this was the one." },
-  { image: engagementImage, alt: "Engagement party", date: "November 2, 2024", title: "Engagement Celebration", copy: "Family and friends gathered for an intimate garden party. So much love, laughter, and homemade pie." },
-];
 
 const haldiImage = haldiImageAsset.url;
 const baraatImage = baraatImageAsset.url;
@@ -407,10 +398,10 @@ function Index() {
           <a href="#home" className="font-display text-3xl text-primary">Lake <span className="text-gold-soft">&</span> Love</a>
           <Button variant="ghost" size="icon" className="text-primary hover:bg-blush/50 hover:text-accent md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</Button>
           <div className="hidden gap-8 text-sm uppercase tracking-[0.18em] md:flex">
-            <a href="#home" className="transition-colors hover:text-accent">Us</a><a href="#event" className="transition-colors hover:text-accent">Countdown</a><a href="#events" className="transition-colors hover:text-accent">Events</a><a href="#venue" className="transition-colors hover:text-accent">Venue</a><a href="#blog" className="transition-colors hover:text-accent">Stories</a>
+            <a href="#home" className="transition-colors hover:text-accent">Us</a><a href="#event" className="transition-colors hover:text-accent">Countdown</a><a href="#events" className="transition-colors hover:text-accent">Events</a><a href="#venue" className="transition-colors hover:text-accent">Venue</a>
           </div>
         </div>
-        {menuOpen && <div className="flex flex-col gap-5 border-t border-blush py-6 text-center text-sm uppercase tracking-[0.18em] md:hidden">{[["#home","Us"],["#event","Countdown"],["#events","Events"],["#venue","Venue"],["#blog","Stories"]].map(([href,label]) => <a key={href} href={href} className="hover:text-accent" onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
+        {menuOpen && <div className="flex flex-col gap-5 border-t border-blush py-6 text-center text-sm uppercase tracking-[0.18em] md:hidden">{[["#home","Us"],["#event","Countdown"],["#events","Events"],["#venue","Venue"]].map(([href,label]) => <a key={href} href={href} className="hover:text-accent" onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
       </nav>
 
       <InvitationHero />
@@ -456,8 +447,6 @@ function Index() {
            <div className="rounded-lg border border-blush bg-card/55 p-3"><div className="aspect-[4/3] overflow-hidden rounded-md"><iframe title="Praveg Lake Resort location map" src="https://maps.google.com/maps?q=Praveg+Lake+Resort+Daman,+Kachigam,+Daman+396215&hl=en&z=15&output=embed" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade" className="size-full grayscale-[30%]" /></div></div>
         </div>
       </div></section>
-
-        <section id="blog" className="page-section px-5 md:px-10"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group rounded-lg border border-blush bg-card/45 p-3"><div className="overflow-hidden rounded-md border border-blush bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full rounded-sm object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-sm uppercase tracking-[0.18em] text-muted-foreground">{story.date}</time><h3 className="mt-2 font-script text-3xl text-primary">{story.title}</h3><p className="mt-3 text-base leading-7 text-muted-foreground">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-primary/50 pb-1 text-sm uppercase tracking-[0.16em] text-primary transition-colors hover:border-accent hover:text-accent">Read more</a></article>)}</div></div></section>
 
         <footer className="checker-footer page-footer border-t border-gold-soft/40 px-5 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
       </main>
