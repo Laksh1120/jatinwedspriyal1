@@ -128,7 +128,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
         // The timeout below still advances if playback is blocked.
       });
     }
-    fallbackRef.current = window.setTimeout(() => setStep("transition"), 4600);
+    fallbackRef.current = window.setTimeout(() => setStep("transition"), 7000);
     return () => {
       if (fallbackRef.current !== null) window.clearTimeout(fallbackRef.current);
     };
