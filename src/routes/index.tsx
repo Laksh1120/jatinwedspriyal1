@@ -8,10 +8,10 @@ import venueImage from "@/assets/story-venue.jpg";
 import engagementImage from "@/assets/story-engagement.jpg";
 import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
 import ringCeremonyImage from "@/assets/events/ring-ceremony.jpg";
-import haldiImage from "@/assets/events/haldi.jpg";
-import baraatImage from "@/assets/events/baraat.jpg";
-import receptionImage from "@/assets/events/reception.jpg";
-import phereImage from "@/assets/events/phere.jpg";
+import haldiImageAsset from "@/assets/events/haldi.jpeg.asset.json";
+import baraatImageAsset from "@/assets/events/baraat.jpeg.asset.json";
+import receptionImageAsset from "@/assets/events/varmala.jpeg.asset.json";
+import phereImageAsset from "@/assets/events/pheras.jpeg.asset.json";
 import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
 import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
 import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
@@ -35,6 +35,11 @@ const stories = [
   { image: venueImage, alt: "Venue scouting", date: "January 8, 2025", title: "Finding Our Perfect Shore", copy: "We visited a dozen venues before stepping onto the shores of Praveg Lake Resort — we knew instantly this was the one." },
   { image: engagementImage, alt: "Engagement party", date: "November 2, 2024", title: "Engagement Celebration", copy: "Family and friends gathered for an intimate garden party. So much love, laughter, and homemade pie." },
 ];
+
+const haldiImage = haldiImageAsset.url;
+const baraatImage = baraatImageAsset.url;
+const receptionImage = receptionImageAsset.url;
+const phereImage = phereImageAsset.url;
 
 type EventItem = { image: string; alt: string; title: string; tagline: string; date: [string, string, string]; time: string; day: string; note?: string };
 
