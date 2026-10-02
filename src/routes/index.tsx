@@ -318,7 +318,7 @@ function Flourish({ dark = false }: { dark?: boolean }) {
 }
 
 function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; title: string; tone?: "light" | "dark" }) {
-  return <div className="mb-12 text-center md:mb-16"><p className="font-body text-sm uppercase tracking-[0.22em] text-muted-foreground">{eyebrow}</p><h2 className="mt-3 font-display text-5xl font-normal text-foreground md:text-7xl">{title}</h2><Flourish dark={tone === "dark"} /></div>;
+  return <div className="section-heading text-center"><p className="font-body text-sm uppercase tracking-[0.22em] text-muted-foreground">{eyebrow}</p><h2 className="mt-3 font-display text-5xl font-normal text-foreground md:text-7xl">{title}</h2><Flourish dark={tone === "dark"} /></div>;
 }
 
 function InvitationFlorals() {
@@ -410,12 +410,12 @@ function Index() {
 
       <InvitationHero />
 
-      <section id="event" className="checker-section px-5 py-24 md:px-10 md:py-32"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
+       <section id="event" className="checker-section page-section px-5 md:px-10"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
         <Countdown />
         <div className="mt-10 grid overflow-hidden rounded-lg border border-blush bg-card/60 md:grid-cols-2"><div className="p-7 text-center md:border-r md:border-gold/40"><p className="text-sm uppercase tracking-[0.2em] text-primary">The Day</p><p className="mt-2 font-invitation text-2xl">Thursday, December 10, 2026</p></div><div className="border-t border-gold/40 p-7 text-center md:border-t-0"><p className="text-sm uppercase tracking-[0.2em] text-primary">Dress Code</p><p className="mt-2 font-invitation text-2xl">Garden Formal · Earth tones encouraged</p></div></div>
       </div></section>
 
-      <section id="events" className="events-section px-5 py-24 md:px-10 md:py-32">
+       <section id="events" className="events-section page-section px-5 md:px-10">
         <div className="relative mx-auto max-w-6xl">
           <SectionHeading eyebrow="Three days of celebration" title="The Events" tone="dark" />
           {eventDays.map((dayGroup) => (
@@ -446,15 +446,15 @@ function Index() {
         </div>
       </section>
 
-       <section id="venue" className="relative border-y border-blush bg-transparent px-5 py-24 text-foreground md:px-10 md:py-32"><div className="relative mx-auto max-w-6xl"><SectionHeading eyebrow="Where we'll gather" title="The Venue" tone="dark" />
+        <section id="venue" className="page-section relative border-y border-blush bg-transparent px-5 text-foreground md:px-10"><div className="relative mx-auto max-w-6xl"><SectionHeading eyebrow="Where we'll gather" title="The Venue" tone="dark" />
          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20"><div><p className="font-display text-5xl text-primary">Praveg Lake Resort</p><address className="mt-5 not-italic leading-7 text-muted-foreground">Daman - 3 Kachigam, Kachigam Damanganga Garden<br />Nearby Kachigam Talab, Daman, 396215</address><p className="mt-6 leading-8 text-muted-foreground">A breathtaking lakeside retreat spread across four enchanting islands on Kachigam Talab — where nature, luxury, and celebration come together for an unforgettable destination wedding by the water.</p><ul className="my-8 divide-y divide-gold/35 border-y border-gold/35">{[["Getting There","Approximately 6 km from Vapi Railway Station"],["Accommodations","On-site resort rooms and villas for overnight guests"],["Nearby","5–10 km from Devka and Jampore beaches"]].map(([title,copy]) => <li key={title} className="py-4"><strong className="block text-sm uppercase tracking-[0.18em] text-primary">{title}</strong><span className="mt-1 block text-base text-muted-foreground">{copy}</span></li>)}</ul><Button asChild variant="outline" className="h-12 rounded-lg border-primary bg-primary px-7 uppercase tracking-[0.16em] text-primary-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground"><a href="https://share.google/wXPgCUtC4Ho5l4KOc" target="_blank" rel="noopener noreferrer"><MapPin /> Get Directions</a></Button></div>
            <div className="rounded-lg border border-blush bg-card/55 p-3"><div className="aspect-[4/3] overflow-hidden rounded-md"><iframe title="Praveg Lake Resort location map" src="https://maps.google.com/maps?q=Praveg+Lake+Resort+Daman,+Kachigam,+Daman+396215&hl=en&z=15&output=embed" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade" className="size-full grayscale-[30%]" /></div></div>
         </div>
       </div></section>
 
-       <section id="blog" className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group rounded-lg border border-blush bg-card/45 p-3"><div className="overflow-hidden rounded-md border border-blush bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full rounded-sm object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-sm uppercase tracking-[0.18em] text-muted-foreground">{story.date}</time><h3 className="mt-2 font-script text-3xl text-primary">{story.title}</h3><p className="mt-3 text-base leading-7 text-muted-foreground">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-primary/50 pb-1 text-sm uppercase tracking-[0.16em] text-primary transition-colors hover:border-accent hover:text-accent">Read more</a></article>)}</div></div></section>
+        <section id="blog" className="page-section px-5 md:px-10"><div className="mx-auto max-w-6xl"><SectionHeading eyebrow="Our journey" title="Stories & Updates" /><div className="grid gap-8 md:grid-cols-3">{stories.map((story) => <article key={story.title} className="group rounded-lg border border-blush bg-card/45 p-3"><div className="overflow-hidden rounded-md border border-blush bg-blush p-2"><img src={story.image} alt={story.alt} loading="lazy" width={912} height={1104} className="aspect-[4/5] w-full rounded-sm object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div><time className="mt-6 block text-sm uppercase tracking-[0.18em] text-muted-foreground">{story.date}</time><h3 className="mt-2 font-script text-3xl text-primary">{story.title}</h3><p className="mt-3 text-base leading-7 text-muted-foreground">{story.copy}</p><a href="#" className="mt-5 inline-flex border-b border-primary/50 pb-1 text-sm uppercase tracking-[0.16em] text-primary transition-colors hover:border-accent hover:text-accent">Read more</a></article>)}</div></div></section>
 
-       <footer className="checker-footer border-t border-gold-soft/40 px-5 py-16 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
+        <footer className="checker-footer page-footer border-t border-gold-soft/40 px-5 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
       </main>
     </InvitationExperience>
   );
