@@ -142,15 +142,13 @@ function InvitationExperience({ children }: { children: ReactNode }) {
 
   const openEnvelope = () => {
     if (step !== "envelope") return;
-    setStep("opening");
     try {
       window.sessionStorage.setItem(ENVELOPE_SESSION_KEY, "true");
     } catch {
       // A blocked storage write should not stop the opening.
     }
     const video = videoRef.current;
-    window.setTimeout(() => {
-      if (!video) return;
+    if (video) {
       video.currentTime = 0;
       video.muted = false;
       setMuted(false);
@@ -159,8 +157,9 @@ function InvitationExperience({ children }: { children: ReactNode }) {
         setMuted(true);
         void video.play().catch(() => undefined);
       });
-    }, 600);
-    window.setTimeout(() => setStep("video"), 3000);
+    }
+    window.requestAnimationFrame(() => setStep("opening"));
+    window.setTimeout(() => setStep("video"), 3100);
   };
 
   const finishVideo = () => {
@@ -201,27 +200,8 @@ function InvitationExperience({ children }: { children: ReactNode }) {
       )}
 
       {showEnvelope && (
-        <div className={`intro-bow${step === "opening" ? " intro-bow--opening" : ""}`} aria-hidden="true">
-          <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="satin-band" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#F3C6CC" /><stop offset=".48" stopColor="#E5A5B0" /><stop offset=".68" stopColor="#F6D2D6" /><stop offset="1" stopColor="#D997A4" />
-              </linearGradient>
-              <linearGradient id="satin-knot" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#F8D8DC" /><stop offset=".5" stopColor="#E5A5B0" /><stop offset="1" stopColor="#CF8795" />
-              </linearGradient>
-            </defs>
-            <g className="intro-bow__left"><path d="M296 174C238 105 129 85 76 132c-22 20-10 58 29 69 61 18 133 2 191-27Z" fill="url(#satin-band)"/><path d="M294 190 184 340l-30-67-72 6 166-119Z" fill="url(#satin-band)"/></g>
-            <g className="intro-bow__right"><path d="M304 174c58-69 167-89 220-42 22 20 10 58-29 69-61 18-133 2-191-27Z" fill="url(#satin-band)"/><path d="m306 190 110 150 30-67 72 6-166-119Z" fill="url(#satin-band)"/></g>
-            <ellipse cx="300" cy="176" rx="55" ry="45" fill="url(#satin-knot)"/>
-            <path d="M273 151c18-13 44-14 62-2" fill="none" stroke="#FBE5E7" strokeWidth="7" strokeLinecap="round" opacity=".7"/>
-          </svg>
-        </div>
-      )}
-
-      {showEnvelope && (
         <div
-          className={`envelope-intro${step === "opening" ? " envelope-intro--opening" : ""}`}
+          className={`envelope-v2 fixed inset-0 z-[5] h-[100dvh] w-[100dvw] cursor-pointer overflow-hidden [--tip:55%] [perspective:1200px]${step === "opening" ? " envelope-v2--opening pointer-events-none" : ""}`}
           role="button"
           tabIndex={0}
           aria-label="Open wedding invitation"
@@ -233,17 +213,55 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             }
           }}
         >
-          <div className="envelope-flap envelope-flap--left" aria-hidden="true" />
-          <div className="envelope-flap envelope-flap--right" aria-hidden="true" />
-          <div className="envelope-flap envelope-flap--bottom" aria-hidden="true" />
-          <div className="envelope-flap envelope-flap--top" aria-hidden="true">
-            <div className="envelope-flap__front" />
-            <div className="envelope-flap__liner" />
+          <style>{`
+            .envelope-v2__paper{background-color:#FAF6F2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' result='noise'/%3E%3CfeDiffuseLighting in='noise' surfaceScale='1.5' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='75'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)' opacity='.42'/%3E%3C/svg%3E");background-blend-mode:multiply}
+            .envelope-v2__flap{transform-origin:top center;transform-style:preserve-3d}
+            .envelope-v2__face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+            .envelope-v2__back{transform:rotateX(180deg);background:linear-gradient(to bottom,#F3C2A0,#F7D8C2)}
+            .envelope-v2__seal{border-radius:48% 52% 50% 50%;background:radial-gradient(circle at 35% 30%,#E6D8B8,#CDBA95 55%,#A8946C);box-shadow:inset 0 0 0 5px rgba(255,255,255,.18),0 4px 8px rgba(80,50,30,.3);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+            .envelope-v2__seal::after{content:"";position:absolute;inset:-6px;border:2px solid rgba(205,186,149,.7);border-radius:inherit;animation:envelope-v2-ring 1.8s ease-in-out infinite}
+            .envelope-v2--opening .envelope-v2__flap{will-change:transform;animation:envelope-v2-flap 1.3s cubic-bezier(.45,0,.2,1) forwards}
+            .envelope-v2--opening .envelope-v2__pocket{will-change:transform;animation:envelope-v2-pocket 2.2s cubic-bezier(.65,0,.35,1) .9s forwards}
+            .envelope-v2--opening .envelope-v2__seal::after{opacity:0;animation:none}
+            @keyframes envelope-v2-ring{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.2}}
+            @keyframes envelope-v2-flap{to{transform:rotateX(-180deg)}}
+            @keyframes envelope-v2-pocket{to{transform:translate3d(0,105%,0)}}
+          `}</style>
+
+          <svg className="absolute size-0" aria-hidden="true">
+            <defs>
+              <symbol id="envelope-vine" viewBox="0 0 100 100">
+                <path d="M4 96C20 70 16 46 46 30S82 12 96 6M30 62c8-4 12-1 13 4M24 78c-6-6-12-4-15 1M54 28c0-8 6-12 12-11M72 20c4 7 10 8 15 4" />
+                <circle cx="46" cy="30" r="4.5" /><circle cx="28" cy="64" r="3.5" /><circle cx="84" cy="14" r="4" />
+              </symbol>
+            </defs>
+          </svg>
+
+          <div className="envelope-v2__flap fixed inset-0 z-[7] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,100%_0,50%_var(--tip))]" aria-hidden="true">
+            <div className="envelope-v2__face envelope-v2__paper absolute inset-0">
+              <svg className="absolute left-0 top-0 h-auto w-[38%] fill-none stroke-[1.2]" viewBox="0 0 100 100">
+                <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
+                <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+              </svg>
+              <div className="envelope-v2__seal fixed left-1/2 top-[var(--tip)] z-[9] aspect-square w-[clamp(64px,18vw,88px)] -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <div className="envelope-v2__face envelope-v2__back absolute inset-0" />
           </div>
-          <svg className="envelope-emboss envelope-emboss--left" viewBox="0 0 180 260" aria-hidden="true"><path d="M12 250c17-73 27-131 86-179M46 184c-25-4-38-22-40-49 29 3 45 19 40 49Zm25-49c-4-28 9-46 34-56 8 27-3 47-34 56Zm30-34c13-35 37-51 71-47-11 35-35 50-71 47Z"/><circle cx="103" cy="70" r="13"/><path d="M103 57c-16-17-31-5-26 9 4 11 15 16 26 23 11-7 22-12 26-23 5-14-10-26-26-9Z"/></svg>
-          <svg className="envelope-emboss envelope-emboss--right" viewBox="0 0 180 260" aria-hidden="true"><path d="M12 250c17-73 27-131 86-179M46 184c-25-4-38-22-40-49 29 3 45 19 40 49Zm25-49c-4-28 9-46 34-56 8 27-3 47-34 56Zm30-34c13-35 37-51 71-47-11 35-35 50-71 47Z"/><circle cx="103" cy="70" r="13"/><path d="M103 57c-16-17-31-5-26 9 4 11 15 16 26 23 11-7 22-12 26-23 5-14-10-26-26-9Z"/></svg>
-          <div className="envelope-seal" aria-hidden="true" />
-          <p className="envelope-message"><span>Requests the pleasure</span><span>of your company</span></p>
+
+          <div className="envelope-v2__pocket envelope-v2__paper fixed inset-0 z-[8] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,50%_var(--tip),100%_0,100%_100%,0_100%)]" aria-hidden="true">
+            <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0 0 50 55 100 0M0 100 50 55 100 100" fill="none" stroke="rgba(150,110,100,.28)" strokeWidth=".16" vectorEffect="non-scaling-stroke" />
+              <path d="M0 100 50 55 100 100Z" fill="rgba(255,255,255,.35)" />
+            </svg>
+            <svg className="absolute bottom-0 left-0 h-auto w-[34%] fill-none stroke-[1.2]" viewBox="0 0 100 100">
+              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
+              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+            </svg>
+            <svg className="absolute bottom-0 right-0 h-auto w-[34%] scale-x-[-1] fill-none stroke-[1.2]" viewBox="0 0 100 100">
+              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
+              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+            </svg>
+          </div>
         </div>
       )}
 
