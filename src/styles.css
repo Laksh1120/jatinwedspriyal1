@@ -43,6 +43,7 @@
 
 :root {
   --radius: .625rem;
+  --section-gap: clamp(28px, 7vw, 48px);
   --background: oklch(0.9425 0.0205 81.78);
   --foreground: oklch(0.3169 0.0197 43.83);
   --card: oklch(0.9047 0.0284 28.53);
@@ -420,6 +421,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 
 .checker-section,.checker-footer { position:relative; background:transparent; }
+.page-section { padding-block:calc(var(--section-gap) / 2); }
+.section-heading { margin-bottom:16px; }
+.page-footer { padding-top:calc(var(--section-gap) / 2); padding-bottom:max(40px,calc(var(--section-gap) / 2)); }
 
 /* ============= Events ============= */
 .events-section { position:relative; background:transparent; }
