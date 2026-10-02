@@ -247,7 +247,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {(step === "opening" || step === "video") && (
+      {step === "video" && (
         <Button
           className="intro-sound"
           type="button"

@@ -138,17 +138,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
   will-change:transform;
 }
 .envelope-flap--left {
-  z-index:3;
+  z-index:4;
   clip-path:polygon(0 0,50% 55%,0 100%);
   filter:drop-shadow(2px 0 5px color-mix(in oklab,var(--foreground) 15%,transparent));
 }
 .envelope-flap--right {
-  z-index:3;
+  z-index:4;
   clip-path:polygon(100% 0,50% 55%,100% 100%);
   filter:drop-shadow(-2px 0 5px color-mix(in oklab,var(--foreground) 15%,transparent));
 }
 .envelope-flap--bottom {
-  z-index:4;
+  z-index:5;
   clip-path:polygon(0 100%,100% 100%,50% 48%);
   filter:drop-shadow(0 -2px 6px color-mix(in oklab,var(--foreground) 17%,transparent));
 }
@@ -240,7 +240,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .intro-bow {
   position:fixed;
   inset:0;
-  z-index:4;
+  z-index:3;
   width:100dvw;
   height:100dvh;
   pointer-events:none;
