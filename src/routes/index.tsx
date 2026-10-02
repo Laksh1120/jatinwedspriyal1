@@ -218,6 +218,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             .envelope-v2__flap{transform-origin:top center;transform-style:preserve-3d}
             .envelope-v2__face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
             .envelope-v2__back{transform:rotateX(180deg);background:linear-gradient(to bottom,#F3C2A0,#F7D8C2)}
+            .envelope-v2__vine path,.envelope-v2__vine circle{vector-effect:non-scaling-stroke;stroke-width:1px}
             .envelope-v2__seal{border-radius:48% 52% 50% 50%;background:radial-gradient(circle at 35% 30%,#E6D8B8,#CDBA95 55%,#A8946C);box-shadow:inset 0 0 0 5px rgba(255,255,255,.18),0 4px 8px rgba(80,50,30,.3);backface-visibility:hidden;-webkit-backface-visibility:hidden}
             .envelope-v2__seal::after{content:"";position:absolute;inset:-6px;border:2px solid rgba(205,186,149,.7);border-radius:inherit;animation:envelope-v2-ring 1.8s ease-in-out infinite}
             .envelope-v2--opening .envelope-v2__flap{will-change:transform;animation:envelope-v2-flap 1.3s cubic-bezier(.45,0,.2,1) forwards}
@@ -231,35 +232,35 @@ function InvitationExperience({ children }: { children: ReactNode }) {
           <svg className="absolute size-0" aria-hidden="true">
             <defs>
               <symbol id="envelope-vine" viewBox="0 0 100 100">
-                <path d="M4 96C20 70 16 46 46 30S82 12 96 6M30 62c8-4 12-1 13 4M24 78c-6-6-12-4-15 1M54 28c0-8 6-12 12-11M72 20c4 7 10 8 15 4" />
-                <circle cx="46" cy="30" r="4.5" /><circle cx="28" cy="64" r="3.5" /><circle cx="84" cy="14" r="4" />
+                <path d="M4 96C20 70 16 46 46 30S82 12 96 6M30 62c8-4 12-1 13 4M24 78c-6-6-12-4-15 1M54 28c0-8 6-12 12-11M72 20c4 7 10 8 15 4" vectorEffect="non-scaling-stroke" strokeWidth="1" />
+                <circle cx="46" cy="30" r="4.5" vectorEffect="non-scaling-stroke" strokeWidth="1" /><circle cx="28" cy="64" r="3.5" vectorEffect="non-scaling-stroke" strokeWidth="1" /><circle cx="84" cy="14" r="4" vectorEffect="non-scaling-stroke" strokeWidth="1" />
               </symbol>
             </defs>
           </svg>
 
-          <div className="envelope-v2__flap fixed inset-0 z-[7] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,100%_0,50%_var(--tip))]" aria-hidden="true">
-            <div className="envelope-v2__face envelope-v2__paper absolute inset-0">
-              <svg className="absolute left-0 top-0 h-auto w-[38%] fill-none stroke-[1.2]" viewBox="0 0 100 100">
-                <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
-                <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+          <div className="envelope-v2__flap fixed inset-0 z-[3] h-[100dvh] w-[100dvw]" aria-hidden="true">
+            <div className="envelope-v2__face envelope-v2__paper absolute inset-0 [clip-path:polygon(0_0,100%_0,50%_var(--tip))]">
+              <svg className="envelope-v2__vine absolute left-0 top-0 size-[clamp(90px,min(34vw,34vh),200px)] fill-none" viewBox="0 0 100 100">
+                <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
+                <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
               </svg>
-              <div className="envelope-v2__seal fixed left-1/2 top-[var(--tip)] z-[9] aspect-square w-[clamp(64px,18vw,88px)] -translate-x-1/2 -translate-y-1/2" />
             </div>
-            <div className="envelope-v2__face envelope-v2__back absolute inset-0" />
+            <div className="envelope-v2__face envelope-v2__back absolute inset-0 [clip-path:polygon(0_0,100%_0,50%_var(--tip))]" />
+            <div className="envelope-v2__seal fixed left-1/2 top-[var(--tip)] z-[4] aspect-square w-[clamp(64px,18vw,88px)] -translate-x-1/2 -translate-y-1/2" />
           </div>
 
-          <div className="envelope-v2__pocket envelope-v2__paper fixed inset-0 z-[8] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,50%_var(--tip),100%_0,100%_100%,0_100%)]" aria-hidden="true">
+          <div className="envelope-v2__pocket envelope-v2__paper fixed inset-0 z-[1] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,50%_var(--tip),100%_0,100%_100%,0_100%)]" aria-hidden="true">
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
               <path d="M0 0 50 55 100 0M0 100 50 55 100 100" fill="none" stroke="rgba(150,110,100,.28)" strokeWidth=".16" vectorEffect="non-scaling-stroke" />
               <path d="M0 100 50 55 100 100Z" fill="rgba(255,255,255,.35)" />
             </svg>
-            <svg className="absolute bottom-0 left-0 h-auto w-[34%] fill-none stroke-[1.2]" viewBox="0 0 100 100">
-              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
-              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+            <svg className="envelope-v2__vine absolute bottom-0 left-0 size-[clamp(90px,min(34vw,34vh),200px)] fill-none" viewBox="0 0 100 100">
+              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
+              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
             </svg>
-            <svg className="absolute bottom-0 right-0 h-auto w-[34%] scale-x-[-1] fill-none stroke-[1.2]" viewBox="0 0 100 100">
-              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" />
-              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.4)" />
+            <svg className="envelope-v2__vine absolute bottom-0 right-0 size-[clamp(90px,min(34vw,34vh),200px)] scale-x-[-1] fill-none" viewBox="0 0 100 100">
+              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
+              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
             </svg>
           </div>
         </div>
