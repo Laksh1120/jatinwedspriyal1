@@ -428,6 +428,40 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .section-heading > h2 { margin-top:8px; }
 .page-footer { padding-top:var(--section-top); padding-bottom:max(56px,var(--section-bottom)); }
 
+.gold-foil-wrap { width:100%; padding-block:clamp(10px,2vw,16px); }
+.gold-foil {
+  position:relative;
+  width:100%;
+  height:clamp(8px,1.6vw,14px);
+  margin-block:0;
+  overflow:hidden;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle,#FFF3C4 0 1px,transparent 1.5px),
+    radial-gradient(circle,#FFF3C4 0 1.2px,transparent 1.7px),
+    radial-gradient(circle,#FFF3C4 0 .8px,transparent 1.3px),
+    repeating-linear-gradient(90deg,color-mix(in srgb,#B8913A 35%,transparent) 0 3px,color-mix(in srgb,#8D6825 35%,transparent) 3px 6px),
+    linear-gradient(90deg,transparent 0%,#B8913A 6%,#E8CF8A 22%,#A67C2E 38%,#F1DDA0 55%,#B8913A 72%,#E3C97E 88%,transparent 100%);
+  background-size:43px 11px,61px 13px,37px 9px,auto,auto;
+  background-position:7% 35%,53% 72%,86% 22%,0 0,0 0;
+  filter:url(#foil-rough);
+}
+.gold-foil::after {
+  content:"";
+  position:absolute;
+  inset:-100% auto -100% -28%;
+  width:18%;
+  opacity:0;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,white 15%,transparent),transparent);
+}
+.gold-foil--visible::after { animation:gold-foil-shine 2.4s ease-out once; }
+@keyframes gold-foil-shine {
+  0% { left:-28%; opacity:0; }
+  16% { opacity:1; }
+  100% { left:110%; opacity:0; }
+}
+
 /* ============= Events ============= */
 .events-section { position:relative; background:transparent; }
 .event-card { position:relative; border-radius:var(--radius-xl); border:1px solid color-mix(in oklab,var(--invitation-blush) 88%,var(--gold)); background:color-mix(in oklab,var(--card) 72%,var(--background)); padding:.55rem; box-shadow:0 8px 24px color-mix(in oklab,var(--invitation-muted) 7%,transparent); }
@@ -443,4 +477,4 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 767px) { .count-card { padding:1.4rem .5rem 1.2rem; } .count-card .rule { margin-top:.8rem; } .count-card .lbl { margin-top:.6rem; letter-spacing:.22em; } }
 @media (min-width: 768px) { .invitation-hero { padding-block:4.5rem 2rem; } .invitation-card { min-height:52rem; } .invitation-copy { min-height:52rem; padding-inline:2.5rem; } }
 @media (max-height: 760px) { .invitation-copy { padding-top:8rem; padding-bottom:9rem; } .invitation-name { margin-top:1rem; } .invitation-intro { margin-top:1rem; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } .gold-foil--visible::after { animation:none !important; } }
