@@ -56,7 +56,7 @@ const eventDays: { label: string; items: EventItem[] }[] = [
   },
 ];
 
-const COUNTDOWN_TARGET = new Date("2026-12-10T00:00:00+05:30").getTime();
+const COUNTDOWN_TARGET = new Date("2026-12-12T00:00:00+05:30").getTime();
 const ENVELOPE_SESSION_KEY = "priyal-jatin-envelope-opened";
 
 type IntroStep = "boot" | "envelope" | "opening" | "video" | "transition" | "final";
@@ -307,7 +307,7 @@ function Countdown() {
           </div>
         ))}
       </div>
-      <p className="mt-9 text-center font-display text-xl italic text-foreground/80 md:text-2xl">{remaining?.arrived ? "Today is the day — the lake is waiting." : "Until we say “I do” by the water"}</p>
+      {remaining?.arrived && <p className="text-center font-display text-xl italic text-foreground/80 md:text-2xl">Today is the day — the lake is waiting.</p>}
     </div>
   );
 }
@@ -316,8 +316,8 @@ function Flourish({ dark = false }: { dark?: boolean }) {
   return <div className={`flourish ${dark ? "flourish--dark" : ""}`} aria-hidden="true"><span /><Heart className="size-3" /><span /></div>;
 }
 
-function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow: string; title: string; tone?: "light" | "dark" }) {
-  return <div className="section-heading text-center"><p className="font-body text-sm uppercase tracking-[0.22em] text-muted-foreground">{eyebrow}</p><h2 className="mt-3 font-display text-5xl font-normal text-foreground md:text-7xl">{title}</h2><Flourish dark={tone === "dark"} /></div>;
+function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow?: string; title: string; tone?: "light" | "dark" }) {
+  return <div className="section-heading text-center">{eyebrow && <p className="font-body text-sm uppercase tracking-[0.22em] text-muted-foreground">{eyebrow}</p>}<h2 className="mt-3 font-display text-5xl font-normal text-foreground md:text-7xl">{title}</h2><Flourish dark={tone === "dark"} /></div>;
 }
 
 function InvitationFlorals() {
@@ -480,9 +480,9 @@ function Index() {
       <main className="overflow-hidden bg-background text-foreground">
       <InvitationHero />
 
-       <section id="event" className="foil-frame checker-section page-section px-5 md:px-10"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
+       <section id="event" className="foil-frame checker-section page-section px-5 md:px-10"><div className="relative mx-auto max-w-5xl"><SectionHeading title="Counting the days..." />
         <Countdown />
-        <div className="mt-10 grid overflow-hidden rounded-lg border border-blush bg-card/60 md:grid-cols-2"><div className="p-7 text-center md:border-r md:border-gold/40"><p className="text-sm uppercase tracking-[0.2em] text-primary">The Day</p><p className="mt-2 font-invitation text-2xl">Thursday, December 10, 2026</p></div><div className="border-t border-gold/40 p-7 text-center md:border-t-0"><p className="text-sm uppercase tracking-[0.2em] text-primary">Dress Code</p><p className="mt-2 font-invitation text-2xl">Garden Formal · Earth tones encouraged</p></div></div>
+         <div className="mt-10 overflow-hidden rounded-lg border border-blush bg-card/60"><div className="p-7 text-center"><p className="text-sm uppercase tracking-[0.2em] text-primary">The Day</p><p className="mt-2 font-invitation text-2xl">11th – 12th December, 2026</p></div></div>
       </div></section>
 
        <section id="events" className="foil-frame events-section page-section px-5 md:px-10">
