@@ -456,6 +456,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background:linear-gradient(90deg,transparent,color-mix(in srgb,white 15%,transparent),transparent);
 }
 .gold-foil--visible::after { animation:gold-foil-shine 2.4s ease-out once; }
+.gold-foil--edge {
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  z-index:2;
+  height:6px;
+}
 @keyframes gold-foil-shine {
   0% { left:-28%; opacity:0; }
   16% { opacity:1; }
@@ -466,7 +474,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .events-section { position:relative; background:transparent; }
 .event-card { position:relative; border-radius:var(--radius-xl); border:1px solid color-mix(in oklab,var(--invitation-blush) 88%,var(--gold)); background:color-mix(in oklab,var(--card) 72%,var(--background)); padding:.55rem; box-shadow:0 8px 24px color-mix(in oklab,var(--invitation-muted) 7%,transparent); }
 .event-card::before { content:""; position:absolute; inset:8px; z-index:1; border:1px solid color-mix(in oklab,var(--gold-soft) 48%,transparent); border-radius:calc(var(--radius-xl) - 4px); pointer-events:none; }
-.event-card .event-img-wrap { overflow:hidden; border-radius:var(--radius-lg); }
+.event-card .event-img-wrap { position:relative; overflow:hidden; border-radius:var(--radius-lg); }
 .event-card .event-img-wrap img { display:block; width:100%; aspect-ratio:4/3.4; object-fit:cover; }
 .font-script { font-family:"Great Vibes", cursive; }
 .event-divider { display:flex; align-items:center; justify-content:center; gap:1.1rem; margin:0 0 3rem; color:var(--gold-soft); }
