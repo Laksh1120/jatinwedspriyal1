@@ -341,7 +341,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   overflow-x:hidden;
   overscroll-behavior:contain;
   scrollbar-width:none;
-  padding-top:56px;
+  padding-top:0;
 }
 .framed-invitation__scroll::-webkit-scrollbar { display:none; }
 .framed-invitation__content { opacity:0; transform:translateY(12px); }

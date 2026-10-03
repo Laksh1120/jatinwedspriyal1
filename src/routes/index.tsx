@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Heart, MapPin, Menu, Music2, X } from "lucide-react";
+import { Heart, MapPin, Music2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
@@ -388,22 +388,9 @@ function InvitationHero() {
 }
 
 function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <InvitationExperience>
       <main className="overflow-hidden bg-background text-foreground">
-      <nav className="sticky inset-x-0 top-0 z-40 border-b border-blush bg-background/92 px-5 text-foreground backdrop-blur-md md:px-10">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <a href="#home" className="font-display text-3xl text-primary">Lake <span className="text-gold-soft">&</span> Love</a>
-          <Button variant="ghost" size="icon" className="text-primary hover:bg-blush/50 hover:text-accent md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X /> : <Menu />}</Button>
-          <div className="hidden gap-8 text-sm uppercase tracking-[0.18em] md:flex">
-            <a href="#home" className="transition-colors hover:text-accent">Us</a><a href="#event" className="transition-colors hover:text-accent">Countdown</a><a href="#events" className="transition-colors hover:text-accent">Events</a><a href="#venue" className="transition-colors hover:text-accent">Venue</a>
-          </div>
-        </div>
-        {menuOpen && <div className="flex flex-col gap-5 border-t border-blush py-6 text-center text-sm uppercase tracking-[0.18em] md:hidden">{[["#home","Us"],["#event","Countdown"],["#events","Events"],["#venue","Venue"]].map(([href,label]) => <a key={href} href={href} className="hover:text-accent" onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
-      </nav>
-
       <InvitationHero />
 
        <section id="event" className="checker-section page-section px-5 md:px-10"><div className="relative mx-auto max-w-5xl"><SectionHeading eyebrow="Counting the days" title="The Countdown" />
