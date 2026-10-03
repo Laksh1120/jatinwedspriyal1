@@ -189,13 +189,15 @@ function InvitationExperience({ children }: { children: ReactNode }) {
           }}
         >
           <style>{`
-            .envelope-v2__paper{background-color:#FAF6F2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' result='noise'/%3E%3CfeDiffuseLighting in='noise' surfaceScale='1.5' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='75'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)' opacity='.42'/%3E%3C/svg%3E");background-blend-mode:multiply}
+            .envelope-v2{background:#E8DDC9}
+            .envelope-v2__paper{background-color:#F7F0E4;background-image:linear-gradient(135deg,rgba(255,255,255,.34),transparent 42%,rgba(112,79,62,.055)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' result='noise'/%3E%3CfeDiffuseLighting in='noise' surfaceScale='1.5' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='75'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)' opacity='.42'/%3E%3C/svg%3E");background-blend-mode:soft-light,multiply;box-shadow:inset 0 0 80px rgba(112,79,62,.07)}
             .envelope-v2__flap{transform-origin:top center;transform-style:preserve-3d}
             .envelope-v2__face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-            .envelope-v2__back{transform:rotateX(180deg);background:linear-gradient(to bottom,#F3C2A0,#F7D8C2)}
+            .envelope-v2__back{transform:rotateX(180deg);background:linear-gradient(to bottom,#D9C3A0,#F1E3CC);box-shadow:inset 0 -1px 0 rgba(112,79,62,.18)}
             .envelope-v2__vine path,.envelope-v2__vine circle{vector-effect:non-scaling-stroke;stroke-width:1px}
-            .envelope-v2__seal{border-radius:48% 52% 50% 50%;background:radial-gradient(circle at 35% 30%,#E6D8B8,#CDBA95 55%,#A8946C);box-shadow:inset 0 0 0 5px rgba(255,255,255,.18),0 4px 8px rgba(80,50,30,.3);backface-visibility:hidden;-webkit-backface-visibility:hidden}
-            .envelope-v2__seal::after{content:"";position:absolute;inset:-6px;border:2px solid rgba(205,186,149,.7);border-radius:inherit;animation:envelope-v2-ring 1.8s ease-in-out infinite}
+            .envelope-v2__seal{display:grid;place-items:center;border:1px solid rgba(112,79,62,.34);border-radius:48% 52% 50% 50%;background:radial-gradient(circle at 32% 26%,#F1E1BE 0 7%,#D9C3A0 31%,#A98957 74%,#80633D 100%);box-shadow:inset 0 0 0 4px rgba(247,240,228,.2),inset 0 0 0 6px rgba(112,79,62,.16),0 6px 14px rgba(80,50,30,.28),0 1px 0 rgba(255,255,255,.55);backface-visibility:hidden;-webkit-backface-visibility:hidden;color:#704F3E;font-family:var(--font-script);font-size:clamp(22px,6vw,32px);text-shadow:0 1px rgba(247,240,228,.5)}
+            .envelope-v2__seal::before{content:"P & J";display:grid;place-items:center;position:absolute;inset:16%;border:1px solid rgba(112,79,62,.34);border-radius:50%;line-height:1}
+            .envelope-v2__seal::after{content:"";position:absolute;inset:-7px;border:1px solid rgba(169,137,87,.58);border-radius:inherit;box-shadow:0 0 0 3px rgba(247,240,228,.18);animation:envelope-v2-ring 1.8s ease-in-out infinite}
             .envelope-v2--opening .envelope-v2__flap{will-change:transform;animation:envelope-v2-flap 1.3s cubic-bezier(.45,0,.2,1) forwards}
             .envelope-v2--opening .envelope-v2__pocket{will-change:transform;animation:envelope-v2-pocket 2.2s cubic-bezier(.65,0,.35,1) .9s forwards}
             .envelope-v2--opening .envelope-v2__seal::after{opacity:0;animation:none}
@@ -226,8 +228,8 @@ function InvitationExperience({ children }: { children: ReactNode }) {
 
           <div className="envelope-v2__pocket envelope-v2__paper fixed inset-0 z-[1] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,50%_var(--tip),100%_0,100%_100%,0_100%)]" aria-hidden="true">
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M0 0 50 55 100 0M0 100 50 55 100 100" fill="none" stroke="rgba(150,110,100,.28)" strokeWidth=".16" vectorEffect="non-scaling-stroke" />
-              <path d="M0 100 50 55 100 100Z" fill="rgba(255,255,255,.35)" />
+              <path d="M0 0 50 55 100 0M0 100 50 55 100 100" fill="none" stroke="rgba(112,79,62,.2)" strokeWidth=".16" vectorEffect="non-scaling-stroke" />
+              <path d="M0 100 50 55 100 100Z" fill="rgba(255,255,255,.24)" />
             </svg>
             <svg className="envelope-v2__vine absolute bottom-0 left-0 size-[clamp(90px,min(34vw,34vh),200px)] fill-none" viewBox="0 0 100 100">
               <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
