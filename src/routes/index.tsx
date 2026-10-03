@@ -35,25 +35,15 @@ const baraatImage = baraatImageAsset.url;
 const receptionImage = receptionImageAsset.url;
 const phereImage = phereImageAsset.url;
 
-type EventItem = { image: string; alt: string; title: string; tagline: string; date: [string, string, string]; time: string; day: string; note?: string };
+type EventItem = { image: string; alt: string; title: string; date: [string, string, string]; time: string; day: string; note?: string };
 
-const eventDays: { label: string; items: EventItem[] }[] = [
-  {
-    label: "Friday · 11 December 2026",
-    items: [
-      { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", tagline: "A First Toast to Forever", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
-      { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony", tagline: "A Promise Sealed by the Water", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Sangeet & Cocktails" },
-    ],
-  },
-  {
-    label: "Saturday · 12 December 2026",
-    items: [
-      { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", tagline: "Bathed in Flowers & Blessings", date: ["12", "12", "26"], time: "10:00 am onwards", day: "Saturday" },
-      { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", tagline: "The Joyful Procession", date: ["12", "12", "26"], time: "6:00 pm onwards", day: "Saturday" },
-      { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", tagline: "An Evening of Glamour & Grace", date: ["12", "12", "26"], time: "8:00 pm onwards", day: "Saturday" },
-      { image: phereImage, alt: "Mandap by the lake at night", title: "Phere", tagline: "Seven Steps Around the Sacred Fire", date: ["12", "12", "26"], time: "11:00 pm onwards", day: "Saturday" },
-    ],
-  },
+const eventDays: EventItem[] = [
+  { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
+  { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony & Sangeet", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Cocktails" },
+  { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", date: ["12", "12", "26"], time: "10:00 am onwards", day: "Saturday" },
+  { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", date: ["12", "12", "26"], time: "6:00 pm onwards", day: "Saturday" },
+  { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", date: ["12", "12", "26"], time: "8:00 pm onwards", day: "Saturday" },
+  { image: phereImage, alt: "Mandap by the lake at night", title: "Phere", date: ["12", "12", "26"], time: "11:00 pm onwards", day: "Saturday" },
 ];
 
 const COUNTDOWN_TARGET = new Date("2026-12-12T00:00:00+05:30").getTime();
@@ -485,34 +475,28 @@ function Index() {
          <div className="mt-10 overflow-hidden rounded-lg border border-blush bg-card/60"><div className="p-7 text-center"><p className="text-sm uppercase tracking-[0.2em] text-primary">The Day</p><p className="mt-2 font-invitation text-2xl">11th – 12th December, 2026</p></div></div>
       </div></section>
 
-       <section id="events" className="foil-frame events-section page-section px-5 md:px-10">
-        <div className="relative mx-auto max-w-6xl">
-          <SectionHeading eyebrow="Three days of celebration" title="The Events" tone="dark" />
-          {eventDays.map((dayGroup) => (
-            <div key={dayGroup.label} className="mt-20 first:mt-0">
-              <div className="event-divider"><span className="text-sm uppercase tracking-[0.22em] text-muted-foreground">{dayGroup.label}</span></div>
-              <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-                {dayGroup.items.map((item) => (
-                  <article key={item.title} className="event-card">
+       <section id="events" className="foil-frame events-section page-section px-0">
+         <div className="relative mx-auto w-full max-w-none">
+           <div className="px-5"><SectionHeading eyebrow="Two days of celebration" title="The Events" tone="dark" /></div>
+           <div className="grid gap-8">
+             {eventDays.map((item) => (
+                   <article key={item.title} className="event-card foil-frame w-full mx-0">
                     <div className="event-img-wrap">
                       <img src={item.image} alt={item.alt} loading="lazy" width={896} height={1024} />
                     </div>
                     <div className="relative px-6 py-9 text-center md:px-8">
                        <h3 className="font-script text-4xl font-normal text-primary md:text-5xl">{item.title}</h3>
-                       <p className="mt-2 font-invitation text-base italic text-muted-foreground">{item.tagline}</p>
                       <div className="mx-auto my-6 h-px w-16 bg-gold-soft/60" />
+                        <p className="font-script text-3xl text-primary">{item.time}</p>
                        <p className="font-invitation text-2xl text-foreground md:text-3xl">
                         {item.date[0]} <span className="mx-2 text-gold">|</span> {item.date[1]} <span className="mx-2 text-gold">|</span> {item.date[2]}
                       </p>
-                       <p className="mt-3 text-sm uppercase tracking-[0.18em] text-muted-foreground">{item.time}</p>
                        <p className="mt-1 font-script text-3xl text-primary">{item.day}</p>
                        {item.note && <p className="mt-4 text-sm uppercase tracking-[0.16em] text-muted-foreground">{item.note}</p>}
                     </div>
                   </article>
-                ))}
-              </div>
-            </div>
-          ))}
+             ))}
+           </div>
         </div>
       </section>
 
