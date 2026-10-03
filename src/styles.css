@@ -475,25 +475,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .event-card { position:relative; border-radius:var(--radius-xl); border:1px solid color-mix(in oklab,var(--invitation-blush) 88%,var(--gold)); background:color-mix(in oklab,var(--card) 72%,var(--background)); padding:.55rem; box-shadow:0 8px 24px color-mix(in oklab,var(--invitation-muted) 7%,transparent); }
 .event-card::before { content:""; position:absolute; inset:8px; z-index:1; border:1px solid color-mix(in oklab,var(--gold-soft) 48%,transparent); border-radius:calc(var(--radius-xl) - 4px); pointer-events:none; }
 .event-card .event-img-wrap { position:relative; overflow:hidden; border-radius:var(--radius-lg); }
-.event-card .event-img-wrap::before {
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  z-index:2;
-  height:6px;
-  pointer-events:none;
-  background-image:
-    radial-gradient(circle,#FFF3C4 0 1px,transparent 1.5px),
-    radial-gradient(circle,#FFF3C4 0 1.2px,transparent 1.7px),
-    radial-gradient(circle,#FFF3C4 0 .8px,transparent 1.3px),
-    repeating-linear-gradient(90deg,color-mix(in srgb,#B8913A 35%,transparent) 0 3px,color-mix(in srgb,#8D6825 35%,transparent) 3px 6px),
-    linear-gradient(90deg,transparent 0%,#B8913A 6%,#E8CF8A 22%,#A67C2E 38%,#F1DDA0 55%,#B8913A 72%,#E3C97E 88%,transparent 100%);
-  background-size:43px 11px,61px 13px,37px 9px,auto,auto;
-  background-position:7% 35%,53% 72%,86% 22%,0 0,0 0;
-  filter:url(#foil-rough);
-}
 .event-card .event-img-wrap img { display:block; width:100%; aspect-ratio:4/3.4; object-fit:cover; }
 .font-script { font-family:"Great Vibes", cursive; }
 .event-divider { display:flex; align-items:center; justify-content:center; gap:1.1rem; margin:0 0 3rem; color:var(--gold-soft); }

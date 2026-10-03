@@ -523,6 +523,7 @@ function Index() {
                 {dayGroup.items.map((item) => (
                   <article key={item.title} className="event-card">
                     <div className="event-img-wrap">
+                      <div className="gold-foil gold-foil--edge" aria-hidden="true" />
                       <img src={item.image} alt={item.alt} loading="lazy" width={896} height={1024} />
                     </div>
                     <div className="relative px-6 py-9 text-center md:px-8">
