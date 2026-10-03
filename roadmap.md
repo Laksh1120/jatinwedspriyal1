@@ -1,1 +1,0 @@
-- [x] Beautify the existing envelope without changing its structure or opening behavior.
