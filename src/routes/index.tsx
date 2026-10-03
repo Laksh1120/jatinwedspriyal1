@@ -3,11 +3,11 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Heart, MapPin, Music2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import welcomeLunchImage from "@/assets/events/welcome-lunch.jpg";
-import ringCeremonyImage from "@/assets/events/ring-ceremony.jpg";
+import welcomeDinnerImageAsset from "@/assets/events/welcome-dinner.png.asset.json";
+import ringCeremonyImageAsset from "@/assets/events/ring-ceremony-new.png.asset.json";
 import haldiImageAsset from "@/assets/events/haldi.jpeg.asset.json";
-import baraatImageAsset from "@/assets/events/baraat.jpeg.asset.json";
-import receptionImageAsset from "@/assets/events/varmala.jpeg.asset.json";
+import baraatImageAsset from "@/assets/events/baraat-new.png.asset.json";
+import receptionImageAsset from "@/assets/events/reception-new.png.asset.json";
 import phereImageAsset from "@/assets/events/pheras.jpeg.asset.json";
 import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
 import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
@@ -28,6 +28,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const welcomeDinnerImage = welcomeDinnerImageAsset.url;
+const ringCeremonyImage = ringCeremonyImageAsset.url;
 const haldiImage = haldiImageAsset.url;
 const baraatImage = baraatImageAsset.url;
 const receptionImage = receptionImageAsset.url;
@@ -39,7 +41,7 @@ const eventDays: { label: string; items: EventItem[] }[] = [
   {
     label: "Friday · 11 December 2026",
     items: [
-      { image: welcomeLunchImage, alt: "Welcome lunch on the lawn", title: "Welcome Lunch", tagline: "A First Toast to Forever", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
+      { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", tagline: "A First Toast to Forever", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
       { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony", tagline: "A Promise Sealed by the Water", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Sangeet & Cocktails" },
     ],
   },
