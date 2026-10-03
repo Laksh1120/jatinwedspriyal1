@@ -451,7 +451,7 @@ function InvitationHero() {
             </div>
           </div>
           <div style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
-          <p className="invitation-intro invitation-reveal invitation-reveal--2">You are invited to the wedding of</p>
+          <p className="invitation-intro invitation-reveal invitation-reveal--2">You are cordially invited to the wedding of</p>
           <div className="invitation-reveal invitation-reveal--3">
             <h1 className="invitation-name">Priyal Bang</h1>
             <div className="invitation-family">
@@ -463,7 +463,8 @@ function InvitationHero() {
           <div className="invitation-reveal invitation-reveal--5">
             <h2 className="invitation-name invitation-name--groom">Jatin Mulchandani</h2>
             <div className="invitation-family">
-              <p>s/o Mr. Hiranand Mulchandani &amp; Mrs. Ganeshi Devi Mulchandani</p>
+              <p>grand s/o Mr. Hiranand Mulchandani &amp; Mrs. Ganeshi Devi Mulchandani</p>
+              <p>s/o Mr. Shyam Mulchandani &amp; Mrs. Aarti Mulchandani</p>
             </div>
           </div>
           </div>
