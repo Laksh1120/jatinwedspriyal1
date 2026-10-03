@@ -451,15 +451,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding-block:26px;
   background-image:url(/foil-v.png),url(/foil-v.png);
   background-repeat:repeat-y,repeat-y;
-  background-position:left 6px top 0,right 6px top 0;
+  background-position:left 4px top 0,right 4px top 0;
   background-size:22px auto,22px auto;
 }
 .foil-frame::before,
 .foil-frame::after {
   content:"";
   position:absolute;
-  right:0;
-  left:0;
+  right:-4px;
+  left:-4px;
   z-index:2;
   height:22px;
   pointer-events:none;
@@ -470,15 +470,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* ============= Events ============= */
 .events-section { position:relative; background:transparent; }
-.event-card { position:relative; border-radius:var(--radius-xl); border:1px solid color-mix(in oklab,var(--invitation-blush) 88%,var(--gold)); background:color-mix(in oklab,var(--card) 72%,var(--background)); padding:.55rem; box-shadow:0 8px 24px color-mix(in oklab,var(--invitation-muted) 7%,transparent); }
-.event-card::before { content:""; position:absolute; inset:8px; z-index:1; border:1px solid color-mix(in oklab,var(--gold-soft) 48%,transparent); border-radius:calc(var(--radius-xl) - 4px); pointer-events:none; }
+.event-card { position:relative; width:100%; margin-inline:0; }
+.event-card.foil-frame { padding:36px 34px; }
 .event-card .event-img-wrap { position:relative; overflow:hidden; border-radius:var(--radius-lg); }
 .event-card .event-img-wrap img { display:block; width:100%; aspect-ratio:4/3.4; object-fit:cover; }
 .font-script { font-family:"Great Vibes", cursive; }
-.event-divider { display:flex; align-items:center; justify-content:center; gap:1.1rem; margin:0 0 3rem; color:var(--gold-soft); }
-.event-divider::before,.event-divider::after { content:""; width:4rem; height:1px; background:linear-gradient(90deg,transparent,var(--gold-soft)); }
-.event-divider::after { background:linear-gradient(90deg,var(--gold-soft),transparent); }
-@media (max-width: 767px) { .event-card { padding:.45rem; } .event-card::before { inset:6px; } .event-card .event-img-wrap img { aspect-ratio:4/3.6; } }
+#events .section-heading { padding-top:2.5rem; margin-bottom:1.25rem; }
+@media (max-width: 767px) { .event-card .event-img-wrap img { aspect-ratio:4/3.6; } }
 
 @media (max-width: 767px) { .count-card { padding:1.4rem .5rem 1.2rem; } .count-card .rule { margin-top:.8rem; } .count-card .lbl { margin-top:.6rem; letter-spacing:.22em; } }
 @media (min-width: 768px) { .invitation-card { min-height:100svh; } .invitation-copy { min-height:52rem; padding-inline:2.5rem; } }
