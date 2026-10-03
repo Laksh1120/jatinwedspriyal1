@@ -12,6 +12,7 @@ import phereImageAsset from "@/assets/events/pheras.jpeg.asset.json";
 import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
 import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
 import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
+import ganpatiLogo from "@/assets/ganpati-logo.svg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -354,7 +355,86 @@ function InvitationFlorals() {
   );
 }
 
+function GanpatiLogoFloat({ onComplete }: { onComplete: () => void }) {
+  const overlayRef = useRef<HTMLImageElement>(null);
+  const slotRef = useRef<HTMLImageElement>(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const overlay = overlayRef.current;
+    const slot = slotRef.current;
+    const experience = overlay?.closest(".invitation-experience");
+    if (!overlay || !slot || !experience) return;
+
+    let timeout = 0;
+    let animationFrame = 0;
+
+    const startFloat = () => {
+      if (startedRef.current || (!experience.classList.contains("invitation-experience--transition") && !experience.classList.contains("invitation-experience--final"))) return;
+      startedRef.current = true;
+
+      animationFrame = window.requestAnimationFrame(() => {
+        overlay.style.transition = "none";
+        overlay.style.transform = "translate(-50%, -50%) scale(1)";
+        overlay.style.opacity = "1";
+
+        const overlayRect = overlay.getBoundingClientRect();
+        const slotRect = slot.getBoundingClientRect();
+        const cardRect = overlay.closest(".invitation-card")?.getBoundingClientRect();
+        const cardHeight = cardRect?.height ?? 0;
+        let k = slotRect.width / overlayRect.width;
+        let dx = slotRect.left + slotRect.width / 2 - (overlayRect.left + overlayRect.width / 2);
+        let dy = slotRect.top + slotRect.height / 2 - (overlayRect.top + overlayRect.height / 2);
+
+        if (!Number.isFinite(k) || k <= 0 || !Number.isFinite(dx) || !Number.isFinite(dy)) {
+          k = 0.2;
+          dx = 0;
+          dy = -(cardHeight / 2 - 90);
+        }
+
+        let finished = false;
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          window.clearTimeout(timeout);
+          overlay.removeEventListener("transitionend", handleTransitionEnd);
+          slot.style.opacity = "1";
+          overlay.style.opacity = "0";
+          window.requestAnimationFrame(onComplete);
+        };
+        const handleTransitionEnd = (event: TransitionEvent) => {
+          if (event.propertyName === "transform") finish();
+        };
+
+        overlay.addEventListener("transitionend", handleTransitionEnd);
+        overlay.style.transition = "transform 1.5s cubic-bezier(.45,.05,.2,1)";
+        void overlay.getBoundingClientRect();
+        overlay.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${k})`;
+        timeout = window.setTimeout(finish, 1800);
+      });
+    };
+
+    startFloat();
+    const observer = new MutationObserver(startFloat);
+    observer.observe(experience, { attributes: true, attributeFilter: ["class"] });
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+      window.clearTimeout(timeout);
+    };
+  }, [onComplete]);
+
+  return (
+    <>
+      <img ref={slotRef} src={ganpatiLogo.url} alt="" aria-hidden="true" className="h-auto w-12 opacity-0" />
+      <img ref={overlayRef} src={ganpatiLogo.url} alt="" aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-auto w-[clamp(150px,42cqw,220px)] -translate-x-1/2 -translate-y-1/2" />
+    </>
+  );
+}
+
 function InvitationHero() {
+  const [textVisible, setTextVisible] = useState(false);
+
   return (
     <header id="home" className="invitation-hero">
       <div className="invitation-grain" aria-hidden="true" />
@@ -362,10 +442,13 @@ function InvitationHero() {
         <div className="invitation-damask" aria-hidden="true" />
         <InvitationFlorals />
         <div className="invitation-copy">
-          <div className="invitation-reveal invitation-reveal--1">
-            <div className="ganesh-mark" aria-hidden="true">ॐ</div>
+          <div className="invitation-reveal invitation-reveal--1 flex flex-col items-center">
+            <GanpatiLogoFloat onComplete={() => setTextVisible(true)} />
+            <div style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
             <p className="invitation-blessing">|| Shri Ganeshay Namah ||</p>
+            </div>
           </div>
+          <div style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
           <p className="invitation-intro invitation-reveal invitation-reveal--2">You are invited to the wedding of</p>
           <div className="invitation-reveal invitation-reveal--3">
             <h1 className="invitation-name">Priyal Bang</h1>
@@ -380,6 +463,7 @@ function InvitationHero() {
             <div className="invitation-family">
               <p>s/o Mr. Hiranand Mulchandani &amp; Mrs. Ganeshi Devi Mulchandani</p>
             </div>
+          </div>
           </div>
         </div>
       </div>
