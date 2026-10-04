@@ -430,20 +430,20 @@ function InvitationHero() {
             </div>
           </div>
           <div className="invitation-text-area" style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
-          <div className="invitation-intro invitation-reveal invitation-reveal--2"><p className="invitation-family-title">Bang Family</p><p>Awaits your presence for the wedding celebrations of their beloved daughter</p></div>
+          <div className="invitation-intro invitation-reveal invitation-reveal--2"><p className="invitation-family-title">Mulchandani Family</p><p>Awaits your presence for the wedding celebrations of their beloved son</p></div>
           <div className="invitation-person invitation-reveal invitation-reveal--3">
-            <h1 className="invitation-name">Priyal</h1>
+            <h1 className="invitation-name">Jatin</h1>
             <div className="invitation-family">
-              <p>(Grand d/o Late Shri Shankerlalji &amp; Smt. Sitadevi Bang)</p>
-              <p>D/o of Mr. Dinesh &amp; Mrs. Meenakshi Bang</p>
+              <p>Grand s/o Late Hiranand &amp; Smt. Ganeshidevi Mulchandani</p>
+              <p>S/o Mr. Shyam &amp; Mrs. Aarti Mulchandani</p>
             </div>
           </div>
           <div className="invitation-ampersand invitation-reveal invitation-reveal--4">with</div>
           <div className="invitation-person invitation-reveal invitation-reveal--5">
-            <h2 className="invitation-name invitation-name--groom">Jatin</h2>
+            <h2 className="invitation-name invitation-name--groom">Priyal</h2>
             <div className="invitation-family">
-              <p>Grand s/o Late Hiranand &amp; Smt. Ganeshidevi Mulchandani</p>
-              <p>S/o Mr. Shyam &amp; Mrs. Aarti Mulchandani</p>
+              <p>(Grand d/o Late Shri Shankerlalji &amp; Smt. Sitadevi Bang)</p>
+              <p>D/o of Mr. Dinesh &amp; Mrs. Meenakshi Bang</p>
             </div>
           </div>
           <div className="invitation-lotus-spacer" aria-hidden="true" />
