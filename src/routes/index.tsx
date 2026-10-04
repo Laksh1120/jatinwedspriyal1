@@ -13,6 +13,7 @@ import introVideo from "@/assets/priyal-jatin-intro.mp4.asset.json";
 import introVideoWebm from "@/assets/priyal-jatin-intro.webm.asset.json";
 import introLastFrame from "@/assets/priyal-jatin-intro-last-frame.jpg.asset.json";
 import ganpatiLogo from "@/assets/ganpati-logo.svg.asset.json";
+import lotusBottom from "@/assets/lotus-bottom.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -312,7 +313,6 @@ function SectionHeading({ eyebrow, title, tone = "light" }: { eyebrow?: string; 
 
 function InvitationFlorals() {
   return (
-    <>
       <svg className="invitation-florals invitation-florals--top" viewBox="0 0 480 250" aria-hidden="true">
         <g className="floral-sway floral-sway--left">
           <path className="floral-stem" d="M38 0c2 54 15 88 47 125 15 17 19 41 16 67M74 0c-3 50 5 84 25 112" />
@@ -332,18 +332,6 @@ function InvitationFlorals() {
           <circle className="floral-bud" cx="212" cy="26" r="7" /><circle className="floral-bud" cx="268" cy="26" r="7" />
         </g>
       </svg>
-      <svg className="invitation-florals invitation-florals--bottom" viewBox="0 0 480 250" aria-hidden="true">
-        <g className="floral-sway floral-sway--bottom">
-          <path className="lotus-stem" d="M46 250c7-68 24-104 47-136M156 250c-3-60 5-103 23-143M253 250c0-73-1-121-8-169M350 250c-3-58 9-98 38-137M448 250c-1-60-8-102-27-137" />
-          <path className="palm-leaf" d="M0 230C31 161 65 151 111 166 75 177 48 196 23 229Zm4 18c19-49 52-63 91-50-36 9-58 27-75 51Z" />
-          <g className="lotus-bloom"><path d="M93 126c-28-5-40 15-35 31 5 18 22 28 35 36 13-8 30-18 35-36 5-16-7-36-35-31Z" /><path d="M93 182c-13-22-13-45 0-72 13 27 13 50 0 72Zm0 3c-25-13-37-30-41-55 25 12 38 30 41 55Zm0 0c25-13 37-30 41-55-25 12-38 30-41 55Z" /></g>
-          <g className="lotus-bloom"><path d="M179 118c-25-4-36 14-31 29 4 16 19 25 31 32 12-7 27-16 31-32 5-15-6-33-31-29Z" /><path d="M179 171c-12-20-12-41 0-66 12 25 12 46 0 66Z" /></g>
-          <g className="lotus-bloom lotus-bloom--large"><path d="M245 93c-32-6-46 18-40 37 5 21 25 32 40 42 15-10 35-21 40-42 6-19-8-43-40-37Z" /><path d="M245 162c-16-27-16-56 0-88 16 32 16 61 0 88Zm0 4c-31-16-46-37-51-68 31 15 47 37 51 68Zm0 0c31-16 46-37 51-68-31 15-47 37-51 68Z" /></g>
-          <g className="lotus-bloom"><path d="M388 124c-27-5-39 15-34 31 5 17 21 27 34 35 13-8 29-18 34-35 5-16-7-36-34-31Z" /><path d="M388 181c-13-22-13-44 0-71 13 27 13 49 0 71Z" /></g>
-          <g className="lotus-bloom"><path d="M421 119c-22-4-32 12-28 25 4 14 17 22 28 29 11-7 24-15 28-29 4-13-6-29-28-25Z" /></g>
-        </g>
-      </svg>
-    </>
   );
 }
 
@@ -433,16 +421,17 @@ function InvitationHero() {
       <div className="invitation-card">
         <div className="invitation-damask" aria-hidden="true" />
         <InvitationFlorals />
+        <img className="invitation-lotuses" src={lotusBottom.url} alt="" aria-hidden="true" />
         <div className="invitation-copy">
-          <div className="invitation-reveal invitation-reveal--1 flex flex-col items-center">
+          <div className="invitation-logo-zone invitation-reveal invitation-reveal--1">
             <GanpatiLogoFloat onComplete={() => setTextVisible(true)} />
             <div style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
             <p className="invitation-blessing">|| Shri Ganeshay Namah ||</p>
             </div>
           </div>
-          <div style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
-          <p className="invitation-intro invitation-reveal invitation-reveal--2">Bang Family<br /><br />Awaits your presence for the wedding celebrations of their beloved daughter</p>
-          <div className="invitation-reveal invitation-reveal--3">
+          <div className="invitation-text-area" style={{ opacity: textVisible ? 1 : 0, transition: "opacity .8s ease" }}>
+          <div className="invitation-intro invitation-reveal invitation-reveal--2"><p className="invitation-family-title">Bang Family</p><p>Awaits your presence for the wedding celebrations of their beloved daughter</p></div>
+          <div className="invitation-person invitation-reveal invitation-reveal--3">
             <h1 className="invitation-name">Priyal</h1>
             <div className="invitation-family">
               <p>(Grand d/o Late Shri Shankerlalji &amp; Smt. Sitadevi Bang)</p>
@@ -450,13 +439,14 @@ function InvitationHero() {
             </div>
           </div>
           <div className="invitation-ampersand invitation-reveal invitation-reveal--4">with</div>
-          <div className="invitation-reveal invitation-reveal--5">
+          <div className="invitation-person invitation-reveal invitation-reveal--5">
             <h2 className="invitation-name invitation-name--groom">Jatin</h2>
             <div className="invitation-family">
               <p>Grand s/o Late Hiranand &amp; Smt. Ganeshidevi Mulchandani</p>
               <p>S/o Mr. Shyam &amp; Mrs. Aarti Mulchandani</p>
             </div>
           </div>
+          <div className="invitation-lotus-spacer" aria-hidden="true" />
           </div>
         </div>
       </div>
