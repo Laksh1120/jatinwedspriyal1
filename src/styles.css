@@ -35,10 +35,10 @@
   --color-gold-soft: var(--gold-soft);
   --color-cream: var(--cream);
   --color-beige: var(--beige);
-  --font-display: "Great Vibes", cursive;
-  --font-body: "Cormorant Garamond", Georgia, serif;
-  --font-invitation: "Cormorant Garamond", Georgia, serif;
-  --font-script: "Great Vibes", cursive;
+  --font-display: "Playfair Display", "Great Vibes", cursive;
+  --font-body: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-invitation: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-script: "Playfair Display", "Great Vibes", cursive;
 }
 
 :root {
@@ -456,10 +456,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .foil-frame {
   position:relative;
   padding-block:26px;
-  background-image:url(/foil-v.png),url(/foil-v.png);
-  background-repeat:repeat-y,repeat-y;
-  background-position:left 4px top 0,right 4px top 0;
-  background-size:22px auto,22px auto;
 }
 .foil-frame::before,
 .foil-frame::after {
@@ -481,7 +477,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .event-card.foil-frame { padding:36px 34px; }
 .event-card .event-img-wrap { position:relative; overflow:hidden; border-radius:var(--radius-lg); }
 .event-card .event-img-wrap img { display:block; width:100%; aspect-ratio:4/3.4; object-fit:cover; }
-.font-script { font-family:"Great Vibes", cursive; }
+.font-script { font-family:"Playfair Display", "Great Vibes", cursive; }
 #events .section-heading { padding-top:2.5rem; margin-bottom:1.25rem; }
 @media (max-width: 767px) { .event-card .event-img-wrap img { aspect-ratio:4/3.6; } }
 
