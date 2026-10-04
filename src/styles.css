@@ -347,7 +347,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .framed-invitation__content { opacity:0; transform:translateY(12px); }
 .invitation-experience--transition .framed-invitation__content { animation:card-content-in .6s ease 1.4s forwards; }
 .invitation-experience--final .framed-invitation__content { opacity:1; transform:translateY(0); }
-.framed-invitation__content > main { padding-bottom:56px; }
+.framed-invitation__content > main { padding-bottom:0; }
 .ticket-border,
 .ticket-glow {
   z-index:6;
@@ -470,6 +470,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .foil-frame::before { top:0; }
 .foil-frame::after { bottom:0; }
+.checker-footer::after { bottom:-6px; }
+.foil-frame + .foil-frame::before { display:none; }
+.event-card:last-child::after { display:none; }
 
 /* ============= Events ============= */
 .events-section { position:relative; background:transparent; }
