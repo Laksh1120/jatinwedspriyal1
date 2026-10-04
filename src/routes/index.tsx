@@ -189,27 +189,25 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             .env-flap--top{clip-path:polygon(2.72% 0,100% 0,100% 3.36%,51.63% 49.69%);z-index:2}
             .env-flap--left{clip-path:polygon(0 0,3.8% 0,53.8% 46.48%,53.8% 54.13%,0 95.57%);z-index:3}
             .env-flap--right{clip-path:polygon(100% 2.91%,49.46% 46.02%,49.46% 53.21%,97.83% 100%,100% 100%);z-index:4}
-            .env-seal{position:absolute;left:50.8%;top:50.1%;width:36%;aspect-ratio:265/269;transform:translate(-50%,-50%);background:url(/envelope-seal.png) center/100% 100% no-repeat;z-index:6;filter:drop-shadow(0 6px 8px rgba(90,60,20,.35));animation:env-seal-pulse 2.4s ease-in-out infinite}
+            .env-seal-wrap{position:absolute;inset:0;z-index:6;will-change:transform}
+            .env-seal{position:absolute;left:50.8%;top:50.1%;width:36%;aspect-ratio:265/269;transform:translate(-50%,-50%);background:url(/envelope-seal.png) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(90,60,20,.35))}
             .envelope--opening{pointer-events:none}
-            .envelope--opening .env-seal{animation:env-seal-open 1s ease-in forwards}
+            .envelope--opening .env-seal-wrap{animation:env-down 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
             .envelope--opening .env-flap--top{animation:env-up 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
             .envelope--opening .env-flap--bottom{animation:env-down 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
             .envelope--opening .env-flap--left{animation:env-left 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
             .envelope--opening .env-flap--right{animation:env-right 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
-            @keyframes env-seal-pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.04)}}
-            @keyframes env-seal-open{0%{transform:translate(-50%,-50%) scale(1);opacity:1}30%{transform:translate(-50%,-50%) scale(.94)}100%{transform:translate(-50%,-30%) scale(1.15);opacity:0}}
             @keyframes env-up{to{transform:translateY(-105%)}}
             @keyframes env-down{to{transform:translateY(105%)}}
             @keyframes env-left{to{transform:translateX(-105%)}}
             @keyframes env-right{to{transform:translateX(105%)}}
-            @media (prefers-reduced-motion:reduce){.env-seal{animation:none}}
           `}</style>
           <div className="env-stage" aria-hidden="true">
             <div className="env-flap env-flap--bottom" />
             <div className="env-flap env-flap--top" />
             <div className="env-flap env-flap--left" />
             <div className="env-flap env-flap--right" />
-            <div className="env-seal" />
+            <div className="env-seal-wrap"><div className="env-seal" /></div>
           </div>
         </div>
       )}
