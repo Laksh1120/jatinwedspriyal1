@@ -169,7 +169,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
 
       {showEnvelope && (
         <div
-          className={`envelope-v2 fixed inset-0 z-[5] h-[100dvh] w-[100dvw] cursor-pointer overflow-hidden [--tip:55%] [perspective:1200px]${step === "opening" ? " envelope-v2--opening pointer-events-none" : ""}`}
+          className={`envelope${step === "opening" ? " envelope--opening pointer-events-none" : ""}`}
           role="button"
           tabIndex={0}
           aria-label="Open wedding invitation"
@@ -182,54 +182,34 @@ function InvitationExperience({ children }: { children: ReactNode }) {
           }}
         >
           <style>{`
-            .envelope-v2__paper{background-color:#FAF6F2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' result='noise'/%3E%3CfeDiffuseLighting in='noise' surfaceScale='1.5' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='75'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)' opacity='.42'/%3E%3C/svg%3E");background-blend-mode:multiply}
-            .envelope-v2__flap{transform-origin:top center;transform-style:preserve-3d}
-            .envelope-v2__face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-            .envelope-v2__back{transform:rotateX(180deg);background:linear-gradient(to bottom,#F3C2A0,#F7D8C2)}
-            .envelope-v2__vine path,.envelope-v2__vine circle{vector-effect:non-scaling-stroke;stroke-width:1px}
-            .envelope-v2__seal{border-radius:48% 52% 50% 50%;background:radial-gradient(circle at 35% 30%,#E6D8B8,#CDBA95 55%,#A8946C);box-shadow:inset 0 0 0 5px rgba(255,255,255,.18),0 4px 8px rgba(80,50,30,.3);backface-visibility:hidden;-webkit-backface-visibility:hidden}
-            .envelope-v2__seal::after{content:"";position:absolute;inset:-6px;border:2px solid rgba(205,186,149,.7);border-radius:inherit;animation:envelope-v2-ring 1.8s ease-in-out infinite}
-            .envelope-v2--opening .envelope-v2__flap{will-change:transform;animation:envelope-v2-flap 1.3s cubic-bezier(.45,0,.2,1) forwards}
-            .envelope-v2--opening .envelope-v2__pocket{will-change:transform;animation:envelope-v2-pocket 2.2s cubic-bezier(.65,0,.35,1) .9s forwards}
-            .envelope-v2--opening .envelope-v2__seal::after{opacity:0;animation:none}
-            @keyframes envelope-v2-ring{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.2}}
-            @keyframes envelope-v2-flap{to{transform:rotateX(-180deg)}}
-            @keyframes envelope-v2-pocket{to{transform:translate3d(0,105%,0)}}
+            .envelope{position:fixed;inset:0;overflow:hidden;cursor:pointer;z-index:5;background:#F3E9DD}
+            .env-stage{position:absolute;left:50%;top:50%;width:max(100dvw,calc(100dvh*.5627));aspect-ratio:736/1308;transform:translate(-50%,-50%)}
+            .env-flap{position:absolute;inset:0;background:url(/envelope-face.jpg) center/100% 100% no-repeat;will-change:transform}
+            .env-flap--bottom{clip-path:polygon(0 94.5%,51.63% 49.69%,100% 100%,0 100%);z-index:1}
+            .env-flap--top{clip-path:polygon(2.72% 0,100% 0,100% 3.36%,51.63% 49.69%);z-index:2}
+            .env-flap--left{clip-path:polygon(0 0,3.8% 0,53.8% 46.48%,53.8% 54.13%,0 95.57%);z-index:3}
+            .env-flap--right{clip-path:polygon(100% 2.91%,49.46% 46.02%,49.46% 53.21%,97.83% 100%,100% 100%);z-index:4}
+            .env-seal{position:absolute;left:50.8%;top:50.1%;width:36%;aspect-ratio:265/269;transform:translate(-50%,-50%);background:url(/envelope-seal.png) center/100% 100% no-repeat;z-index:6;filter:drop-shadow(0 6px 8px rgba(90,60,20,.35));animation:env-seal-pulse 2.4s ease-in-out infinite}
+            .envelope--opening{pointer-events:none}
+            .envelope--opening .env-seal{animation:env-seal-open 1s ease-in forwards}
+            .envelope--opening .env-flap--top{animation:env-up 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
+            .envelope--opening .env-flap--bottom{animation:env-down 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
+            .envelope--opening .env-flap--left{animation:env-left 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
+            .envelope--opening .env-flap--right{animation:env-right 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
+            @keyframes env-seal-pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.04)}}
+            @keyframes env-seal-open{0%{transform:translate(-50%,-50%) scale(1);opacity:1}30%{transform:translate(-50%,-50%) scale(.94)}100%{transform:translate(-50%,-30%) scale(1.15);opacity:0}}
+            @keyframes env-up{to{transform:translateY(-105%)}}
+            @keyframes env-down{to{transform:translateY(105%)}}
+            @keyframes env-left{to{transform:translateX(-105%)}}
+            @keyframes env-right{to{transform:translateX(105%)}}
+            @media (prefers-reduced-motion:reduce){.env-seal{animation:none}}
           `}</style>
-
-          <svg className="absolute size-0" aria-hidden="true">
-            <defs>
-              <symbol id="envelope-vine" viewBox="0 0 100 100">
-                <path d="M4 96C20 70 16 46 46 30S82 12 96 6M30 62c8-4 12-1 13 4M24 78c-6-6-12-4-15 1M54 28c0-8 6-12 12-11M72 20c4 7 10 8 15 4" vectorEffect="non-scaling-stroke" strokeWidth="1" />
-                <circle cx="46" cy="30" r="4.5" vectorEffect="non-scaling-stroke" strokeWidth="1" /><circle cx="28" cy="64" r="3.5" vectorEffect="non-scaling-stroke" strokeWidth="1" /><circle cx="84" cy="14" r="4" vectorEffect="non-scaling-stroke" strokeWidth="1" />
-              </symbol>
-            </defs>
-          </svg>
-
-          <div className="envelope-v2__flap fixed inset-0 z-[3] h-[100dvh] w-[100dvw]" aria-hidden="true">
-            <div className="envelope-v2__face envelope-v2__paper absolute inset-0 [clip-path:polygon(0_0,100%_0,50%_var(--tip))]">
-              <svg className="envelope-v2__vine absolute left-0 top-0 size-[clamp(90px,min(34vw,34vh),200px)] fill-none" viewBox="0 0 100 100">
-                <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
-                <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
-              </svg>
-            </div>
-            <div className="envelope-v2__face envelope-v2__back absolute inset-0 [clip-path:polygon(0_0,100%_0,50%_var(--tip))]" />
-            <div className="envelope-v2__seal fixed left-1/2 top-[var(--tip)] z-[4] aspect-square w-[clamp(64px,18vw,88px)] -translate-x-1/2 -translate-y-1/2" />
-          </div>
-
-          <div className="envelope-v2__pocket envelope-v2__paper fixed inset-0 z-[1] h-[100dvh] w-[100dvw] [clip-path:polygon(0_0,50%_var(--tip),100%_0,100%_100%,0_100%)]" aria-hidden="true">
-            <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M0 0 50 55 100 0M0 100 50 55 100 100" fill="none" stroke="rgba(150,110,100,.28)" strokeWidth=".16" vectorEffect="non-scaling-stroke" />
-              <path d="M0 100 50 55 100 100Z" fill="rgba(255,255,255,.35)" />
-            </svg>
-            <svg className="envelope-v2__vine absolute bottom-0 left-0 size-[clamp(90px,min(34vw,34vh),200px)] fill-none" viewBox="0 0 100 100">
-              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
-              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
-            </svg>
-            <svg className="envelope-v2__vine absolute bottom-0 right-0 size-[clamp(90px,min(34vw,34vh),200px)] scale-x-[-1] fill-none" viewBox="0 0 100 100">
-              <use href="#envelope-vine" transform="translate(-.8 -.8)" stroke="white" opacity=".9" />
-              <use href="#envelope-vine" transform="translate(.8 .8)" stroke="rgba(150,105,95,.22)" />
-            </svg>
+          <div className="env-stage" aria-hidden="true">
+            <div className="env-flap env-flap--bottom" />
+            <div className="env-flap env-flap--top" />
+            <div className="env-flap env-flap--left" />
+            <div className="env-flap env-flap--right" />
+            <div className="env-seal" />
           </div>
         </div>
       )}
