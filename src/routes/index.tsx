@@ -39,12 +39,12 @@ const phereImage = phereImageAsset.url;
 type EventItem = { image: string; alt: string; title: string; date: [string, string, string]; time: string; day: string; note?: string };
 
 const eventDays: EventItem[] = [
-  { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
-  { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony & Sangeet", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Cocktail Party" },
-  { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", date: ["12", "12", "26"], time: "10:00 am onwards", day: "Saturday" },
-  { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", date: ["12", "12", "26"], time: "6:00 pm onwards", day: "Saturday" },
-  { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", date: ["12", "12", "26"], time: "8:00 pm onwards", day: "Saturday" },
-  { image: phereImage, alt: "Mandap by the lake at night", title: "Phere", date: ["12", "12", "26"], time: "11:00 pm onwards", day: "Saturday" },
+  { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", date: ["11", "12", "26"], time: "1 P.M. onwards", day: "Friday" },
+  { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony & Sangeet", date: ["11", "12", "26"], time: "5 P.M. onwards", day: "Friday", note: "Followed by Cocktail Party" },
+  { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", date: ["12", "12", "26"], time: "10 A.M. onwards", day: "Saturday" },
+  { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", date: ["12", "12", "26"], time: "6 P.M. onwards", day: "Saturday" },
+  { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", date: ["12", "12", "26"], time: "8 P.M. onwards", day: "Saturday" },
+  { image: phereImage, alt: "Mandap by the lake at night", title: "Phere", date: ["12", "12", "26"], time: "11 P.M. onwards", day: "Saturday" },
 ];
 
 const COUNTDOWN_TARGET = new Date("2026-12-12T00:00:00+05:30").getTime();
@@ -491,7 +491,7 @@ function Index() {
       </section>
 
         <section id="venue" className="foil-frame page-section relative bg-transparent px-5 text-foreground md:px-10"><div className="relative mx-auto max-w-6xl"><div className="pt-10"><SectionHeading title="The Venue" tone="dark" /></div>
-         <div><p className="whitespace-nowrap text-center font-display text-[clamp(1.9rem,9vw,3rem)] text-primary">Praveg Lake Resort</p><p className="mt-2 text-center font-body text-sm font-bold tracking-[0.2em]">Daman</p><div className="mt-8 border-y border-gold/35 py-4"><strong className="block text-sm uppercase tracking-[0.18em] text-primary">Getting There</strong><ul className="mt-3 list-disc space-y-2 pl-5 text-left text-base text-muted-foreground"><li>Approximately 6 km from Vapi Railway Station</li><li>127 km from Surat International Airport via NH&nbsp;48</li><li>185 km from Mumbai</li></ul><div className="mt-6"><strong className="block text-sm uppercase tracking-[0.18em] text-primary">Accommodations</strong><p className="mt-2 text-base text-muted-foreground">Check-in: 11/12/2026, 1:00 PM<br />Check-out: 13/12/2026, 10:00 AM</p></div></div><Button asChild variant="outline" className="mt-8 h-12 rounded-lg border-primary bg-primary px-7 uppercase tracking-[0.16em] text-primary-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground"><a href="https://share.google/wXPgCUtC4Ho5l4KOc" target="_blank" rel="noopener noreferrer"><MapPin /> Get Directions</a></Button></div>
+         <div><p className="whitespace-nowrap text-center font-display text-[clamp(1.9rem,9vw,3rem)] text-primary">Praveg Lake Resort</p><p className="mt-2 text-center font-body text-sm font-bold tracking-[0.2em]">Daman</p><div className="mt-8 border-y border-gold/35 py-4"><strong className="block text-sm uppercase tracking-[0.18em] text-primary">Getting There</strong><ul className="mt-3 list-disc space-y-2 pl-5 text-left text-base text-muted-foreground"><li>Approximately 6 km from Vapi Railway Station</li><li>127 km from Surat International Airport via NH&nbsp;48</li><li>185 km from Mumbai</li></ul><div className="mt-6"><strong className="block text-sm uppercase tracking-[0.18em] text-primary">Accommodations</strong><p className="mt-2 text-base text-muted-foreground">Check-in: 11/12/2026, 1 P.M.<br />Check-out: 13/12/2026, 10 A.M.</p></div></div><Button asChild variant="outline" className="mt-8 h-12 rounded-lg border-primary bg-primary px-7 uppercase tracking-[0.16em] text-primary-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground"><a href="https://share.google/wXPgCUtC4Ho5l4KOc" target="_blank" rel="noopener noreferrer"><MapPin /> Get Directions</a></Button></div>
       </div></section>
 
         <footer className="foil-frame checker-footer page-footer px-5 text-center"><Music2 className="mx-auto size-6 text-gold-soft" /><p className="mt-5 font-display text-4xl text-primary">Priyal <span className="text-gold-soft">&</span> Jatin</p><p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">November 12, 2026</p><p className="mt-8 font-invitation text-xl italic text-muted-foreground">Where the lake meets forever</p></footer>
