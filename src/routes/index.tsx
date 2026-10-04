@@ -40,7 +40,7 @@ type EventItem = { image: string; alt: string; title: string; date: [string, str
 
 const eventDays: EventItem[] = [
   { image: welcomeDinnerImage, alt: "Lakeside welcome celebration", title: "Welcome Lunch", date: ["11", "12", "26"], time: "1:00 pm onwards", day: "Friday" },
-  { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony & Sangeet", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Cocktails" },
+  { image: ringCeremonyImage, alt: "Rings on a lavender cushion", title: "Ring Ceremony & Sangeet", date: ["11", "12", "26"], time: "5:00 pm onwards", day: "Friday", note: "Followed by Cocktail Party" },
   { image: haldiImage, alt: "Flower haldi seat with marigolds", title: "Phoolon Wali Haldi", date: ["12", "12", "26"], time: "10:00 am onwards", day: "Saturday" },
   { image: baraatImage, alt: "Baraat procession with dhol", title: "Baraat", date: ["12", "12", "26"], time: "6:00 pm onwards", day: "Saturday" },
   { image: receptionImage, alt: "Candlelit reception by the lake", title: "Reception", date: ["12", "12", "26"], time: "8:00 pm onwards", day: "Saturday" },
@@ -477,11 +477,11 @@ function Index() {
                     <div className="relative px-6 py-9 text-center md:px-8">
                        <h3 className="font-script text-4xl font-normal text-primary md:text-5xl">{item.title}</h3>
                       <div className="mx-auto my-6 h-px w-16 bg-gold-soft/60" />
-                        <p className="font-script text-3xl text-primary">{item.time}</p>
-                       <p className="font-invitation text-2xl text-foreground md:text-3xl">
+                        <p className="font-script text-3xl text-[#A8862F]">{item.time}</p>
+                       <p className="mt-3 font-invitation text-2xl text-foreground md:text-3xl">
                         {item.date[0]} <span className="mx-2 text-gold">|</span> {item.date[1]} <span className="mx-2 text-gold">|</span> {item.date[2]}
                       </p>
-                       <p className="mt-1 font-script text-3xl text-primary">{item.day}</p>
+                       <p className="mt-3 font-script text-3xl text-[#A8862F]">{item.day}</p>
                        {item.note && <p className="mt-4 text-sm uppercase tracking-[0.16em] text-muted-foreground">{item.note}</p>}
                     </div>
                   </article>
