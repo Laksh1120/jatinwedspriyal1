@@ -462,7 +462,7 @@ function Index() {
 
        <section id="event" className="foil-frame checker-section page-section px-5 md:px-10"><div className="relative mx-auto max-w-5xl"><SectionHeading title="Counting the days..." />
         <Countdown />
-         <div className="mt-10 overflow-hidden rounded-lg border border-blush bg-card/60"><div className="p-7 text-center"><p className="text-sm uppercase tracking-[0.2em] text-primary">The Day</p><p className="mt-2 font-invitation text-2xl">11th – 12th December, 2026</p></div></div>
+         <div className="mt-10 overflow-hidden rounded-lg border border-blush bg-card/60"><div className="p-7 text-center"><p className="font-invitation text-2xl">11th – 12th December, 2026</p></div></div>
       </div></section>
 
        <section id="events" className="foil-frame events-section page-section px-0">
