@@ -151,10 +151,13 @@ function InvitationExperience({ children }: { children: ReactNode }) {
           <video
             ref={videoRef}
             className="intro-video"
-            poster={introLastFrame.url}
+            poster={step === "final" ? introLastFrame.url : undefined}
             playsInline
             preload="auto"
             onEnded={finishVideo}
+            onLoadedData={(event) => {
+              if (step === "envelope") event.currentTarget.currentTime = 0.05;
+            }}
             onLoadedMetadata={(event) => {
               if (step === "final" && Number.isFinite(event.currentTarget.duration)) {
                 event.currentTarget.currentTime = Math.max(0, event.currentTarget.duration - 0.05);
@@ -169,10 +172,10 @@ function InvitationExperience({ children }: { children: ReactNode }) {
 
       {showEnvelope && (
         <div
-          className={`envelope${step === "opening" ? " envelope--opening pointer-events-none" : ""}`}
+          className={`envelope${step === "opening" ? " envelope--opening" : ""}`}
           role="button"
           tabIndex={0}
-          aria-label="Open wedding invitation"
+          aria-label="Open invitation"
           onClick={openEnvelope}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
@@ -181,28 +184,7 @@ function InvitationExperience({ children }: { children: ReactNode }) {
             }
           }}
         >
-          <style>{`
-            .envelope{position:fixed;inset:0;overflow:hidden;cursor:pointer;z-index:5;background:#F3E9DD}
-            .env-stage{position:absolute;left:50%;top:50%;width:max(100dvw,calc(100dvh*.5627));aspect-ratio:736/1308;transform:translate(-50%,-50%)}
-            .env-flap{position:absolute;inset:0;background:url(/envelope-face.jpg) center/100% 100% no-repeat;will-change:transform}
-            .env-flap--bottom{clip-path:polygon(0 94.5%,51.63% 49.69%,100% 100%,0 100%);z-index:1}
-            .env-flap--top{clip-path:polygon(2.72% 0,100% 0,100% 3.36%,51.63% 49.69%);z-index:2}
-            .env-flap--left{clip-path:polygon(0 0,3.8% 0,53.8% 46.48%,53.8% 54.13%,0 95.57%);z-index:3}
-            .env-flap--right{clip-path:polygon(100% 2.91%,49.46% 46.02%,49.46% 53.21%,97.83% 100%,100% 100%);z-index:4}
-            .env-seal-wrap{position:absolute;inset:0;z-index:6;will-change:transform}
-            .env-seal{position:absolute;left:50.8%;top:50.1%;width:36%;aspect-ratio:265/269;transform:translate(-50%,-50%);background:url(/envelope-seal.png) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(90,60,20,.35))}
-            .envelope--opening{pointer-events:none}
-            .envelope--opening .env-seal-wrap{animation:env-down 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
-            .envelope--opening .env-flap--top{animation:env-up 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
-            .envelope--opening .env-flap--bottom{animation:env-down 1.3s cubic-bezier(.6,0,.3,1) .7s forwards}
-            .envelope--opening .env-flap--left{animation:env-left 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
-            .envelope--opening .env-flap--right{animation:env-right 1.3s cubic-bezier(.6,0,.3,1) .9s forwards}
-            @keyframes env-up{to{transform:translateY(-105%)}}
-            @keyframes env-down{to{transform:translateY(105%)}}
-            @keyframes env-left{to{transform:translateX(-105%)}}
-            @keyframes env-right{to{transform:translateX(105%)}}
-          `}</style>
-          <div className="env-stage" aria-hidden="true">
+          <div className="env-stage">
             <div className="env-flap env-flap--bottom" />
             <div className="env-flap env-flap--top" />
             <div className="env-flap env-flap--left" />
